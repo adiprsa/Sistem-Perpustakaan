@@ -26,7 +26,7 @@ class Contoh extends MY_Controller {
 		//Header
 		$this->load->view('templates/header', $data);
 		// Body
-		$this->load->view('welcome_message');
+		$this->load->view('main');
 		// Footer
 		$this->load->view('templates/footer');
 	}
