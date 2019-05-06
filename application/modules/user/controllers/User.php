@@ -107,6 +107,16 @@ class User extends MY_Controller {
 		}
 	}
 
+	function hapus($sha1){
+		$this->Db_model->delete('user','sha1(user_id)' => $sha1);
+		?>
+		<script>
+		alert('Pengguna berhasil dihapus');
+		window.location.href='<?=site_url('user')?>';
+		</script>
+		
+		<?php
+	}
 	
 	function ajax_list(){
 		$this->load->model('User_model');

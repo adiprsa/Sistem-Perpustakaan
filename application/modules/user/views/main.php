@@ -105,15 +105,9 @@
 		var cnf = confirm("Apakah anda yakin akan menghapus user ini?");
 		if (cnf == true) {
 			//alert ($(this).attr('id'));
-			location.href = '<?=site_url()?>/User/disabled/' + $(this).attr('id');
+			location.href = '<?=site_url()?>/User/hapus/' + $(this).attr('id');
 		}				
 	});
-	$(document).on('click','.enabled',function(){
-		var cnf = confirm("Apakah anda yakin akan mengaktifkan user ini?");
-		if (cnf == true) {
-			//alert ($(this).attr('id'));
-			location.href = '<?=site_url()?>/User/enabled/' + $(this).attr('id');
-		}				
-	});
+	
 	
 </script>
