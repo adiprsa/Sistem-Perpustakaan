@@ -77,11 +77,13 @@
 				  window.location.href = respon.link;                 
 				} else {
 				  alert(respon.alert);
+				  window.location.href = respon.link;                 
 				}
 			},
 		  error: function() 
 		  {
 			alert('Gagal simpan data');
+			//window.location.href = respon.link;                 
 		  }         
 		 });
 	  }));

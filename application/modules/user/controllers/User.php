@@ -26,6 +26,86 @@ class User extends MY_Controller {
 		$this->load->view('user/modal_user',$data);
 	}
 	
+	function modal_myform(){
+		$hash = sha1($this->session->userdata('user_id'));
+		$q = $this->Db_model->get('user','*',array('sha1(user_id)' => $hash));
+		$data['user'] = $q;
+		$data['ref'] = $hash;
+		$this->load->view('user/modal_myuser',$data);
+	}
+	
+	function simpan_myuser(){
+		$json['status'] = 'gagal';
+		$json['alert'] 	= 'gagal';
+		$json['link'] 	= site_url('Login/logout');
+		$ref			= $this->session->userdata('user_id');
+		$q = $this->Db_model->get('user','*',array('(user_id)' => $ref))->row();
+		//print_r($q->password);
+		$password = ((md5($this->input->post('password0'))));
+		//echo $password;exit;
+		if($password!=$q->password){
+			$json['status'] = 'berhasil';
+			$json['alert'] 	= 'Password salah, silahkan login ulang.';
+			echo json_encode($json);
+			exit;
+		}
+		$data = array();		
+		if($this->input->post('password1')){
+			if(strlen($this->input->post('password1')) < 6){
+				$json['alert'] 	= 'Panjang password baru minimal 6 karakter';
+				echo json_encode($json);
+				exit;
+			}
+			if($this->input->post('password2') !=  $this->input->post('password1')){
+				$json['alert'] 	= 'Kombinasi password baru tidak sama';
+				echo json_encode($json);
+				exit;
+			}
+			$data['password'] = ((md5($this->input->post('password1'))));
+		}
+
+		if($this->input->post('username')){
+			$z = $this->Db_model->get('user','user_id',array('(user_id) <>' => $ref, 'username' => $this->input->post('username')));
+			if($z->num_rows()>0){
+				$json['alert'] 	= 'Username sudah dipakai';
+				echo json_encode($json);
+				exit;
+			}
+			$data['username'] = $this->input->post('username');			
+		}else{
+			$json['alert'] 	= 'Username harus diisi';
+			echo json_encode($json);
+			exit;
+		}
+		
+		if(!$this->input->post('name')){
+			$json['alert'] 	= 'Nama asli harus diisi';
+			echo json_encode($json);
+			exit;
+		}
+		$data['nama_asli'] = $this->input->post('name');			
+
+		if(!$this->input->post('email')){
+			$json['alert'] 	= 'Email harus diisi';
+			echo json_encode($json);
+			exit;
+		}
+		$z = $this->Db_model->get('user','user_id',array('(user_id) <>' => $ref, 'email' => $this->input->post('email')));
+		if($z->num_rows()>0){
+			$json['alert'] 	= 'Email sudah dipakai';
+			echo json_encode($json);
+			exit;
+		}
+		$data['email'] = $this->input->post('email');
+			if($this->Db_model->update('user',$data,array('(user_id)' => $ref))){
+				$json['status'] = 'berhasil';
+				$json['alert']  = "Data berhasil disimpan, silahkan login ulang";
+				echo json_encode($json);
+				exit;
+			}
+			
+		
+	}
 	function simpan_user(){
 		$json['status'] = 'gagal';
 		$json['alert'] 	= 'gagal';
@@ -53,7 +133,7 @@ class User extends MY_Controller {
 				echo json_encode($json);
 				exit;
 			}
-			$data['password'] = sha1(sha1(md5($this->input->post('password1'))));
+			$data['password'] = ((md5($this->input->post('password1'))));
 		}
 
 		if($this->input->post('username')){
@@ -97,7 +177,7 @@ class User extends MY_Controller {
 				exit;
 			}
 		}else{
-			if($this->Db_model->update('user',$data,array('md5(id)' => $ref))){
+			if($this->Db_model->update('user',$data,array('md5(user_id)' => $ref))){
 				$json['status'] = 'berhasil';
 				$json['alert']  = "Data berhasil disimpan";
 				echo json_encode($json);

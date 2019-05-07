@@ -82,7 +82,7 @@ $row = $user->row();
 		  </table>
         </div>
         <div class="modal-footer">
-		  <input type='hidden' name='ref' value='<?=isset($row->id) ? md5($row->id) : '0'?>'>
+		  <input type='hidden' name='ref' value='<?=isset($row->user_id) ? md5($row->user_id) : '0'?>'>
 		  <input type='hidden' name='old_status' value='<?=isset($row->status) ? md5($row->status) : '0'?>'>
 		  
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

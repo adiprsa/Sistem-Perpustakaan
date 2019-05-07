@@ -32,21 +32,16 @@ class Login extends MY_Controller {
 	function proses(){
 		$json['status']	= 'gagal';
 		$json['alert']	= 'gagal';
-		$json['link'] = base_url();
-		//print_r($this->session->all_userdata());
-		//print_r($this->input->post());
+		$json['link'] = base_url('login/logout');
 		$username = $this->input->post('username');
 		$password = md5($this->input->post('password'));
 		$user = $this->Db_model->get('user','user_id,karyawan_id,email,tipe_user,grup_id,nama_asli,username,password',array('username' => $username, 'password' => $password));
 		if($user->num_rows()==1){
 			$isi = $user->row();
-			//print_r($isi);
 			$session = array();
 			foreach($isi as $aa => $bb){
 				$session[$aa] = $bb;
 			}
-	//		echo $this->session->set_userdata($session);
-//			exit;
 			if(!$this->session->set_userdata($session)){
 				$json['link'] = base_url('contoh');
 				$json['status'] = 'berhasil';
