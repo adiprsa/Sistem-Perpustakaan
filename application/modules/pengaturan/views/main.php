@@ -70,7 +70,7 @@
 
 		// Load data for the table's content from an Ajax source
 			"ajax": {
-			"url": "<?=site_url('User/ajax_list')?>",
+			"url": "<?=site_url('user/ajax_list')?>",
 			"type": "POST",
 		},
 
@@ -82,22 +82,22 @@
 		},
 		],
 		});
-		
-		
+
+
 	});
 	</script>
 <div id="modal_form" class="modal" data-width="600">
 	<div id="tampil_form"></div>
 </div>
 
-<script>				
+<script>
 	$(document).on('click','.ganti',function(){
-					$('#tampil_form').load("<?=site_url()?>/User/modal_form/"+ $(this).attr('id'),function(){
+					$('#tampil_form').load("<?=site_url()?>/user/modal_form/"+ $(this).attr('id'),function(){
 					$('#modal_form').modal('show');
 					});
 				});
 	$(document).on('click','.tambah',function(){
-					$('#tampil_form').load("<?=site_url()?>/User/modal_form/",function(){
+					$('#tampil_form').load("<?=site_url()?>/user/modal_form/",function(){
 					$('#modal_form').modal('show');
 					});
 				});
@@ -105,9 +105,9 @@
 		var cnf = confirm("Apakah anda yakin akan menghapus user ini?");
 		if (cnf == true) {
 			//alert ($(this).attr('id'));
-			location.href = '<?=site_url()?>/User/hapus/' + $(this).attr('id');
-		}				
+			location.href = '<?=site_url()?>/user/hapus/' + $(this).attr('id');
+		}
 	});
-	
-	
+
+
 </script>
