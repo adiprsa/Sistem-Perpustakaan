@@ -5,8 +5,8 @@ class User_model extends CI_Model {
 
 	var $table = 'user';
 	var $column_order = array('user.username','user.email','user.nama_asli','user.id'); //set column field database for datatable orderable
-	var $column_search = array('user.username','user.email','user.nama_asli'); //set column field database for datatable searchable 
-	var $order = array('user.user_id' => 'desc'); // default order 
+	var $column_search = array('user.username','user.email','user.nama_asli'); //set column field database for datatable searchable
+	var $order = array('user.user_id' => 'desc'); // default order
 
 	public function __construct()
 	{
@@ -15,15 +15,15 @@ class User_model extends CI_Model {
 	}
 
 	private function _get_datatables_query()
-	{	
+	{
 		$this->db->select('*');
 		$this->db->from($this->table);
-		$i = 0;	
-		foreach ($this->column_search as $item) // loop column 
+		$i = 0;
+		foreach ($this->column_search as $item) // loop column
 		{
-			if($_POST['search']['value']) // if datatable send POST for search
+			if(isset($_POST['search']['value'])) // if datatable send POST for search
 			{
-				
+
 				if($i===0) // first loop
 				{
 			//		$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
@@ -38,11 +38,11 @@ class User_model extends CI_Model {
 					//$this->db->group_end(); //close bracket
 			}
 			$i++;
-		}		
+		}
 		if(isset($_POST['order'])) // here order processing
 		{
 			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} 
+		}
 		else if(isset($this->order))
 		{
 			$order = $this->order;
@@ -51,8 +51,8 @@ class User_model extends CI_Model {
 	}
 
 	function get_datatables()
-	{		
-		$this->_get_datatables_query();		
+	{
+		$this->_get_datatables_query();
 		if($_POST['length'] != -1)
 		$this->db->limit($_POST['length'], $_POST['start']);
 		$query = $this->db->get();
@@ -73,5 +73,5 @@ class User_model extends CI_Model {
 		$this->db->from($this->table);
 		return $this->db->count_all_results();
 	}
-	
+
 }

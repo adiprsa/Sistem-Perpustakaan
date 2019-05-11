@@ -20,11 +20,8 @@ class Login extends MY_Controller {
 	 */
 	public function index()
 	{
-//		print_r($this->session->all_userdata());
-		$z = 'heysuperadmin';
-		//echo md5($z);
 		if(($this->session->userdata('username'))){
-			redirect('contoh');
+			redirect('dashboard');
 		}
 		$this->load->view('login');
 	}
