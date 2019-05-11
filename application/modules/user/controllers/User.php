@@ -4,11 +4,11 @@ class User extends MY_Controller {
 	public function __construct() {
         parent::__construct();
 		$this->load->model('User_model');
-		if(!$this->session->userdata('username')){
-			redirect('login/logout');
-		}
+		// if(!$this->session->userdata('username')){
+		// 	redirect('login/logout');
+		// }
     }
-	
+
 	public function index() {
 		$data['title'] = 'Pengguna';
 		//Header
@@ -18,14 +18,14 @@ class User extends MY_Controller {
 		// Footer
 		$this->load->view('templates/footer');
 	}
-	
+
 	function modal_form($hash='0'){
 		$q = $this->Db_model->get('user','*',array('sha1(user_id)' => $hash));
 		$data['user'] = $q;
 		$data['ref'] = $hash;
 		$this->load->view('user/modal_user',$data);
 	}
-	
+
 	function modal_myform(){
 		$hash = sha1($this->session->userdata('user_id'));
 		$q = $this->Db_model->get('user','*',array('sha1(user_id)' => $hash));
@@ -33,7 +33,7 @@ class User extends MY_Controller {
 		$data['ref'] = $hash;
 		$this->load->view('user/modal_myuser',$data);
 	}
-	
+
 	function simpan_myuser(){
 		$json['status'] = 'gagal';
 		$json['alert'] 	= 'gagal';
@@ -49,7 +49,7 @@ class User extends MY_Controller {
 			echo json_encode($json);
 			exit;
 		}
-		$data = array();		
+		$data = array();
 		if($this->input->post('password1')){
 			if(strlen($this->input->post('password1')) < 6){
 				$json['alert'] 	= 'Panjang password baru minimal 6 karakter';
@@ -71,19 +71,19 @@ class User extends MY_Controller {
 				echo json_encode($json);
 				exit;
 			}
-			$data['username'] = $this->input->post('username');			
+			$data['username'] = $this->input->post('username');
 		}else{
 			$json['alert'] 	= 'Username harus diisi';
 			echo json_encode($json);
 			exit;
 		}
-		
+
 		if(!$this->input->post('name')){
 			$json['alert'] 	= 'Nama asli harus diisi';
 			echo json_encode($json);
 			exit;
 		}
-		$data['nama_asli'] = $this->input->post('name');			
+		$data['nama_asli'] = $this->input->post('name');
 
 		if(!$this->input->post('email')){
 			$json['alert'] 	= 'Email harus diisi';
@@ -103,8 +103,8 @@ class User extends MY_Controller {
 				echo json_encode($json);
 				exit;
 			}
-			
-		
+
+
 	}
 	function simpan_user(){
 		$json['status'] = 'gagal';
@@ -143,19 +143,19 @@ class User extends MY_Controller {
 				echo json_encode($json);
 				exit;
 			}
-			$data['username'] = $this->input->post('username');			
+			$data['username'] = $this->input->post('username');
 		}else{
 			$json['alert'] 	= 'Username harus diisi';
 			echo json_encode($json);
 			exit;
 		}
-		
+
 		if(!$this->input->post('name')){
 			$json['alert'] 	= 'Nama asli harus diisi';
 			echo json_encode($json);
 			exit;
 		}
-		$data['nama_asli'] = $this->input->post('name');			
+		$data['nama_asli'] = $this->input->post('name');
 
 		if(!$this->input->post('email')){
 			$json['alert'] 	= 'Email harus diisi';
@@ -183,7 +183,7 @@ class User extends MY_Controller {
 				echo json_encode($json);
 				exit;
 			}
-			
+
 		}
 	}
 
@@ -194,10 +194,10 @@ class User extends MY_Controller {
 		alert('Pengguna berhasil dihapus');
 		window.location.href='<?=site_url('user')?>';
 		</script>
-		
+
 		<?php
 	}
-	
+
 	function ajax_list(){
 		$this->load->model('User_model');
 		$list = $this->User_model->get_datatables();
@@ -208,7 +208,7 @@ class User extends MY_Controller {
 		}
 		foreach ($list as $rows) {
 			$row = array();
-				
+
 			$row[] = isset($rows->username) ? $rows->username : '-';
 			$row[] = isset($rows->email) ? $rows->email : '-';
 			$row[] = isset($rows->nama_asli) ? $rows->nama_asli : '-';
