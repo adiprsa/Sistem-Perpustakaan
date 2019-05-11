@@ -28,7 +28,7 @@ class Login extends MY_Controller {
 		}
 		$this->load->view('login');
 	}
-	
+
 	function proses(){
 		$json['status']	= 'gagal';
 		$json['alert']	= 'gagal';
@@ -57,7 +57,7 @@ class Login extends MY_Controller {
 
 		}
 	}
-	
+
 	function logout(){
 		$this->session->sess_destroy();
         redirect(base_url());

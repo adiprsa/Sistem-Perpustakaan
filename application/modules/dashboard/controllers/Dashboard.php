@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Contoh extends MY_Controller {
+class Dashboard extends MY_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,8 +21,8 @@ class Contoh extends MY_Controller {
 	public function index()
 	{
 		// Store title
-		$data['title'] = 'Contoh Page';
-		
+		$data['title'] = 'Halaman Dashboard';
+
 		//Header
 		$this->load->view('templates/header', $data);
 		// Body
