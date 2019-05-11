@@ -1,7 +1,7 @@
 
 <!doctype html>
 <html lang="en">
- 
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -52,7 +52,7 @@
             </div>
         </div>
     </div>
-	
+
     <!-- ============================================================== -->
     <!-- end login page  -->
     <!-- ============================================================== -->
@@ -64,7 +64,7 @@
 		$("#login").on('submit',(function(e) {
 		e.preventDefault();
 		$.ajax({
-		  url: "<?=site_url()?>/Login/proses",
+		  url: "<?=site_url()?>/login/proses",
 		  type: "POST",
 		  data:  new FormData(this),
 		  contentType: false,
@@ -74,21 +74,21 @@
 		  success: function(respon){
 			if (respon.status == 'berhasil') {
 				  alert(respon.alert);
-				  window.location.href = respon.link;                 
+				  window.location.href = respon.link;
 				} else {
 				  alert(respon.alert);
-				  window.location.href = respon.link;                 
+				  window.location.href = respon.link;
 				}
 			},
-		  error: function() 
+		  error: function()
 		  {
 			alert('Gagal simpan data');
-			//window.location.href = respon.link;                 
-		  }         
+			//window.location.href = respon.link;
+		  }
 		 });
 	  }));
 	});
 	</script>
 </body>
- 
+
 </html>

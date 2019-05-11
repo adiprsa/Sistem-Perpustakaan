@@ -40,7 +40,7 @@ class Login extends MY_Controller {
 				$session[$aa] = $bb;
 			}
 			if(!$this->session->set_userdata($session)){
-				$json['link'] = base_url('contoh');
+				$json['link'] = base_url('dashboard');
 				$json['status'] = 'berhasil';
 				$json['alert'] = 'Selamat Datang '.$username;
 				echo json_encode($json);exit;

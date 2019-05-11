@@ -35,11 +35,11 @@ $row = $ref->row();
 						<?php
 					}else{
 						?>
-						<select name='userlevel' class='form-control'>						
+						<select name='userlevel' class='form-control'>
 							<option value='1'> Superadmin
 							<option value='101'> Admin Registrasi
 							<option value='102'> Admin Wallet
-						</select>						
+						</select>
 						<?php
 					}
 					?>
@@ -77,10 +77,10 @@ $row = $ref->row();
 						<option value='1' <?=(isset($row->status) AND $row->status==1) ? "selected" : ''?> >Aktif
 						<option value='2' <?=(isset($row->status) AND $row->status==2) ? "selected" : ''?> >Bekukan
 					</select>
-					
+
 				</td>
 			</tr>
-			
+
 		  </table>
         </div>
         <div class="modal-footer">
@@ -95,7 +95,7 @@ $row = $ref->row();
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>/User/simpan_user",
+        	url: "<?=site_url()?>/user/simpan_user",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,
@@ -106,17 +106,17 @@ $row = $ref->row();
 				if (respon.status == 'berhasil') {
                             alert(respon.alert);
 							window.location.href = respon.link;
-                     
+
                         } else {
                             alert(respon.alert);
 							$("#modal_loader").hide();
                         }
 				},
-		  	error: function() 
+		  	error: function()
 	    	{
 				alert('Gagal simpan data');
 				$("#modal_loader").hide();
-	    	}	        
+	    	}
 	   });
 	}));
 	});
@@ -128,8 +128,8 @@ $row = $ref->row();
 		$(document).on('change','#jenis',function(){
 						$('#asw').load("<?=site_url('News/opsi_sasaran')?>/" + $('#jenis').val() + "/",function(){
 							 $("#asw").html(data);
-						});					
-					});	  
+						});
+					});
 	</script>
 	<div id="modal_loader" class="modal" data-width="600">
 		<div class="loader"></div>
@@ -162,4 +162,3 @@ $row = $ref->row();
   100% { transform: rotate(360deg); }
 }
 </style>
-	

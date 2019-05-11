@@ -4,9 +4,9 @@ class User extends MY_Controller {
 	public function __construct() {
         parent::__construct();
 		$this->load->model('User_model');
-		// if(!$this->session->userdata('username')){
-		// 	redirect('login/logout');
-		// }
+		if(!$this->session->userdata('username')){
+			redirect('login/logout');
+		}
     }
 
 	public function index() {
