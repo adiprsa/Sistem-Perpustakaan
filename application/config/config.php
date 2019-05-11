@@ -23,7 +23,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://simpus.dna';
+$server_name=filter_input(INPUT_SERVER, 'SERVER_NAME');
+$port=filter_input(INPUT_SERVER, 'SERVER_PORT');
+$config['base_url'] = 'http://'.$servername.":".$port;
 
 /*
 |--------------------------------------------------------------------------
@@ -324,7 +326,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'hOIwcQs1AKrb0m2l2T1HdBKcHoN8WJNM';
 
 /*
 |--------------------------------------------------------------------------
