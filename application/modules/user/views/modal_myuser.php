@@ -54,7 +54,7 @@ $row = $user->row();
 					<input type='password' name='password0' value='' placeholder='Isikan untuk memproses perubahan' class='form-control'>
 				</td>
 			</tr>
-			
+
 		  </table>
         </div>
         <div class="modal-footer">
@@ -69,7 +69,7 @@ $row = $user->row();
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>/User/simpan_myuser",
+        	url: "<?=site_url()?>/user/simpan_myuser",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,
@@ -80,17 +80,17 @@ $row = $user->row();
 				if (respon.status == 'berhasil') {
                             alert(respon.alert);
 							window.location.href = respon.link;
-                     
+
                         } else {
                             alert(respon.alert);
 							$("#modal_loader").hide();
                         }
 				},
-		  	error: function() 
+		  	error: function()
 	    	{
 				alert('Gagal simpan data');
 				$("#modal_loader").hide();
-	    	}	        
+	    	}
 	   });
 	}));
 	});
@@ -102,8 +102,8 @@ $row = $user->row();
 		$(document).on('change','#jenis',function(){
 						$('#asw').load("<?=site_url('News/opsi_sasaran')?>/" + $('#jenis').val() + "/",function(){
 							 $("#asw").html(data);
-						});					
-					});	  
+						});
+					});
 	</script>
 	<div id="modal_loader" class="modal" data-width="600">
 		<div class="loader"></div>
@@ -136,4 +136,3 @@ $row = $user->row();
   100% { transform: rotate(360deg); }
 }
 </style>
-	

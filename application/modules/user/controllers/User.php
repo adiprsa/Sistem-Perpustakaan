@@ -109,7 +109,7 @@ class User extends MY_Controller {
 	function simpan_user(){
 		$json['status'] = 'gagal';
 		$json['alert'] 	= 'gagal';
-		$json['link'] 	= site_url('User');
+		$json['link'] 	= site_url('user');
 		$ref			= $this->input->post('ref');
 		$q = $this->Db_model->get('user','*',array('md5(user_id)' => $ref))->row();
 		$password = sha1(sha1(md5($this->input->post('password'))));

@@ -70,7 +70,7 @@
 
 		// Load data for the table's content from an Ajax source
 			"ajax": {
-			"url": "<?=site_url('User/ajax_list')?>",
+			"url": "<?=site_url('user/ajax_list')?>",
 			"type": "POST",
 		},
 
