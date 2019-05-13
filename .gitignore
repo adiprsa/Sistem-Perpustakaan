@@ -1,3 +1,5 @@
 .htaccess
 application/config/database.php
 application/config/config.php
+access_log
+error_log
