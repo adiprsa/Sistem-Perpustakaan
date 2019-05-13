@@ -57,6 +57,126 @@ class Import_model extends CI_Model {
 		$array = array('status' => $status, 'pesan' => $msg);
 		return $array;
 	}
+	
+	function import_pengarang($filename){
+		ini_set('memory_limit', '-1');
+        $inputFileName = 'uploads/xls/'.$filename;
+//		echo $inputFileName;
+        try {
+        $objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
+        } catch(Exception $e) {
+        die('Error loading file :' . $e->getMessage());
+        }
+
+        $worksheet = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+        $numRows = count($worksheet);
+		$status = "gagal";
+		$line_kosong 		= array();
+		$line_bermasalah 	= array();
+		$data_isi = array();
+		//$msg = "Data Berhasil dihapus";
+		if(
+			$worksheet[1]["A"] != "No" OR $worksheet[1]["B"] != "Nama Pengarang" OR 
+			$worksheet[1]["C"] != "Tahun Pengarang" OR $worksheet[1]["D"] != "Kata Kunci")
+			{
+			$msg = "format salah";
+		}else{
+			for ($i=2; $i < ($numRows+1) ; $i++) { 
+				if($worksheet[$i]["A"] == "NO" or $worksheet[$i]["A"] == ""){
+				
+				}else{					
+					$pengarang['nama_pengarang'] 	= $worksheet[$i]["B"];
+					$pengarang['tahun_pengarang'] 	= $worksheet[$i]["C"];
+					$pengarang['tipe_pengarang'] 	= 1;
+					$pengarang['kata_kunci'] 		= $worksheet[$i]["D"];
+					$this->db->insert('pengarang',$pengarang);
+				}	
+			}
+		}
+		$msg = "Data berhasil disimpan";
+		
+		$status = "berhasil";
+		$array = array('status' => $status, 'pesan' => $msg);
+		return $array;
+	}
+	
+	
+	function import_penerbit($filename){
+		ini_set('memory_limit', '-1');
+        $inputFileName = 'uploads/xls/'.$filename;
+//		echo $inputFileName;
+        try {
+        $objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
+        } catch(Exception $e) {
+        die('Error loading file :' . $e->getMessage());
+        }
+
+        $worksheet = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+        $numRows = count($worksheet);
+		$status = "gagal";
+		$line_kosong 		= array();
+		$line_bermasalah 	= array();
+		$data_isi = array();
+		//$msg = "Data Berhasil dihapus";
+		if(
+			$worksheet[1]["A"] != "No" OR $worksheet[1]["B"] != "Nama Penerbit")
+			{
+			$msg = "format salah";
+		}else{
+			for ($i=2; $i < ($numRows+1) ; $i++) { 
+				if($worksheet[$i]["A"] == "NO" or $worksheet[$i]["A"] == ""){
+				
+				}else{					
+					$data['nama_penerbit'] 	= $worksheet[$i]["B"];
+					$this->db->insert('penerbit',$data);
+				}	
+			}
+		}
+		$msg = "Data berhasil disimpan";
+		
+		$status = "berhasil";
+		$array = array('status' => $status, 'pesan' => $msg);
+		return $array;
+	}
+	
+	function import_bahasa($filename){
+		ini_set('memory_limit', '-1');
+        $inputFileName = 'uploads/xls/'.$filename;
+//		echo $inputFileName;
+        try {
+        $objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
+        } catch(Exception $e) {
+        die('Error loading file :' . $e->getMessage());
+        }
+
+        $worksheet = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+        $numRows = count($worksheet);
+		$status = "gagal";
+		$line_kosong 		= array();
+		$line_bermasalah 	= array();
+		$data_isi = array();
+		//$msg = "Data Berhasil dihapus";
+		if(
+			$worksheet[1]["A"] != "No" OR $worksheet[1]["B"] != "Nama Bahasa")
+			{
+			$msg = "format salah";
+		}else{
+			for ($i=2; $i < ($numRows+1) ; $i++) { 
+				if($worksheet[$i]["A"] == "NO" or $worksheet[$i]["A"] == ""){
+				
+				}else{					
+					$data['nama_bahasa'] 	= $worksheet[$i]["B"];
+					$this->db->insert('bahasa',$data);
+				}	
+			}
+		}
+		$msg = "Data berhasil disimpan";
+		
+		$status = "berhasil";
+		$array = array('status' => $status, 'pesan' => $msg);
+		return $array;
+	}
+	
 	public function upload_data_pencapaian($filename){
 		ini_set('memory_limit', '-1');
         $inputFileName = 'uploads/xls/'.$filename;

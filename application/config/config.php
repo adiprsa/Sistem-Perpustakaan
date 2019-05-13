@@ -26,6 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $server_name=filter_input(INPUT_SERVER, 'SERVER_NAME');
 $port=filter_input(INPUT_SERVER, 'SERVER_PORT');
 $config['base_url'] = 'http://'.$server_name.":".$port;
+$config['base_url'] = 'http://localhost/sistem-perpustakaan';
 
 /*
 |--------------------------------------------------------------------------

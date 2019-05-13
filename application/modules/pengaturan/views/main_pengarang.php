@@ -36,6 +36,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <button type='button' class='btn btn-success tambah'>Tambah</button>
+                                <button type='button' class='btn btn-success import'>Import Data Pengarang</button>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -92,12 +93,12 @@
 
 <script>
 	$(document).on('click','.ganti',function(){
-					$('#tampil_form').load("<?=site_url()?>/user/modal_form/"+ $(this).attr('id'),function(){
+					$('#tampil_form').load("<?=site_url()?>Pengaturan/modal_form_pengarang/"+ $(this).attr('id'),function(){
 					$('#modal_form').modal('show');
 					});
 				});
 	$(document).on('click','.tambah',function(){
-					$('#tampil_form').load("<?=site_url()?>/user/modal_form/",function(){
+					$('#tampil_form').load("<?=site_url()?>Pengaturan/modal_form_pengarang/",function(){
 					$('#modal_form').modal('show');
 					});
 				});
@@ -105,9 +106,13 @@
 		var cnf = confirm("Apakah anda yakin akan menghapus user ini?");
 		if (cnf == true) {
 			//alert ($(this).attr('id'));
-			location.href = '<?=site_url()?>/user/hapus/' + $(this).attr('id');
+			location.href = '<?=site_url()?>Pengaturan/hapus_pengarang/' + $(this).attr('id');
 		}
 	});
-
+	$(document).on('click','.import',function(){
+		$('#tampil_form').load("<?=site_url()?>/Pengaturan/modal_import_pengarang/",function(){
+		$('#modal_form').modal('show');
+		});
+	});
 
 </script>

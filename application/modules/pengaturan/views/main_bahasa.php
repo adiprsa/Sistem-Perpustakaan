@@ -36,15 +36,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <button type='button' class='btn btn-success tambah'>Tambah</button>
+                                <button type='button' class='btn btn-success import'>Import Data bahasa</button>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Nama Pengarang</th>
-                                                <th>Tahun Pengarang</th>
-                                                <th>Tipe Pengarang</th>
+                                                <th>Nama bahasa</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -70,7 +69,7 @@
 
 		// Load data for the table's content from an Ajax source
 			"ajax": {
-			"url": "<?=site_url('Pengaturan/pengarang_list')?>",
+			"url": "<?=site_url('Pengaturan/bahasa_list')?>",
 			"type": "POST",
 		},
 
@@ -92,22 +91,26 @@
 
 <script>
 	$(document).on('click','.ganti',function(){
-					$('#tampil_form').load("<?=site_url()?>/user/modal_form/"+ $(this).attr('id'),function(){
+					$('#tampil_form').load("<?=site_url()?>Pengaturan/modal_form_bahasa/"+ $(this).attr('id'),function(){
 					$('#modal_form').modal('show');
 					});
 				});
 	$(document).on('click','.tambah',function(){
-					$('#tampil_form').load("<?=site_url()?>/user/modal_form/",function(){
+					$('#tampil_form').load("<?=site_url()?>Pengaturan/modal_form_bahasa/",function(){
 					$('#modal_form').modal('show');
 					});
 				});
 	$(document).on('click','.hapus',function(){
-		var cnf = confirm("Apakah anda yakin akan menghapus user ini?");
+		var cnf = confirm("Apakah anda yakin akan menghapus bahasa ini?");
 		if (cnf == true) {
 			//alert ($(this).attr('id'));
-			location.href = '<?=site_url()?>/user/hapus/' + $(this).attr('id');
+			location.href = '<?=site_url()?>Pengaturan/hapus_bahasa/' + $(this).attr('id');
 		}
 	});
-
+	$(document).on('click','.import',function(){
+		$('#tampil_form').load("<?=site_url()?>/Pengaturan/modal_import_bahasa/",function(){
+		$('#modal_form').modal('show');
+		});
+	});
 
 </script>
