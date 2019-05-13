@@ -16,10 +16,10 @@
                 <div id="submenu-1" class="collapse submenu" style="">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?=base_url('#');?>">Pengarang</a>
+                            <a class="nav-link" href="<?=base_url('Pengaturan/pengarang');?>">Pengarang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?=base_url('#');?>">Penerbit</a>
+                            <a class="nav-link" href="<?=base_url('Pengaturan/penerbit');?>">Penerbit</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?=base_url('#');?>">Supplier</a>
@@ -56,7 +56,7 @@
                           <a class="nav-link" href="<?=base_url('#');?>">Eksemplar</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Tipe Kolasi</a>
+                          <a class="nav-link" href="<?=base_url('Pengaturan/kolasi');?>">Tipe Kolasi</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="<?=base_url('#');?>">Tipe Media</a>
