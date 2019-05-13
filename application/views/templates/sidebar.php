@@ -98,19 +98,19 @@
                 <div id="submenu-5" class="collapse submenu" style="">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('c_laporan_buku/tampil_laporan_buku') ?>">Laporan Koleksi Buku</a>
+                            <a class="nav-link" href="<?php echo base_url('laporan/c_laporan_buku/tampil_laporan_buku') ?>">Laporan Koleksi Buku</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('c_laporan_anggota/tampil_laporan_anggota') ?>">Laporan Member</a>
+                            <a class="nav-link" href="<?php echo base_url('laporan/c_laporan_anggota/tampil_laporan_anggota') ?>">Laporan Member</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('c_laporan_stok_opname/tampil_laporan_stok_opname') ?>">Laporan Stok Opname</a>
+                            <a class="nav-link" href="<?php echo base_url('laporan/c_laporan_stok_opname/tampil_laporan_stok_opname') ?>">Laporan Stok Opname</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('c_laporan_peminjaman/tampil_laporan_peminjaman') ?>">Laporan Peminjaman</a>
+                            <a class="nav-link" href="<?php echo base_url('laporan/c_laporan_peminjaman/tampil_laporan_peminjaman') ?>">Laporan Peminjaman</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url('c_laporan_denda/tampil_laporan_denda') ?>">Laporan Denda</a>
+                            <a class="nav-link" href="<?php echo base_url('laporan/c_laporan_denda/tampil_laporan_denda') ?>">Laporan Denda</a>
                         </li>
                     </ul>
                 </div>
