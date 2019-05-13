@@ -14,10 +14,11 @@ class Peminjaman extends MY_Controller {
     $data['title'] = 'Peminjaman Buku';
     $this->load->view('templates/header', $data);
     if(!empty($this->member_code)) {
-      $this->load->view('peminjaman/member_session.php',$data);
+      $this->load->view('member_session.php',$data);
     } else {
-      $this->load->view('peminjaman/index',$data);
+      $this->load->view('index',$data);
     }
+    $this->load->view('templates/footer');
   }
 
   public function find_member() {
