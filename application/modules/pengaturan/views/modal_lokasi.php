@@ -36,15 +36,15 @@ $(function() {
 		?>
           <table border='0' width='100%'>
 			<tr>
-				<td>Nama bahasa</td>
+				<td>Nama lokasi</td>
 				<td>
-					<input placeholder='Nama bahasa' type='text' name='nama_bahasa' value='<?=isset($row->nama_bahasa) ? $row->nama_bahasa : ''?>' class='form-control'>
+					<input placeholder='Nama lokasi' type='text' name='nama_lokasi' value='<?=isset($row->nama_lokasi) ? $row->nama_lokasi : ''?>' class='form-control'>
 				</td>
 			</tr>
 		  </table>
         </div>
         <div class="modal-footer">
-		  <input type='hidden' name='ref' value='<?=isset($row-bahasa_id) ? md5($row->bahasa_id) : '0'?>'>
+		  <input type='hidden' name='ref' value='<?=isset($row->lokasi_id) ? md5($row->lokasi_id) : '0'?>'>
 		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-info" id='simpan'>Simpan</button>
         </div>
@@ -55,7 +55,7 @@ $(function() {
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/simpan_bahasa",
+        	url: "<?=site_url()?>Pengaturan/simpan_lokasi",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

@@ -36,15 +36,21 @@ $(function() {
 		?>
           <table border='0' width='100%'>
 			<tr>
-				<td>Nama bahasa</td>
+				<td>Tipe Media</td>
 				<td>
-					<input placeholder='Nama bahasa' type='text' name='nama_bahasa' value='<?=isset($row->nama_bahasa) ? $row->nama_bahasa : ''?>' class='form-control'>
+					<input placeholder='Tipe Media' type='text' name='tipe_media' value='<?=isset($row->tipe_media) ? $row->tipe_media : ''?>' class='form-control'>
+				</td>
+			</tr>
+			<tr>
+				<td>Kode</td>
+				<td>
+					<input placeholder='Kode' type='text' name='kode' value='<?=isset($row->kode) ? $row->kode : ''?>' class='form-control'>
 				</td>
 			</tr>
 		  </table>
         </div>
         <div class="modal-footer">
-		  <input type='hidden' name='ref' value='<?=isset($row-bahasa_id) ? md5($row->bahasa_id) : '0'?>'>
+		  <input type='hidden' name='ref' value='<?=isset($row->id) ? md5($row->id) : '0'?>'>
 		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-info" id='simpan'>Simpan</button>
         </div>
@@ -55,7 +61,7 @@ $(function() {
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/simpan_bahasa",
+        	url: "<?=site_url()?>Pengaturan/simpan_tipe_media",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

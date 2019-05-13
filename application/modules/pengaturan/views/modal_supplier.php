@@ -36,15 +36,57 @@ $(function() {
 		?>
           <table border='0' width='100%'>
 			<tr>
-				<td>Nama bahasa</td>
+				<td>Nama Supplier</td>
 				<td>
-					<input placeholder='Nama bahasa' type='text' name='nama_bahasa' value='<?=isset($row->nama_bahasa) ? $row->nama_bahasa : ''?>' class='form-control'>
+					<input placeholder='Nama Supplier' type='text' name='nama_supplier' value='<?=isset($row->nama_supplier) ? $row->nama_supplier : ''?>' class='form-control'>
+				</td>
+			</tr>
+			<tr>
+				<td>Kontak</td>
+				<td>
+					<input placeholder='Kontak Supplier' type='text' name='kontak' value='<?=isset($row->kontak) ? $row->kontak : ''?>' class='form-control'>
+				</td>
+			</tr>
+			<tr>
+				<td>Alamat</td>
+				<td>
+					<input placeholder='Alamat Supplier' type='text' name='alamat' value='<?=isset($row->alamat) ? $row->alamat : ''?>' class='form-control'>
+				</td>
+			</tr>
+			<tr>
+				<td>Kode Pos</td>
+				<td>
+					<input placeholder='Kode pos Supplier' type='text' name='kode_pos' value='<?=isset($row->kode_pos) ? $row->kode_pos : ''?>' class='form-control'>
+				</td>
+			</tr>
+			<tr>
+				<td>Telephone</td>
+				<td>
+					<input placeholder='Telephone Supplier' type='text' name='telephone' value='<?=isset($row->telephone) ? $row->telephone : ''?>' class='form-control'>
+				</td>
+			</tr>
+			<tr>
+				<td>Fax</td>
+				<td>
+					<input placeholder='Fax Supplier' type='text' name='fax' value='<?=isset($row->fax) ? $row->fax : ''?>' class='form-control'>
+				</td>
+			</tr>
+			<tr>
+				<td>Akun</td>
+				<td>
+					<input placeholder='Akun Supplier' type='text' name='akun' value='<?=isset($row->akun) ? $row->akun : ''?>' class='form-control'>
+				</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>
+					<input placeholder='Email Supplier' type='email' name='email' value='<?=isset($row->email) ? $row->email : ''?>' class='form-control'>
 				</td>
 			</tr>
 		  </table>
         </div>
         <div class="modal-footer">
-		  <input type='hidden' name='ref' value='<?=isset($row-bahasa_id) ? md5($row->bahasa_id) : '0'?>'>
+		  <input type='hidden' name='ref' value='<?=isset($row->supplier_id) ? md5($row->supplier_id) : '0'?>'>
 		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-info" id='simpan'>Simpan</button>
         </div>
@@ -55,7 +97,7 @@ $(function() {
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/simpan_bahasa",
+        	url: "<?=site_url()?>Pengaturan/simpan_supplier",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,
