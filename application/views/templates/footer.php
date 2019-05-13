@@ -50,7 +50,7 @@
 <script src="<?php echo base_url('assets/vendor/charts/c3charts/c3.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/vendor/charts/c3charts/d3-5.4.0.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/vendor/charts/c3charts/C3chartjs.js') ?>"></script>
-<!-- <script src="assets/libs/js/dashboard-ecommerce.js"></script> -->
+<!-- <script src="assets/libs/js/dashboard-ecommerce.js"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/plugins/jquery-datatable/jquery.dataTables.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') ?>"></script>
@@ -71,6 +71,7 @@
         });
     });
 </script>
+-->
 </body>
 
 </html>

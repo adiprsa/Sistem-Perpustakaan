@@ -710,20 +710,95 @@ class Pengaturan extends MY_Controller {
 	}
 	
 	function aturan_pinjam(){
-		$data['title'] = 'Pengaturan Bahasa';
-		//$data['hari_libur']	= $this->Db_model->get('hari_libur','*',array('YEAR(tgl_libur)' => $tahun));
+		$data['title'] = 'Pengaturan Peminjaman';
 		$this->load->view('templates/header', $data);
-		$this->load->view('pengaturan/main_bahasa',$data);
+		$this->load->view('pengaturan/main_aturan',$data);
 		$this->load->view('templates/footer');
+	}
+	
+	function simpan_aturan(){
+		$json['status'] = 'gagal';
+		$json['alert'] 	= 'gagal';
+		$json['link'] 	= site_url('Pengaturan/aturan_pinjam');
+		$ref			= $this->input->post('ref');
+//		print_r($this->input->post());exit;
+		
+		if(!$this->input->post('tipe_member_id')){
+			$json['alert']  = "Tipe Member harus diisi";
+			echo json_encode($json);
+			exit;
+		}
+		$data['tipe_member_id'] = $this->input->post('tipe_member_id');
+		
+		if(!$this->input->post('tipe_kolasi_id')){
+			$json['alert']  = "Tipe Kolasi harus diisi";
+			echo json_encode($json);
+			exit;
+		}
+		$data['tipe_kolasi_id'] = $this->input->post('tipe_kolasi_id');
+		
+		if($this->input->post('limit_pinjam')<1){
+			$json['alert']  = "Limit peminjaman harus diisi";
+			echo json_encode($json);
+			exit;
+		}
+		$data['limit_pinjam'] = $this->input->post('limit_pinjam');
+		
+		if($this->input->post('periode_pinjam')<1){
+			$json['alert']  = "Periode peminjaman harus diisi";
+			echo json_encode($json);
+			exit;
+		}
+		$data['periode_pinjam'] = $this->input->post('periode_pinjam');
+		
+		if($this->input->post('limit_pinjam_ulang')<1){
+			$json['alert']  = "Limit peminjaman ulang harus diisi";
+			echo json_encode($json);
+			exit;
+		}
+		$data['limit_pinjam_ulang'] = $this->input->post('limit_pinjam_ulang');
+		
+		if($this->input->post('bisa_tiap_hari')==""){
+			$json['alert']  = "Kondisi peminjaman tiap hari harus diisi";
+			echo json_encode($json);
+			exit;
+		}
+		$data['bisa_tiap_hari'] = $this->input->post('bisa_tiap_hari');
+		
+		if($this->input->post('masa_tenggang')<1){
+			$json['alert']  = "Masa tenggang harus diisi";
+			echo json_encode($json);
+			exit;
+		}
+		$data['masa_tenggang'] = $this->input->post('masa_tenggang');
+		
+		if($ref=='0'){
+			if($this->Db_model->add('aturan_pinjam',$data)){
+				$json['status'] = 'berhasil';
+				$json['alert']  = "Data berhasil disimpan";
+				echo json_encode($json);
+				exit;
+			}
+		}else{
+			if($this->Db_model->update('aturan_pinjam',$data,array('md5(aturan_pinjam_id)' => $ref))){
+				$json['status'] = 'berhasil';
+				$json['alert']  = "Data berhasil disimpan";
+				echo json_encode($json);
+				exit;
+			}
+			
+		}
 	}
 	
 	
 	function modal_form_aturan_pinjam($hash='0'){
-		$q = $this->Db_model->get('bahasa','*',array('sha1(bahasa_id)' => $hash));
-		$data['title']	= "bahasa";
+		$q = $this->Db_model->get('aturan_pinjam','*',array('sha1(aturan_id)' => $hash));
+		$data['title']	= "Aturan Pinjam";
 		$data['datanya'] = $q;
+		$data['opsi_tipe_member']	= $this->Db_model->get('tipe_member','tipe_member_id,nama_tipe_member');
+		$data['opsi_tipe_kolasi']	= $this->Db_model->get('tipe_kolasi','tipe_kolasi_id,nama_tipe_kolasi');
 		$data['ref'] = $hash;
-		$this->load->view('pengaturan/modal_bahasa',$data);
+		$this->load->view('pengaturan/modal_aturan',$data);
 	}
 	
 	function simpan_aturan_pinjam(){
@@ -738,22 +813,7 @@ class Pengaturan extends MY_Controller {
 		}
 		$data['nama_bahasa'] = $this->input->post('nama_bahasa',true);
 		
-		if($ref=='0'){
-			if($this->Db_model->add('bahasa',$data)){
-				$json['status'] = 'berhasil';
-				$json['alert']  = "Data berhasil disimpan";
-				echo json_encode($json);
-				exit;
-			}
-		}else{
-			if($this->Db_model->update('bahasa',$data,array('md5(bahasa_id)' => $ref))){
-				$json['status'] = 'berhasil';
-				$json['alert']  = "Data berhasil disimpan";
-				echo json_encode($json);
-				exit;
-			}
-			
-		}
+		
 	}
 	
 	function aturan_pinjam_list(){
@@ -766,11 +826,13 @@ class Pengaturan extends MY_Controller {
 		}
 		foreach ($list as $rows) {
 			$row = array();
-
-			$row[] = isset($rows->nama_bahasa) ? $rows->nama_bahasa : '-';
+			$row[] = isset($rows->nama_tipe_member) ? $rows->nama_tipe_member : '-';
+			$row[] = isset($rows->nama_tipe_kolasi) ? $rows->nama_tipe_kolasi : '-';
+			$row[] = isset($rows->limit_pinjam) ? $rows->limit_pinjam : '-';
+			$row[] = isset($rows->periode_pinjam) ? $rows->periode_pinjam : '-';
 			$btn = "
-			<button type='button' class='btn btn-info ganti' id='".sha1($rows->bahasa_id)."'>Ubah</button>
-			<button type='button' class='btn btn-warning hapus' id='".sha1($rows->bahasa_id)."'>Hapus</button>
+			<button type='button' class='btn btn-info ganti' id='".sha1($rows->aturan_id)."'>Ubah</button>
+			<button type='button' class='btn btn-warning hapus' id='".sha1($rows->aturan_id)."'>Hapus</button>
 			";
 			$row[] = $btn;
 			$data[] = $row;
