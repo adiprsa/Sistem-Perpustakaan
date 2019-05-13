@@ -1,5 +1,8 @@
 <!-- ============================================================== -->
 <!-- wrapper  -->
+<script src="<?= base_url('assets/datatable') ?>/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="<?= base_url('assets/datatable') ?>/dataTables.bootstrap.min.css">
+
 <!-- ============================================================== -->
 <div class="dashboard-wrapper">
 	<div class="dashboard-ecommerce">
@@ -32,24 +35,15 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="<?=site_url('buku/form/tambah')?>" class='btn btn-success'>Tambah</a>
+                                <button type='button' class='btn btn-success tambah'>Tambah</button>
+                                <button type='button' class='btn btn-success import'>Import Data Penerbit</button>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="data" class="table table-striped table-bordered second" style="width:100%">
+                                    <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                         <thead>
                                             <tr>
-<<<<<<< HEAD:application/modules/buku/views/buku_list.php
-                                                <th>No</th>
-                                                <th>Judul</th>
-                                                <th>ISBN ISSN </th>
-												<th>Penerbit</th>
-												<th>Tahun Terbit</th>
-=======
-                                                <th>Nama Pengarang</th>
-                                                <th>Tahun Pengarang</th>
-                                                <th>Tipe Pengarang</th>
->>>>>>> refs/remotes/origin/master:application/modules/pengaturan/views/main.php
+                                                <th>Nama Penerbit</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -66,40 +60,57 @@
                 </div>
 		</div>
 	</div>
-<div id="modal_form" class="modal" data-width="900">
-</div>
-<script src="<?= base_url('assets/datatable') ?>/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="<?= base_url('assets/datatable') ?>/dataTables.bootstrap.min.css">
-<script>
-$(document).ready(function() {
-table = $('#data').DataTable({
-		"processing": true, //Feature control the processing indicator.
+	<script>
+	$(document).ready(function() {
+	   table = $('#example').DataTable({
+			"processing": true, //Feature control the processing indicator.
 		"serverSide": true, //Feature control DataTables' server-side processing mode.
 		"order": [], //Initial no order.
+
 		// Load data for the table's content from an Ajax source
-<<<<<<< HEAD:application/modules/buku/views/buku_list.php
-		"ajax": {
-			"url": "<?=site_url('buku/ajax/buku_datatable')?>",
-=======
 			"ajax": {
-			"url": "<?=site_url('Pengaturan/pengarang_list')?>",
->>>>>>> refs/remotes/origin/master:application/modules/pengaturan/views/main.php
+			"url": "<?=site_url('Pengaturan/penerbit_list')?>",
 			"type": "POST",
 		},
+
 		//Set column definition initialisation properties.
 		"columnDefs": [
-<<<<<<< HEAD:application/modules/buku/views/buku_list.php
-			{
-				"targets": [ 0 ], //first column / numbering column
-				"orderable": false, //set not orderable
-			},
-=======
 		{
 			"targets": [ 0 ], //first column / numbering column
 			"orderable": false, //set not orderable
 		},
->>>>>>> refs/remotes/origin/master:application/modules/pengaturan/views/main.php
 		],
+		});
+
+
 	});
-});
+	</script>
+<div id="modal_form" class="modal" data-width="600">
+	<div id="tampil_form"></div>
+</div>
+
+<script>
+	$(document).on('click','.ganti',function(){
+					$('#tampil_form').load("<?=site_url()?>Pengaturan/modal_form_penerbit/"+ $(this).attr('id'),function(){
+					$('#modal_form').modal('show');
+					});
+				});
+	$(document).on('click','.tambah',function(){
+					$('#tampil_form').load("<?=site_url()?>Pengaturan/modal_form_penerbit/",function(){
+					$('#modal_form').modal('show');
+					});
+				});
+	$(document).on('click','.hapus',function(){
+		var cnf = confirm("Apakah anda yakin akan menghapus penerbit ini?");
+		if (cnf == true) {
+			//alert ($(this).attr('id'));
+			location.href = '<?=site_url()?>Pengaturan/hapus_penerbit/' + $(this).attr('id');
+		}
+	});
+	$(document).on('click','.import',function(){
+		$('#tampil_form').load("<?=site_url()?>/Pengaturan/modal_import_penerbit/",function(){
+		$('#modal_form').modal('show');
+		});
+	});
+
 </script>
