@@ -72,10 +72,10 @@
                     <div id="submenu-3" class="collapse submenu" style="">
                         <ul class="nav flex-column">
                           <li class="nav-item">
-                              <a class="nav-link" href="<?=base_url('#');?>">Peminjaman</a>
+                              <a class="nav-link" href="<?=base_url('peminjaman');?>">Peminjaman</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="<?=base_url('#');?>">Pengembalian</a>
+                              <a class="nav-link" href="<?=base_url('pengembalian');?>">Pengembalian</a>
                           </li>
                       </ul>
                   </div>

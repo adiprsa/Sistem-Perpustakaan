@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- ============================================================== -->
         <div class="nav-left-sidebar sidebar-dark">
             <div class="menu-list">
-                <?php $this->load->view('template/sidebar') ?>
+                <?php $this->load->view('templates/sidebar') ?>
             </div>
         </div>
         <!-- ============================================================== -->
@@ -58,4 +58,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- ============================================================== -->
         <!-- wrapper  -->
         <!-- ============================================================== -->
-        
