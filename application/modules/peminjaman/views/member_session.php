@@ -96,7 +96,8 @@ $(document).ready(function (e) {
             <div class="card-body">
               <h4>Peminjaman Aktif</h4>
               <div class="input-group mb-3">
-                  <a href="<?=base_url('/peminjaman/remove_session');?>" class="btn btn-large btn-danger">Selesaikan Peminjaman</a>
+                  <a href="<?=base_url('/peminjaman/remove_session');?>" class="btn btn-large btn-danger">Selesaikan Peminjaman</a> &nbsp;
+                  <a href="<?=base_url('/pengembalian');?>" class="btn btn-large btn-info">Pengembalian Buku</a>
               </div>
               <div id="detailMember" class="loading">
                 <table>

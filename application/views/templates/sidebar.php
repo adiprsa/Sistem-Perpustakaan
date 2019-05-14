@@ -77,6 +77,9 @@
                           <li class="nav-item">
                               <a class="nav-link" href="<?=base_url('pengembalian');?>">Pengembalian</a>
                           </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="<?=base_url('denda');?>">Pembayaran Denda</a>
+                          </li>
                       </ul>
                   </div>
             </li>

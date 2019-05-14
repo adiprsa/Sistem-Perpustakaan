@@ -25,16 +25,15 @@ class Peminjaman_qry extends CI_Model{
         return false;
     }
 
-    public function simpan_pinjam_buku($member_code,$item_code) {
+    public function simpan_pinjam_buku($member_code,$item_code,$tgl_pinjam,$tgl_kembali) {
       $item = $this->get_item_by_code($item_code);
       $member = $this->get_member_by_code($member_code);
       $data = array(
           'item_id'=>$item->item_id,
           'no_item'=>$item_code,
           'member_id'=>$member->member_id,
-          'tgl_pinjam'=>date('Y-m-d'),
-          'tgl_harus_kembali'=>date('Y-m-d'),
-          'aturan_pinjam_id'=>1,
+          'tgl_pinjam'=>$tgl_pinjam,
+          'tgl_harus_kembali'=>$tgl_kembali,
           'input_date'=>date('Y-m-d'),
           'user_id'=>$this->session->userdata('user_id')
       );
@@ -55,7 +54,8 @@ class Peminjaman_qry extends CI_Model{
                 INNER JOIN item b ON a.item_id = b.item_id
                 INNER JOIN bibliografi c ON b.biblio_id = c.biblio_id
                 INNER JOIN member d ON d.member_id = a.member_id
-                WHERE a.dikembalikan IS NULL AND d.member_code='$member_code'";
+                WHERE a.dikembalikan IS NULL 
+                AND d.member_code='$member_code'";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {
             $data = $query->result();
@@ -75,11 +75,14 @@ class Peminjaman_qry extends CI_Model{
                 	a.tgl_pinjam,
                 	a.tgl_harus_kembali,
                 	a.dikembalikan,
-                  a.tgl_kembali
+                    a.tgl_kembali,
+                    e.total_denda,
+                    e.tgl_bayar
                 FROM peminjaman a
                 INNER JOIN item b ON a.item_id = b.item_id
                 INNER JOIN bibliografi c ON b.biblio_id = c.biblio_id
                 INNER JOIN member d ON d.member_id = a.member_id
+                INNER JOIN pembayaran_denda e ON e.peminjaman_id=a.peminjaman_id
                 WHERE a.dikembalikan IS NOT NULL AND d.member_code='$member_code'";
         $query = $this->db->query($sql);
         if ($query->num_rows() > 0) {

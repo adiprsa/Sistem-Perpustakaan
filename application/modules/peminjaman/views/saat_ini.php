@@ -2,7 +2,7 @@
   <table class="table table-striped table-bordered first">
     <thead>
       <tr>
-        <th>Aksi</th>
+        <th>No</th>
         <th>Kode Eksemplar</th>
         <th>Judul</th>
         <th>Tipe Koleksi</th>

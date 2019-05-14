@@ -3,11 +3,13 @@
 class Peminjaman extends MY_Controller {
 
   public $member_code;
-
+  public $rule;
   public function __construct() {
     $this->member_code = $this->session->userdata('member_code');
     parent::__construct();
     $this->load->model("Peminjaman_qry",'peminjaman');
+    $this->load->library('Aturan');
+    $this->rule = $this->aturan->aturan_pinjam($this->member_code);
   }
 
   public function index() {
@@ -52,13 +54,31 @@ class Peminjaman extends MY_Controller {
     $item_code = $this->input->post('item_code');
     $member_code = $this->member_code;
     $result = $this->peminjaman->get_item_by_code($item_code);
+    $tgl_pinjam = date('Y-m-d');
+    $tgl_kembali = $this->aturan->get_tgl_kembali($tgl_pinjam,$this->rule->lama_pinjam);
+    $jml_dipinjam  = count($this->peminjaman->get_item_by_member($member_code));
+
     if(!$result) {
       $resp['error_code'] = '404';
       $resp['messages'] = 'Data buku tidak tersedia';
       echo json_encode($resp);
       exit;
     } else {
-      $query = $this->peminjaman->simpan_pinjam_buku($member_code,$item_code);
+      ########## ATURAN PEMINJAMAN ##########
+      // Jika item tidak ada
+      if($this->aturan->check_jml_item_dipinjam($item_code) >= $this->aturan->check_jml_item($item_code)) {
+        $resp['error_code'] = '401';
+        $resp['messages'] = 'Jumlah Eksemplar Habis!';
+        echo json_encode($resp);
+        exit;
+      // Jika jumlah pinjam melebihi batas pinjam
+      }else if($jml_dipinjam >= $this->rule->limit_pinjam) {
+        $resp['error_code'] = '401';
+        $resp['messages'] = 'Limit pinjam sudah habis!';
+        echo json_encode($resp);
+        exit;
+      }
+      $query = $this->peminjaman->simpan_pinjam_buku($member_code,$item_code,$tgl_pinjam,$tgl_kembali);
       if($query) {
         $resp['error_code'] = '201';
         $resp['messages'] = 'Buku berhasil dipinjam';
