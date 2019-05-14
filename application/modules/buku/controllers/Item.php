@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Exemplar extends MY_Controller {
+class Item extends MY_Controller {
 
 	public function __construct()
 	{
@@ -10,15 +10,15 @@ class Exemplar extends MY_Controller {
 	}
 	public function index()
 	{
-		$this->exemplar_list();
+		$this->item_list();
 	}
-	public function exemplar_list()
+	public function item_list()
 	{
-		$data['title'] = 'Exemplar';
+		$data['title'] = 'item';
 		//Header
 		$this->load->view('templates/header', $data);
 		// Body
-		$this->load->view('exemplar_list',$data);
+		$this->load->view('item_list',$data);
 		// Footer
 		$this->load->view('templates/footer');
 	}
@@ -26,36 +26,36 @@ class Exemplar extends MY_Controller {
 	{
 		$this->load->model('ref_m');
 
-		$data['title'] = 'Exemplar';
+		$data['title'] = 'item';
 		$data['action'] = $this->uri->segment(3);
 
 		if ($data['action']=='edit') {
 			$id = $this->input->get('id_item');
-			$data['exemplar'] = $this->item_m->item_id($id);
+			$data['item'] = $this->item_m->item_id($id);
 		}
 		if ($this->input->post()) {
 			if($this->validasi()){
 				if ($data['action']=='edit') {
 					if($this->item_m->edit($id)){
-						$this->session->set_flashdata('pesan', 'Edit exemplar Berhasil');
+						$this->session->set_flashdata('pesan', 'Edit item Berhasil');
 						$this->session->set_flashdata('status', TRUE);
-						redirect('exemplar','refresh');
+						redirect('item','refresh');
 					}else{
-						$this->session->set_flashdata('pesan', 'Edit exemplar GAGAL');
+						$this->session->set_flashdata('pesan', 'Edit item GAGAL');
 						$this->session->set_flashdata('status', FALSE);
 					}
 				}else{
 					if($this->item_m->tambah()){
-						$this->session->set_flashdata('pesan', 'Tambah exemplar Berhasil');
+						$this->session->set_flashdata('pesan', 'Tambah item Berhasil');
 						$this->session->set_flashdata('status', TRUE);
-						redirect('exemplar','refresh');
+						redirect('item','refresh');
 					}else{
-						$this->session->set_flashdata('pesan', 'Tambah exemplar GAGAL');
+						$this->session->set_flashdata('pesan', 'Tambah item GAGAL');
 						$this->session->set_flashdata('status', FALSE);
 					}
 				}
 			}
-			$data['exemplar'] = $this->input->post();
+			$data['item'] = $this->input->post();
 		}
 
 		//Referensi tabal
@@ -68,7 +68,7 @@ class Exemplar extends MY_Controller {
 		//Header
 		$this->load->view('templates/header', $data);
 		// Body
-		$this->load->view('exemplar_form',$data);
+		$this->load->view('item_form',$data);
 		// Footer
 		$this->load->view('templates/footer');
 	}
@@ -78,5 +78,5 @@ class Exemplar extends MY_Controller {
 	}
 }
 
-/* End of file exemplar.php */
-/* Location: ./application/controllers/exemplar.php */
+/* End of file item.php */
+/* Location: ./application/controllers/item.php */

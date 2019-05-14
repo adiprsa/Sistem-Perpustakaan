@@ -30,7 +30,7 @@ class Item_m extends CI_Model {
 						'item_status_id'	=> $this->input->post('item_status_id'),
 						'asal'				=> $this->input->post('asal'),
 						'invoice'			=> $this->input->post('invoice'),
-						'harga'				=> $this->input->post('harga')
+						'harga'				=> $this->input->post('harga'),
 						'input_date'		=> date('Y-m-d H:i:s'));
 		$query = $this->db->insert('itemgrafi', $data);
 		return $query;
