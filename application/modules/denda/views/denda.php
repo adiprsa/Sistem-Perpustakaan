@@ -56,13 +56,7 @@
     }));
   });
 </script>
-
-<div class="dashboard-wrapper">
-  <div class="dashboard-ecommerce">
-    <div class="container-fluid dashboard-content ">
-      <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <div class="card">
+<div class="card">
             <div class="card-body">
               <h4>Member Aktif</h4>
               <div class="input-group mb-3">
@@ -97,7 +91,7 @@
                 <div class="tab-regular">
                   <ul class="nav nav-tabs " id="myTab" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active" id="pinjam-tab" data-toggle="tab" href="#pinjam" onclick="javascript:kembali();" role="tab" aria-controls="pinjam" aria-selected="true" cur>Pembayaran Denda</a>
+                      <a class="nav-link active" id="pinjam-tab" data-toggle="tab" href="#pinjam" role="tab" aria-controls="pinjam" aria-selected="true" cur>Pembayaran Denda</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" id="sejarah-tab" data-toggle="tab" href="#sejarah" onclick="javascript:sejarah();" role="tab" aria-controls="sejarah" aria-selected="false">History Pembayaran</a>
@@ -106,7 +100,10 @@
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active loading" id="pinjam" role="tabpanel" aria-labelledby="home-tab">
                       <div class="table-responsive">
-                        <table class="table table-striped table-bordered first">
+                      <?php
+                            if(is_array($items)) {
+                      ?>
+                      <table class="table table-striped table-bordered first">
                           <thead>
                             <tr>
                               <th style="text-align:center">
@@ -124,7 +121,6 @@
                           </thead>
                           <tbody>
                             <?php
-                            if(is_array($items)) {
                               $i = 1;
                               $total_denda = [];
                               foreach ($items as $item) {
@@ -143,7 +139,7 @@
                                   <td><?php echo $this->aturan->rupiah($item->total_denda); ?></td>
                                 </tr>
                                 <?php $i++;
-                                } } ?>
+                                }?>
                               <tfooter>
                             <tr>
                               <th></th>
@@ -152,8 +148,10 @@
                             </tr>
                           </tfooter>
                         </table>
+                              
                         <br>
                         <button type="button" class="btn btn-primary" id="btnBayar">Bayar Denda</button>
+                        <?php } ?>
                       </div>
 
                     </div>
@@ -163,10 +161,4 @@
                   </div>
                 </div>
               </div>
-
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>

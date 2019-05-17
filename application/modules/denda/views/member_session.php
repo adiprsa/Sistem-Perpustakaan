@@ -97,7 +97,7 @@
                 <div class="tab-regular">
                   <ul class="nav nav-tabs " id="myTab" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active" id="pinjam-tab" data-toggle="tab" href="#pinjam" onclick="javascript:kembali();" role="tab" aria-controls="pinjam" aria-selected="true" cur>Pembayaran Denda</a>
+                      <a class="nav-link active" id="pinjam-tab" data-toggle="tab" href="#pinjam" role="tab" aria-controls="pinjam" aria-selected="true" cur>Pembayaran Denda</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" id="sejarah-tab" data-toggle="tab" href="#sejarah" onclick="javascript:sejarah();" role="tab" aria-controls="sejarah" aria-selected="false">History Pembayaran</a>
