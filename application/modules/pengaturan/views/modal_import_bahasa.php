@@ -55,7 +55,7 @@
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/import_bahasa",
+        	url: "<?=site_url()?>pengaturan/bahasa/import_bahasa",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

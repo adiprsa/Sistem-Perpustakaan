@@ -35,7 +35,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <button type='button' class='btn btn-success tambah'>Tambah</button>
+                                <button type='button' class='btn btn-info tambah'>Tambah</button>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -69,7 +69,7 @@
 
 		// Load data for the table's content from an Ajax source
 			"ajax": {
-			"url": "<?=site_url('Pengaturan/tipe_media_list')?>",
+			"url": "<?=site_url('pengaturan/tipe_media/tipe_media_list')?>",
 			"type": "POST",
 		},
 
@@ -91,20 +91,20 @@
 
 <script>
 	$(document).on('click','.ganti',function(){
-					$('#tampil_form').load("<?=site_url()?>Pengaturan/modal_form_tipe_media/"+ $(this).attr('id'),function(){
+					$('#tampil_form').load("<?=site_url()?>pengaturan/tipe_media/modal_form_tipe_media/"+ $(this).attr('id'),function(){
 					$('#modal_form').modal('show');
 					});
 				});
 	$(document).on('click','.tambah',function(){
-					$('#tampil_form').load("<?=site_url()?>Pengaturan/modal_form_tipe_media/",function(){
+					$('#tampil_form').load("<?=site_url()?>pengaturan/tipe_media/modal_form_tipe_media/",function(){
 					$('#modal_form').modal('show');
 					});
 				});
 	$(document).on('click','.hapus',function(){
-		var cnf = confirm("Apakah anda yakin akan menghapus lokasi ini?");
+		var cnf = confirm("Apakah anda yakin akan menghapus tipe media ini?");
 		if (cnf == true) {
 			//alert ($(this).attr('id'));
-			location.href = '<?=site_url()?>Pengaturan/hapus_tipe_media/' + $(this).attr('id');
+			location.href = '<?=site_url()?>pengaturan/tipe_media/hapus_tipe_media/' + $(this).attr('id');
 		}
 	});
 

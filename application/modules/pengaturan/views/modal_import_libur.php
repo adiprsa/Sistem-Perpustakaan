@@ -55,7 +55,7 @@
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/import_libur",
+        	url: "<?=site_url()?>pengaturan/libur/import_libur",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

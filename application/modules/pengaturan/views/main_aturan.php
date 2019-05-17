@@ -36,7 +36,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <button type='button' class='btn btn-success tambah'>Tambah</button>
+                                <button type='button' class='btn btn-info tambah'>Tambah</button>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -72,7 +72,7 @@
 
 		// Load data for the table's content from an Ajax source
 			"ajax": {
-			"url": "<?=site_url('Pengaturan/aturan_pinjam_list')?>",
+			"url": "<?=site_url('pengaturan/aturan_pinjam/aturan_pinjam_list')?>",
 			"type": "POST",
 		},
 
@@ -94,12 +94,12 @@
 
 <script>
 	$(document).on('click','.ganti',function(){
-					$('#tampil_form').load("<?=site_url()?>Pengaturan/modal_form_aturan_pinjam/"+ $(this).attr('id'),function(){
+					$('#tampil_form').load("<?=site_url()?>pengaturan/aturan_pinjam/modal_form_aturan_pinjam/"+ $(this).attr('id'),function(){
 					$('#modal_form').modal('show');
 					});
 				});
 	$(document).on('click','.tambah',function(){
-					$('#tampil_form').load("<?=site_url()?>Pengaturan/modal_form_aturan_pinjam/",function(){
+					$('#tampil_form').load("<?=site_url()?>pengaturan/aturan_pinjam/modal_form_aturan_pinjam/",function(){
 					$('#modal_form').modal('show');
 					});
 				});
@@ -107,7 +107,7 @@
 		var cnf = confirm("Apakah anda yakin akan menghapus aturan peminjaman ini?");
 		if (cnf == true) {
 			//alert ($(this).attr('id'));
-			location.href = '<?=site_url()?>Pengaturan/hapus_aturan_pinjam/' + $(this).attr('id');
+			location.href = '<?=site_url()?>pengaturan/aturan_pinjam/hapus_aturan_pinjam/' + $(this).attr('id');
 		}
 	});
 

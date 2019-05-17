@@ -83,7 +83,7 @@ $(function() {
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/simpan_pengarang",
+        	url: "<?=site_url()?>pengaturan/pengarang/simpan_pengarang",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

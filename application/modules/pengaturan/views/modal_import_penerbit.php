@@ -55,7 +55,7 @@
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/import_penerbit",
+        	url: "<?=site_url()?>pengaturan/penerbit/import_penerbit",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

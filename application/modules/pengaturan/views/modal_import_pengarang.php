@@ -55,7 +55,7 @@
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/import_pengarang",
+        	url: "<?=site_url()?>pengaturan/pengarang/import_pengarang",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

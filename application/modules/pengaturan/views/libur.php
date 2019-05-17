@@ -35,8 +35,8 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <button type='button' class='btn btn-success tambah'>Tambah</button>
-                                <button type='button' class='btn btn-info import'>Import Data Libur</button>
+                                <button type='button' class='btn btn-info tambah'>Tambah</button>
+                                <button type='button' class='btn btn-success import'>Import Data Libur</button>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -56,7 +56,7 @@
 													<td><?=$this->convertion->mysql2normal($bb->tgl_libur)?></td>
 													<td><?=$bb->hari_libur?></td>
 													<td>
-													<button type='button' class='btn btn-info ganti' id='<?=sha1($bb->libur_id)?>'>Ubah</button>
+													<button type='button' class='btn btn-warning ganti' id='<?=sha1($bb->libur_id)?>'>Ubah</button>
 													<button type='button' class='btn btn-danger hapus' id='<?=sha1($bb->libur_id)?>'>Hapus</button>
 													</td>
 												</tr>
@@ -88,17 +88,17 @@
 
 <script>				
 	$(document).on('click','.ganti',function(){
-					$('#tampil_form').load("<?=site_url()?>/Pengaturan/modal_form_libur/"+ $(this).attr('id'),function(){
+					$('#tampil_form').load("<?=site_url()?>pengaturan/libur/modal_form_libur/"+ $(this).attr('id'),function(){
 					$('#modal_form').modal('show');
 					});
 				});
 	$(document).on('click','.tambah',function(){
-					$('#tampil_form').load("<?=site_url()?>/Pengaturan/modal_form_libur/",function(){
+					$('#tampil_form').load("<?=site_url()?>pengaturan/libur/modal_form_libur/",function(){
 					$('#modal_form').modal('show');
 					});
 				});
 	$(document).on('click','.import',function(){
-		$('#tampil_form').load("<?=site_url()?>/Pengaturan/modal_import_libur/",function(){
+		$('#tampil_form').load("<?=site_url()?>pengaturan/libur/modal_import_libur/",function(){
 		$('#modal_form').modal('show');
 		});
 	});
@@ -107,7 +107,7 @@
 		var cnf = confirm("Apakah anda yakin akan menghapus data ini?");
 		if (cnf == true) {
 			//alert ($(this).attr('id'));
-			location.href = '<?=site_url()?>/Pengaturan/hapus_libur/' + $(this).attr('id');
+			location.href = '<?=site_url()?>pengaturan/libur/hapus_libur/' + $(this).attr('id');
 		}				
 	});
 	
