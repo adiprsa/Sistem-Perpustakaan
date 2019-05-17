@@ -55,7 +55,7 @@ $(function() {
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/simpan_kolasi",
+        	url: "<?=site_url()?>pengaturan/kolasi/simpan_kolasi",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

@@ -42,12 +42,8 @@
                                     <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Nama Supplier</th>
-                                                <th>Kontak</th>
-                                                <th>Alamat</th>
-                                                <th>Telephone</th>
-                                                <th>Akun</th>
-                                                <th>Email</th>
+                                                <th>Kode Fakultas</th>
+                                                <th>Nama Fakultas</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -73,7 +69,7 @@
 
 		// Load data for the table's content from an Ajax source
 			"ajax": {
-			"url": "<?=site_url('pengaturan/supplier/supplier_list')?>",
+			"url": "<?=site_url('pengaturan/fakultas/fakultas_list')?>",
 			"type": "POST",
 		},
 
@@ -95,21 +91,23 @@
 
 <script>
 	$(document).on('click','.ganti',function(){
-					$('#tampil_form').load("<?=site_url()?>pengaturan/supplier/modal_form_supplier/"+ $(this).attr('id'),function(){
+					$('#tampil_form').load("<?=site_url()?>pengaturan/fakultas/modal_form_fakultas/"+ $(this).attr('id'),function(){
 					$('#modal_form').modal('show');
 					});
 				});
 	$(document).on('click','.tambah',function(){
-					$('#tampil_form').load("<?=site_url()?>pengaturan/supplier/modal_form_supplier/",function(){
+					$('#tampil_form').load("<?=site_url()?>pengaturan/fakultas/modal_form_fakultas/",function(){
 					$('#modal_form').modal('show');
 					});
 				});
 	$(document).on('click','.hapus',function(){
-		var cnf = confirm("Apakah anda yakin akan menghapus lokasi ini?");
+		var cnf = confirm("Apakah anda yakin akan menghapus fakultas ini?");
 		if (cnf == true) {
 			//alert ($(this).attr('id'));
-			location.href = '<?=site_url()?>pengaturan/supplier/hapus_supplier/' + $(this).attr('id');
+			location.href = '<?=site_url()?>pengaturan/fakultas/hapus_fakultas/' + $(this).attr('id');
 		}
 	});
-
+	$(document).on('click','.prodi',function(){
+		location.href = '<?=site_url()?>pengaturan/prodi/index/' + $(this).attr('id');		
+	});
 </script>

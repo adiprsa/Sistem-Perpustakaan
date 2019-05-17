@@ -36,21 +36,21 @@ $(function() {
 		?>
           <table border='0' width='100%'>
 			<tr>
-				<td>Tipe Media</td>
+				<td>Kode Fakultas</td>
 				<td>
-					<input placeholder='Tipe Media' type='text' name='tipe_media' value='<?=isset($row->tipe_media) ? $row->tipe_media : ''?>' class='form-control'>
+					<input placeholder='Kode Fakultas' type='text' name='kd_fakultas' <?=(isset($ref) AND $ref!="0") ? 'readonly' : ''?> name='fakultas' value='<?=isset($row->kd_fakultas) ? $row->kd_fakultas : ''?>' class='form-control'>
 				</td>
 			</tr>
 			<tr>
-				<td>Kode</td>
+				<td>Nama Fakultas</td>
 				<td>
-					<input placeholder='Kode' type='text' name='kode' value='<?=isset($row->kode) ? $row->kode : ''?>' class='form-control'>
+					<input placeholder='Nama Fakultas' type='text' name='fakultas' value='<?=isset($row->fakultas) ? $row->fakultas : ''?>' class='form-control'>
 				</td>
 			</tr>
 		  </table>
         </div>
         <div class="modal-footer">
-		  <input type='hidden' name='ref' value='<?=isset($row->id) ? md5($row->id) : '0'?>'>
+		  <input type='hidden' name='ref' value='<?=isset($row->kd_fakultas) ? md5($row->kd_fakultas) : '0'?>'>
 		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-info" id='simpan'>Simpan</button>
         </div>
@@ -61,7 +61,7 @@ $(function() {
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>pengaturan/tipe_media/simpan_tipe_media",
+        	url: "<?=site_url()?>pengaturan/fakultas/simpan_fakultas",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

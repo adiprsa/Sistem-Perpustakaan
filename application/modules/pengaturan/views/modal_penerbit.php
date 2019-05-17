@@ -55,7 +55,7 @@ $(function() {
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/simpan_penerbit",
+        	url: "<?=site_url()?>pengaturan/penerbit/simpan_penerbit",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

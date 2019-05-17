@@ -35,7 +35,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <button type='button' class='btn btn-success tambah'>Tambah</button>
+                                <button type='button' class='btn btn-info tambah'>Tambah</button>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -68,7 +68,7 @@
 
 		// Load data for the table's content from an Ajax source
 			"ajax": {
-			"url": "<?=site_url('Pengaturan/lokasi_list')?>",
+			"url": "<?=site_url('pengaturan/lokasi/lokasi_list')?>",
 			"type": "POST",
 		},
 
@@ -90,12 +90,12 @@
 
 <script>
 	$(document).on('click','.ganti',function(){
-					$('#tampil_form').load("<?=site_url()?>Pengaturan/modal_form_lokasi/"+ $(this).attr('id'),function(){
+					$('#tampil_form').load("<?=site_url()?>pengaturan/lokasi/modal_form_lokasi/"+ $(this).attr('id'),function(){
 					$('#modal_form').modal('show');
 					});
 				});
 	$(document).on('click','.tambah',function(){
-					$('#tampil_form').load("<?=site_url()?>Pengaturan/modal_form_lokasi/",function(){
+					$('#tampil_form').load("<?=site_url()?>pengaturan/lokasi/modal_form_lokasi/",function(){
 					$('#modal_form').modal('show');
 					});
 				});
@@ -103,11 +103,11 @@
 		var cnf = confirm("Apakah anda yakin akan menghapus lokasi ini?");
 		if (cnf == true) {
 			//alert ($(this).attr('id'));
-			location.href = '<?=site_url()?>Pengaturan/hapus_lokasi/' + $(this).attr('id');
+			location.href = '<?=site_url()?>pengaturan/lokasi/hapus_lokasi/' + $(this).attr('id');
 		}
 	});
 	$(document).on('click','.import',function(){
-		$('#tampil_form').load("<?=site_url()?>/Pengaturan/modal_import_lokasi/",function(){
+		$('#tampil_form').load("<?=site_url()?>pengaturan/lokasi/modal_import_lokasi/",function(){
 		$('#modal_form').modal('show');
 		});
 	});

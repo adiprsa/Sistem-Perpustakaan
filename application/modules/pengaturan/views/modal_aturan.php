@@ -114,7 +114,7 @@ $(function() {
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/simpan_aturan",
+        	url: "<?=site_url()?>pengaturan/aturan_pinjam/simpan_aturan",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

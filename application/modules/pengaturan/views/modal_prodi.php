@@ -36,21 +36,47 @@ $(function() {
 		?>
           <table border='0' width='100%'>
 			<tr>
-				<td>Tipe Media</td>
+				<td>Fakultas</td>
 				<td>
-					<input placeholder='Tipe Media' type='text' name='tipe_media' value='<?=isset($row->tipe_media) ? $row->tipe_media : ''?>' class='form-control'>
+					<select name='kd_fakultas' class='form-control' <?=($kd_fakultas AND $kd_fakultas != "-") ? 'disabled' : ''?>>
+						<option value=''>Pilih Fakultas</option>
+						<?php
+						print_r($form_fakultas->result());
+						foreach($form_fakultas->result() as $aa => $bb){
+							if($kd_fakultas == sha1($bb->kd_fakultas)){
+								$val = $bb->kd_fakultas;
+							}
+							?>
+								<option value='<?=$bb->kd_fakultas?>' <?=($kd_fakultas AND $kd_fakultas == sha1($bb->kd_fakultas)) ? 'selected' : ''?> > <?=$bb->fakultas?></option>							
+							<?php
+						}
+						?>
+					</select>
+					<?php
+					if($kd_fakultas!="-"){
+						?>
+						<input type='hidden' name='kd_fakultas' value='<?=$val?>'>
+						<?php
+					}
+					?>
 				</td>
 			</tr>
 			<tr>
-				<td>Kode</td>
+				<td>Kode Prodi</td>
 				<td>
-					<input placeholder='Kode' type='text' name='kode' value='<?=isset($row->kode) ? $row->kode : ''?>' class='form-control'>
+					<input placeholder='Kode Prodi' type='text' name='kd_prodi' <?=(isset($ref) AND $ref!="0") ? 'readonly' : ''?> value='<?=isset($row->kd_prodi) ? $row->kd_prodi : ''?>' class='form-control'>
+				</td>
+			</tr>
+			<tr>
+				<td>Nama Prodi</td>
+				<td>
+					<input placeholder='Nama Prodi' type='text' name='prodi' value='<?=isset($row->prodi) ? $row->prodi : ''?>' class='form-control'>
 				</td>
 			</tr>
 		  </table>
         </div>
         <div class="modal-footer">
-		  <input type='hidden' name='ref' value='<?=isset($row->id) ? md5($row->id) : '0'?>'>
+		  <input type='hidden' name='ref' value='<?=isset($row->kd_prodi) ? md5($row->kd_prodi) : '0'?>'>
 		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-info" id='simpan'>Simpan</button>
         </div>
@@ -61,7 +87,7 @@ $(function() {
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>pengaturan/tipe_media/simpan_tipe_media",
+        	url: "<?=site_url()?>pengaturan/prodi/simpan_prodi",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

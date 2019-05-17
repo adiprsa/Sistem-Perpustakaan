@@ -44,7 +44,7 @@ $(function() {
 		  </table>
         </div>
         <div class="modal-footer">
-		  <input type='hidden' name='ref' value='<?=isset($row-bahasa_id) ? md5($row->bahasa_id) : '0'?>'>
+		  <input type='hidden' name='ref' value='<?=isset($row->bahasa_id) ? md5($row->bahasa_id) : '0'?>'>
 		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-info" id='simpan'>Simpan</button>
         </div>
@@ -55,7 +55,7 @@ $(function() {
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/simpan_bahasa",
+        	url: "<?=site_url()?>pengaturan/bahasa/simpan_bahasa",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

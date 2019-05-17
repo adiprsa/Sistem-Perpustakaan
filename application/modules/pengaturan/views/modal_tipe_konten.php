@@ -36,9 +36,9 @@ $(function() {
 		?>
           <table border='0' width='100%'>
 			<tr>
-				<td>Tipe Media</td>
+				<td>Tipe Konten</td>
 				<td>
-					<input placeholder='Tipe Media' type='text' name='tipe_media' value='<?=isset($row->tipe_media) ? $row->tipe_media : ''?>' class='form-control'>
+					<input placeholder='Tipe Konten' type='text' name='tipe_konten' value='<?=isset($row->tipe_konten) ? $row->tipe_konten : ''?>' class='form-control'>
 				</td>
 			</tr>
 			<tr>
@@ -61,7 +61,7 @@ $(function() {
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>pengaturan/tipe_media/simpan_tipe_media",
+        	url: "<?=site_url()?>pengaturan/tipe_konten/simpan_tipe_konten",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,

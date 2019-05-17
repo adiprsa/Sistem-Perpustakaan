@@ -68,7 +68,7 @@ $row = $user->row();
 		$("#modal_loader").show();
 		e.preventDefault();
 		$.ajax({
-        	url: "<?=site_url()?>Pengaturan/simpan_libur",
+        	url: "<?=site_url()?>pengaturan/libur/simpan_libur",
 			type: "POST",
 			data:  new FormData(this),
 			contentType: false,
