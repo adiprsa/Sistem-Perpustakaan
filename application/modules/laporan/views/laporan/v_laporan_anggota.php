@@ -72,11 +72,13 @@
                                             <th>No.</th>
                                             <th>Kode Anggota</th>
                                             <th>Name</th>
+                                            <th>Tanggal Lahir</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Alamat</th>
                                             <th>Email</th>
-                                            <th>Institusi</th>
                                             <th>Tanggal Keanggotaan</th>
+                                            <th>Tanggal Kadaluarsa</th>
+                                            <th>Tipe Member</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -86,11 +88,13 @@
                                                 <td><?php echo $i++; ?></td>
                                                 <td><?php echo $data->member_code ?></td>
                                                 <td><?php echo $data->nama_member ?></td>
+                                                <td><?php echo $data->tgl_lahir ?></td>
                                                 <td><?php echo $data->jenis_kelamin ?></td>
                                                 <td><?php echo $data->alamat ?></td>
                                                 <td><?php echo $data->email ?></td>
-                                                <td><?php echo $data->institusi ?></td>
                                                 <td><?php echo $data->tgl_register ?></td>
+                                                <td><?php echo $data->tgl_expired ?></td>
+                                                <td><?php echo $data->nama_tipe_member ?></td>
                                             </tr>
                                         <?php endforeach; ?>
 
