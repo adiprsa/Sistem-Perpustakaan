@@ -70,12 +70,14 @@ class Pengembalian extends MY_Controller {
       } 
       $return = $this->pengembalian->return_book($result->peminjaman_id,$tgl_kembali);
       if($return){
-        $resp['error_code'] = '201';
+          $resp['type'] = 'success';
+          $resp['error_code'] = '201';
           $resp['messages'] = 'Buku Berhasil Dikembalikan!';
           echo json_encode($resp);
           exit;
       }
     } else {
+      $resp['type'] = 'error';
       $resp['error_code'] = '404';
         $resp['messages'] = 'Kode Buku tidak tersedia';
         echo json_encode($resp);

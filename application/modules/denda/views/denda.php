@@ -15,7 +15,7 @@
         $("#sejarah").html(resp);
       },
       error: function() {
-        alert('Gagal');
+        showMessage('error', '500', 'Terjadi Kegagalan Proses');
       }
     });
   }
@@ -46,10 +46,10 @@
             var obj = JSON.parse(resp);
             alert(obj.error_code + ' - ' + obj.messages);
             $('#btnKembali').prop('disabled', false);
-            window.location.reload();
+            setTimeout(function(){ window.location.reload(); }, 1500);
           },
           error: function() {
-            alert('Gagal simpan data');
+            showMessage('error', '500', 'Terjadi Kegagalan Proses');
           }
         });
       }

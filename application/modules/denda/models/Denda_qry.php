@@ -77,7 +77,7 @@ class Denda_qry extends CI_Model{
                 INNER JOIN item b ON a.item_id = b.item_id
                 INNER JOIN bibliografi c ON b.biblio_id = c.biblio_id
                 INNER JOIN member d ON d.member_id = a.member_id
-                INNER JOIN pembayaran_denda e ON e.peminjaman_id=a.peminjaman_id
+                LEFT JOIN pembayaran_denda e ON e.peminjaman_id=a.peminjaman_id
                 WHERE a.dikembalikan IS NOT NULL 
                 AND d.member_code='$member_code'
                 AND e.tgl_bayar IS NOT NULL";

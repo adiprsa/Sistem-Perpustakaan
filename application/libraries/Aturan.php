@@ -91,6 +91,7 @@ class Aturan {
 	  
 			$result = $CI->db->insert('pembayaran_denda',$data);
 			if($result) {
+				$resp['type'] = 'error';
 				$resp['error_code'] = '201';
 				$resp['messages'] = 'Anda Terlambat: '.$lama.'Hari - Denda Sebesar: '.$total_denda;
 				return json_encode($resp);
