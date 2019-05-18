@@ -14,7 +14,7 @@ class Biblio_m extends CI_Model {
 			return $biblio;
 		}
 	}
-	public function tambah()
+	public function tambah($file=null)
 	{
 		$data = array('judul'				=> $this->input->post('judul'),
 						'edisi'				=> $this->input->post('edisi'),
@@ -28,17 +28,19 @@ class Biblio_m extends CI_Model {
 						'asal'				=> $this->input->post('asal'),
 						'tempat_terbit_id'	=> $this->input->post('tempat_terbit_id'),
 						'notes'				=> $this->input->post('notes'),
-						'gambar'			=> $this->input->post('gambar'),
+						'gambar'			=> $file,
 						'labels'			=> $this->input->post('labels'),
 						'frekuensi_id'		=> $this->input->post('frekuensi_id'),
 						'tipe_konten_id'	=> $this->input->post('tipe_konten_id'),
 						'tipe_media_id'		=> $this->input->post('tipe_media_id'),
-						'klasifikasi'		=> $this->input->post('klasifikasi'),
+						'kategori_id'		=> $this->input->post('kategori_id'),
 						'input_date'		=> date('Y-m-d H:i:s'));
 		$query = $this->db->insert('bibliografi', $data);
-		return $query;
+		$insert_id = $this->db->insert_id();
+		$this->tambah_pengarang($insert_id);
+		return $insert_id;
 	}
-	public function edit($id=null)
+	public function edit($id=null,$file=null)
 	{
 		$data = array('judul'				=> $this->input->post('judul'),
 						'edisi'				=> $this->input->post('edisi'),
@@ -52,15 +54,44 @@ class Biblio_m extends CI_Model {
 						'asal'				=> $this->input->post('asal'),
 						'tempat_terbit_id'	=> $this->input->post('tempat_terbit_id'),
 						'notes'				=> $this->input->post('notes'),
-						'gambar'			=> $this->input->post('gambar'),
 						'labels'			=> $this->input->post('labels'),
 						'frekuensi_id'		=> $this->input->post('frekuensi_id'),
 						'tipe_konten_id'	=> $this->input->post('tipe_konten_id'),
 						'tipe_media_id'		=> $this->input->post('tipe_media_id'),
-						'klasifikasi'		=> $this->input->post('klasifikasi'));
+						'kategori_id'		=> $this->input->post('kategori_id'));
+		if ($file!=''||$file!=null) {
+			$data = array_merge($data,array('gambar'=>$file));
+		}
 		$this->db->where('biblio_id', $id);
 		$query = $this->db->update('bibliografi', $data);
+		$this->tambah_pengarang($id);
 		return $query;
+	}
+	public function pengarang($biblio_id='')
+	{
+		$this->db->where('biblio_id', $biblio_id);
+		$this->db->join('pengarang', 'pengarang.pengarang_id = biblio_pengarang.pengarang_id', 'left');
+		$query = $this->db->get('biblio_pengarang');
+		if ($query->num_rows()>0) {
+			return $query->result_array();
+		}
+	}
+	public function tambah_pengarang($biblio_id=null)
+	{
+		// hapus data pengarang sebelumnya
+		$this->db->where('biblio_id', $biblio_id);
+		$this->db->delete('biblio_pengarang');
+		// tambah data pengarang baru
+
+		$pengarang = $this->input->post('pengarang_id');
+		foreach ($pengarang as $key => $value) {
+			if ($value!='') {
+				$data = array('biblio_id'		=> $biblio_id,
+								'pengarang_id'	=> $value,
+								'level'			=> $key);
+				$this->db->insert('biblio_pengarang', $data);
+			}
+		}
 	}
 	public function hapus($id=null)
 	{

@@ -50,13 +50,13 @@
                 <div id="submenu-2" class="collapse submenu" style="">
                     <ul class="nav flex-column">
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Bibliografi</a>
+                          <a class="nav-link" href="<?=base_url('buku');?>">Bibliografi</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Eksemplar</a>
+                          <a class="nav-link" href="<?=base_url('buku/item');?>">Eksemplar</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('Pengaturan/kolasi');?>">Tipe Kolasi</a>
+                          <a class="nav-link" href="<?=base_url('buku/ketegori');?>">Kategori</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="<?=base_url('#');?>">Tipe Media</a>

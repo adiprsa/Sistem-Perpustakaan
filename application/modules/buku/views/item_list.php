@@ -32,7 +32,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="<?=site_url('exemplar/form/tambah')?>" class='btn btn-success'>Tambah</a>
+                                <a href="<?=site_url('buku/item/form/tambah')?>" class='btn btn-success'>Tambah</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -72,7 +72,7 @@ table = $('#data').DataTable({
 		"order": [], //Initial no order.
 		// Load data for the table's content from an Ajax source
 		"ajax": {
-			"url": "<?=site_url('buku/ajax/exemplar_datatable')?>",
+			"url": "<?=site_url('buku/ajax/item_datatable')?>",
 			"type": "POST",
 		},
 		//Set column definition initialisation properties.

@@ -22,6 +22,17 @@ class Item extends MY_Controller {
 		// Footer
 		$this->load->view('templates/footer');
 	}
+	public function cari()
+	{
+		$data['title'] = 'item';
+		$data['action'] = 'cari';
+		//Header
+		$this->load->view('templates/header', $data);
+		// Body
+		$this->load->view('item_cari',$data);
+		// Footer
+		$this->load->view('templates/footer');
+	}
 	public function form()
 	{
 		$this->load->model('ref_m');

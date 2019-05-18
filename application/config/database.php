@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => 'infokes',//dbserver**
-	'database' => 'sistem_perpus',
+	'hostname' => '13.250.110.206',
+	'username' => 'simpus',
+	'password' => 'Udinus2019',//dbserver**
+	'database' => 'simpus',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
