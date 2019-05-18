@@ -82,7 +82,6 @@
                                             <th>Penerbit</th>
                                             <th>Tahun Terbit</th>
                                             <th>Lokasi Terbit</th>
-                                            <th>Kategori Buku</th>
                                             <th>Total Stok</th>
                                             <th>Total Stok Ada</th>
                                             <th>Total Stok Hilang</th>
@@ -105,7 +104,6 @@
                                                <td><?php echo $data->nama_penerbit; ?></td>
                                                <td><?php echo $data->tahun_terbit; ?></td>
                                                <td><?php echo $data->nama_tempat; ?></td>
-                                               <td><?php echo $data->klasifikasi; ?></td>
                                                <td><?php echo $data->total_item; ?></td>
                                                <td><?php echo $data->total_item_ada; ?></td>
                                                <td><?php echo $data->total_item_hilang; ?></td>
