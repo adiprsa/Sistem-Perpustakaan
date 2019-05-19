@@ -88,10 +88,10 @@
                 <div id="submenu-4" class="collapse submenu" style="">
                     <ul class="nav flex-column">
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Waktu Stok Opname</a>
+                          <a class="nav-link" href="<?=base_url('stok_opname');?>">Waktu Stok Opname</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Stok Take</a>
+                          <a class="nav-link" href="<?=base_url('stok_opname_item');?>">Stok Take</a>
                       </li>
                   </ul>
               </div>

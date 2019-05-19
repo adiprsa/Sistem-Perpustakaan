@@ -119,6 +119,24 @@ class Aturan {
 			return $lama;
 		}
 
+		public function get_stok_opname() {
+			$CI =& get_instance();
+			$sql = "SELECT 
+						a.stok_opname_id,
+						a.nama_stok_opname,
+						a.tgl_mulai,
+						a.tgl_selesai ,
+						a.nama_pembuat
+					from stok_opname a
+					WHERE a.is_active=1";
+			$query = $CI->db->query($sql);
+			if ($query->num_rows() > 0) {
+				$data = $query->row();
+				return $data;
+				$CI->db->close();
+			}
+			return false;
+		}
 
 
 
