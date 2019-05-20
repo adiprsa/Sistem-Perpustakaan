@@ -15,7 +15,7 @@ function pinjam(){
       $("#pinjam").html(resp);
     },
     error: function() {
-      alert('Gagal');
+      showMessage('error', '500', 'Terjadi Kegagalan Proses');
     }
   }).done(function() {
     $("#item_code").focus();
@@ -33,7 +33,7 @@ function saat_ini(){
       $("#saat_ini").html(resp);
     },
     error: function() {
-      alert('Gagal');
+      showMessage('error', '500', 'Terjadi Kegagalan Proses');
     }
   });
 }
@@ -49,7 +49,7 @@ function sejarah(){
       $("#sejarah").html(resp);
     },
     error: function() {
-      alert('Gagal');
+      showMessage('error', '500', 'Terjadi Kegagalan Proses');
     }
   });
 }
@@ -74,12 +74,12 @@ $(document).ready(function (e) {
         },
         success: function(resp){
           var obj = JSON.parse(resp);
-          alert(obj.error_code+ ' - '+obj.messages);
+          showMessage(obj.type, obj.error_code, obj.messages);
           clear_input();
           $('#btnPinjam').prop('disabled', false);
         },
         error: function() {
-          alert('Gagal simpan data');
+          showMessage('error', '500', 'Terjadi Kegagalan Proses');
         }
       });
     }

@@ -59,6 +59,7 @@ class Peminjaman extends MY_Controller {
     $jml_dipinjam  = count($this->peminjaman->get_item_by_member($member_code));
 
     if(!$result) {
+      $resp['type'] = 'error';
       $resp['error_code'] = '404';
       $resp['messages'] = 'Data buku tidak tersedia';
       echo json_encode($resp);
@@ -67,12 +68,14 @@ class Peminjaman extends MY_Controller {
       ########## ATURAN PEMINJAMAN ##########
       // Jika item tidak ada
       if($this->aturan->check_jml_item_dipinjam($item_code) >= $this->aturan->check_jml_item($item_code)) {
+        $resp['type'] = 'error';
         $resp['error_code'] = '401';
         $resp['messages'] = 'Jumlah Eksemplar Habis!';
         echo json_encode($resp);
         exit;
       // Jika jumlah pinjam melebihi batas pinjam
       }else if($jml_dipinjam >= $this->rule->limit_pinjam) {
+        $resp['type'] = 'error';
         $resp['error_code'] = '401';
         $resp['messages'] = 'Limit pinjam sudah habis!';
         echo json_encode($resp);
@@ -80,6 +83,7 @@ class Peminjaman extends MY_Controller {
       }
       $query = $this->peminjaman->simpan_pinjam_buku($member_code,$item_code,$tgl_pinjam,$tgl_kembali);
       if($query) {
+        $resp['type'] = 'success';
         $resp['error_code'] = '201';
         $resp['messages'] = 'Buku berhasil dipinjam';
         echo json_encode($resp);

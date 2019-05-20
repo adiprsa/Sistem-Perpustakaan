@@ -16,11 +16,15 @@
       <?php
       $i = 1;
       foreach ($items as $item) {
-      if($item->tgl_bayar!='') {
-        $bayar = '<span style="color: #5cb85c">Lunas</span>';
-      } else {
-        $bayar = '<span style="color: #f0ad4e">Belum Bayar</span>';
-      }
+        if($item->tgl_bayar!='' AND $item->total_denda != 0) {
+          $bayar = '<span style="color: #5cb85c">Lunas</span>';
+        } else if($item->tgl_bayar=='' AND $item->total_denda <> '') {
+          $bayar = '<span style="color: #f0ad4e">Belum Bayar</span>';
+        } else if($item->tgl_bayar=='') {
+          $bayar = '<span style="color: #000000">Nihil</span>';
+        } else {
+          $bayar = '<span style="color: #f0ad4e">Belum Bayar</span>';
+        }
       ?>
       <tr>
         <td><?php echo $i;?></td>

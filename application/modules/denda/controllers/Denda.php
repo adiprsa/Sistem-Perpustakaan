@@ -61,6 +61,7 @@ class Denda extends MY_Controller {
     $tagihan_id = $this->input->post('id');
     $result = $this->denda->bayar_denda($tagihan_id);
     if($result) {
+      $resp['type'] = 'success';
       $resp['error_code'] = '201';
         $resp['messages'] = 'Pembayaran Denda Berhasil!';
         echo json_encode($resp);
