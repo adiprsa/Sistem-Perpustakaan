@@ -44,7 +44,7 @@
 								    			<td>
 								    				<div class="fileinput fileinput-new" data-provides="fileinput">
 													  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
-													  	<?php if(isset($buku)){?><img style="max-width: 200px; max-height: 150px" src="data:image/png;base64,<?php echo base64_encode($buku['gambar']);?>"><?php } ?>
+													  	<?php if(isset($buku['gambar'])){?><img style="max-width: 200px; max-height: 150px" src="data:image/png;base64,<?php echo base64_encode($buku['gambar']);?>"><?php } ?>
 													  </div>
 													  <div>
 													    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="gambar"></span>
@@ -159,12 +159,19 @@
 								    			</td>
 								    		</tr>
 								    		<tr>
-								    			<td>Asal</td>
-								    			<td><input type="text" name="asal" class="form-control" value="<?=isset($buku)?$buku['asal']:'';?>"></td>
-								    		</tr>
-								    		<tr>
 								    			<td>Tempat Terbit</td>
-								    			<td><input type="text" name="tempat_terbit_id" class="form-control" value="<?=isset($buku)?$buku['tempat_terbit_id']:'';?>"></td>
+								    			<td>
+								    				<select name="tempat_terbit_id" class="form-control">
+								    					<option value=""></option>
+								    					<?php foreach ($tempat_terbit as $key => $value) {
+											                $selected = "";
+											                if (isset($buku)&&$buku['tempat_terbit_id']==$value['tempat_terbit_id']) {
+											                  $selected='selected';
+											                }
+											                echo "<option ".$selected." value='".$value['tempat_terbit_id']."'>".$value['nama_tempat']."</option>";
+											              } ?>
+								    				</select>
+								    			</td>
 								    		</tr>
 								    		<tr>
 								    			<td>Catatan</td>
@@ -233,11 +240,43 @@
 		</div>
 	</div>
 
+<?php if ($this->session->flashdata('status')) { ?>
+<div class="modal" id="respModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><?= $this->session->flashdata('pesan'); ?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Apakah anda ingin menambah item buku tersebut?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="<?=site_url('buku/item/form?biblio_id='.$idBaru);?>" class="btn btn-primary">Tambah Item</a>
+        <a href="<?=site_url('buku/item')?>" class="btn btn-secondary" data-dismiss="modal">Tutup</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#respModal').modal('show');
+	$('#respModal').on('hidden.bs.modal', function (e) {
+	  window.location = "<?=site_url('buku')?>";
+	})
+})
+</script>
+<?php } ?>
 <div id="modal_form" class="modal" data-width="600">
 	<div id="tampil_form"></div>
 </div>
 <script type="text/javascript" src="<?=base_url('assets/vendor/upload.js')?>"></script>
 <script type="text/javascript">
+	$(document).ready(function() {
+		opsiPengarang(1);
+	})
 	function pengarang_tambah(ke) {
 		last=ke-1;next=ke+1;
 		var form = "<div id=\"pengarangRow"+next+"\">"+

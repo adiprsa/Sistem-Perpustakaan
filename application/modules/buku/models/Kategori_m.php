@@ -23,16 +23,16 @@ class Kategori_m extends CI_Model {
 	}
 	public function tambah()
 	{
-		$data = array('judul'				=> $this->input->post('judul'),
-						
+		$data = array('nama_kategori'	=> $this->input->post('nama_kategori'),
+						'kode_kategori'	=> $this->input->post('kode_kategori'),
 						'input_date'		=> date('Y-m-d H:i:s'));
 		$query = $this->db->insert('kategori', $data);
 		return $query;
 	}
 	public function edit($id=null)
 	{
-		$data = array('judul'				=> $this->input->post('judul'),
-						'klasifikasi'		=> $this->input->post('klasifikasi'));
+		$data = array('nama_kategori'	=> $this->input->post('nama_kategori'),
+						'kode_kategori'	=> $this->input->post('kode_kategori'));
 		$this->db->where('kategori_id', $id);
 		$query = $this->db->update('kategori', $data);
 		return $query;
@@ -40,7 +40,7 @@ class Kategori_m extends CI_Model {
 	public function hapus($id=null)
 	{
 		$this->db->where('kategori_id', $id);
-		$query = $this->db->delete('kategori', $data);
+		$query = $this->db->delete('kategori');
 		return $query;
 	}
 }

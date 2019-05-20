@@ -50,6 +50,7 @@ class Datatable_item extends CI_Model {
             $this->db->order_by(key($order), $order[key($order)]);
         }
         $this->db->join('bibliografi', 'bibliografi.biblio_id = item.biblio_id', 'left');
+        $this->db->join('lokasi', 'lokasi.lokasi_id = item.lokasi_id', 'left');
         //$this->db->join('penerbit', 'penerbit.penerbit_id = bibliografi.penerbit_id', 'left');
     }
  

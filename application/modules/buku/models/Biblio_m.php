@@ -6,12 +6,33 @@ class Biblio_m extends CI_Model {
 	public function biblio_id($id=null)
 	{
 		$this->db->where('biblio_id', $id);
+		$this->db->join('penerbit', 'penerbit.penerbit_id = bibliografi.penerbit_id', 'left');
 		$query = $this->db->get('bibliografi',1);
 		if ($query->num_rows()>0) {
 			foreach ($query->result_array() as $value) {
 				$biblio = $value;
 			}
 			return $biblio;
+		}
+	}
+	public function biblio_pengarang($id=null)
+	{
+		$this->db->where('biblio_id', $id);
+		$this->db->join('pengarang', 'pengarang.pengarang_id = biblio_pengarang.pengarang_id', 'left');
+		$query = $this->db->get('biblio_pengarang');
+		if ($query->num_rows()>0) {
+			return $query->result_array();			
+		}
+	}
+	public function cari($q=null,$limit=20,$offset=0)
+	{
+		if ($q!=null) {
+			$this->db->like('judul', $q);
+		}
+		$this->db->join('penerbit', 'penerbit.penerbit_id = bibliografi.penerbit_id', 'left');
+		$query = $this->db->get('bibliografi', $limit, $offset);
+		if ($query->num_rows()>0) {
+			return $query->result();
 		}
 	}
 	public function tambah($file=null)
@@ -25,7 +46,6 @@ class Biblio_m extends CI_Model {
 						'judul_seri'		=> $this->input->post('judul_seri'),
 						'call_number'		=> $this->input->post('call_number'),
 						'bahasa_id'			=> $this->input->post('bahasa_id'),
-						'asal'				=> $this->input->post('asal'),
 						'tempat_terbit_id'	=> $this->input->post('tempat_terbit_id'),
 						'notes'				=> $this->input->post('notes'),
 						'gambar'			=> $file,
@@ -51,7 +71,6 @@ class Biblio_m extends CI_Model {
 						'judul_seri'		=> $this->input->post('judul_seri'),
 						'call_number'		=> $this->input->post('call_number'),
 						'bahasa_id'			=> $this->input->post('bahasa_id'),
-						'asal'				=> $this->input->post('asal'),
 						'tempat_terbit_id'	=> $this->input->post('tempat_terbit_id'),
 						'notes'				=> $this->input->post('notes'),
 						'labels'			=> $this->input->post('labels'),

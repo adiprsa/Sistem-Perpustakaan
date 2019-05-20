@@ -32,7 +32,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <a href="<?=site_url('buku/item/form/tambah')?>" class='btn btn-success'>Tambah</a>
+                                <a href="javascript:void(0)" class='btn btn-success' onclick="tambah()">Tambah</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -40,16 +40,23 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Judul</th>
-                                                <th>Nomor Panggil </th>
-												<th>Kode Item</th>
-												<th>Lokasi </th>
-												<th>Rak </th>
-												<th>Asal </th>
+                                                <th>Kategori</th>
+                                                <th>Kode</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        	<?php if($kategori){ $no=1; foreach ($kategori as $key => $value) {
+                                        		echo "<tr><td>".$no."</td><td>".$value['nama_kategori']."</td>
+                                        				<td>".$value['kode_kategori']."</td>
+                                        				<td>
+                                        					<a href='javascript:void(0)' class='btn btn-warning' onclick='edit(\"".$value['kategori_id']."\")'> Edit <a>
+                                        					<a href='javascript:void(0)' class='btn btn-danger' onclick='hapus(\"".$value['kategori_id']."\",\"".$value['nama_kategori']."\")'> Hapus <a>
+                                        				</td></tr>";
+                                        		$no++;
+                                        	} }else{
+                                        		echo "Tidak ada data";
+                                        	} ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -62,28 +69,39 @@
                 </div>
 		</div>
 	</div>
-<div id="modal_form" class="modal" data-width="900">
-</div>
-<script src="<?= base_url('assets/datatable') ?>/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="<?= base_url('assets/datatable') ?>/dataTables.bootstrap.min.css">
-<script>
-$(document).ready(function() {
-table = $('#data').DataTable({
-		"processing": true, //Feature control the processing indicator.
-		"serverSide": true, //Feature control DataTables' server-side processing mode.
-		"order": [], //Initial no order.
-		// Load data for the table's content from an Ajax source
-		"ajax": {
-			"url": "<?=site_url('buku/ajax/item_datatable')?>",
-			"type": "POST",
-		},
-		//Set column definition initialisation properties.
-		"columnDefs": [
-			{
-				"targets": [ 0 ], //first column / numbering column
-				"orderable": false, //set not orderable
-			},
-		],
-	});
-});
+<div id="popup"></div>
+<script type="text/javascript">
+	function hapus(idKategori,nmKategori) {
+		$.get('<?=site_url('buku/ajax/popup/hapus')?>',
+			{id:idKategori,nama:nmKategori,tabel:'kategori'},
+			function(data) {
+				$('#popup').html(data)
+				$('.modal').modal('show');
+			})
+	}
+	function tambah() {
+		$.get('<?=site_url('buku/ajax/popup/tambah')?>',
+			{tabel:'kategori'},
+			function(data) {
+				$('#popup').html(data)
+				$('.modal').modal('show');
+			})
+	}
+	function edit(idKategori) {
+		$.get('<?=site_url('buku/ajax/popup/edit')?>',
+			{id:idKategori,tabel:'kategori'},
+			function(data) {
+				$('#popup').html(data)
+				$('.modal').modal('show');
+			})
+	}
+	function yakinHapus(id) {
+		$.get('<?=site_url('buku/ajax/hapus/kategori')?>',
+			{id:id},
+			function(data) {
+				if (data.status){
+					location.reload();
+				}
+			})
+	}
 </script>

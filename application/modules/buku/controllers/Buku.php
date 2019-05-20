@@ -45,18 +45,20 @@ class Buku extends MY_Controller {
 			if($this->validasi()){
 				if ($data['action']=='edit') {
 					if($this->biblio_m->edit($id,$file)){
+						$data['idBaru'] = $id;
 						$this->session->set_flashdata('pesan', 'Edit Buku Berhasil');
 						$this->session->set_flashdata('status', TRUE);
-						redirect('buku','refresh');
+						//redirect('buku','refresh');
 					}else{
 						$this->session->set_flashdata('pesan', 'Edit Buku GAGAL');
 						$this->session->set_flashdata('status', FALSE);
 					}
 				}else{
-					if($this->biblio_m->tambah($file)){
+					$data['idBaru'] = $this->biblio_m->tambah($file);
+					if($data['idBaru']){
 						$this->session->set_flashdata('pesan', 'Tambah Buku Berhasil');
 						$this->session->set_flashdata('status', TRUE);
-						redirect('buku','refresh');
+						//redirect('buku','refresh');
 					}else{
 						$this->session->set_flashdata('pesan', 'Tambah Buku GAGAL');
 						$this->session->set_flashdata('status', FALSE);
@@ -69,6 +71,7 @@ class Buku extends MY_Controller {
 		//Referensi tabal
 		$data['kategori'] = $this->ref_m->ambil('kategori');
 		$data['penerbit'] = $this->ref_m->ambil('penerbit');
+		$data['tempat_terbit'] = $this->ref_m->ambil('tempat_terbit');
 		$data['bahasa'] = $this->ref_m->ambil('bahasa');
 		$data['frekuensi'] = $this->ref_m->ambil('frekuensi_terbit');
 		$data['tipe_konten'] = $this->ref_m->ambil('tipe_konten');
