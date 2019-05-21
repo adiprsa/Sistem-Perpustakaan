@@ -56,13 +56,7 @@
                           <a class="nav-link" href="<?=base_url('buku/item');?>">Eksemplar</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('buku/ketegori');?>">Kategori</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Tipe Media</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Serial</a>
+                          <a class="nav-link" href="<?=base_url('buku/kategori');?>">Kategori</a>
                       </li>
                   </ul>
               </div>
