@@ -7,7 +7,6 @@ class Tipe_member_model extends CI_Model {
 	{
 		parent::__construct();
 		$this->load->database();
-		$this->load->library('datatables');
 	}
 
 	public function get_tipe_member() {

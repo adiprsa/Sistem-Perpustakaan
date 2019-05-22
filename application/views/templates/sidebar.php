@@ -31,12 +31,6 @@
                             <a class="nav-link" href="<?=base_url('#');?>">Tempat</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?=base_url('#');?>">Member</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?=base_url('#');?>">Tipe Member</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="<?=base_url('#');?>">Frekuensi Terbit</a>
                         </li>
                         <li class="nav-item">
@@ -117,13 +111,13 @@
                 <div id="submenu-6" class="collapse submenu" style="">
                     <ul class="nav flex-column">
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Pengguna</a>
+                          <a class="nav-link" href="<?=base_url('user');?>">Pengguna</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Member</a>
+                          <a class="nav-link" href="<?=base_url('member');?>">Member</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Tipe Member</a>
+                          <a class="nav-link" href="<?=base_url('member/tipe_member');?>">Tipe Member</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="<?=base_url('#');?>">Module</a>
