@@ -43,7 +43,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="<?php echo base_url('assets/vendor/charts/c3charts/c3.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/vendor/charts/c3charts/d3-5.4.0.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/vendor/charts/c3charts/C3chartjs.js') ?>"></script>
-<script src="<?php echo base_url('assets/vendor/datetimepicker/jquery.min.js');?>"></script>
 <script src="<?php echo base_url('assets/vendor/datetimepicker/moment-with-locales.js');?>"></script>
 <script src="<?php echo base_url('assets/vendor/datetimepicker/bootstrap-datetimepicker.js');?>"></script>
 <!-- <script src="assets/libs/js/dashboard-ecommerce.js"></script>
