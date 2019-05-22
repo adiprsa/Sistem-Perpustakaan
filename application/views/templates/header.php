@@ -24,6 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/vendor/datatables/css/buttons.bootstrap4.css')?>">
     <script src="<?php echo base_url('assets/vendor/jquery/jquery-3.3.1.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/plugins/toastr/toastr.min.js') ?>"></script>
+    <!-- jquery 3.3.1 -->
+    <script src="<?php echo base_url('assets/vendor/jquery/jquery-3.3.1.min.js') ?>"></script>
+
     
 
     
