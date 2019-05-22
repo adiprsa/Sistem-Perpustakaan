@@ -37,8 +37,37 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <form method="post">
+                                    <form method="post" enctype="multipart/form-data">
 								    	<table class="table">
+								    		<tr>
+								    			<td></td>
+								    			<td>
+								    				<div class="fileinput fileinput-new" data-provides="fileinput">
+													  <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+													  	<?php if(isset($buku['gambar'])){?><img style="max-width: 200px; max-height: 150px" src="data:image/png;base64,<?php echo base64_encode($buku['gambar']);?>"><?php } ?>
+													  </div>
+													  <div>
+													    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="gambar"></span>
+													    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+													  </div>
+													</div>
+								    			</td>
+								    		</tr>								    		
+								    		<tr>
+								    			<td>Kategori</td>
+								    			<td>
+								    				<select name="kategori_id" class="form-control">
+								    					<option value=""></option>
+								    					<?php foreach ($kategori as $key => $value) {
+											                $selected = "";
+											                if (isset($buku)&&$buku['kategori_id']==$value['kategori_id']) {
+											                  $selected='selected';
+											                }
+											                echo "<option ".$selected." value='".$value['kategori_id']."'>".$value['nama_kategori']."</option>";
+											              } ?>
+								    				</select>
+								    			</td>
+								    		</tr>
 								    		<tr>
 								    			<td>Judul Buku</td>
 								    			<td><input type="text" name="judul" class="form-control" value="<?=isset($buku)?$buku['judul']:'';?>"></td>
@@ -50,6 +79,38 @@
 								    		<tr>
 								    			<td>ISBN ISSN</td>
 								    			<td><input type="text" name="isbn_issn" class="form-control" value="<?=isset($buku)?$buku['isbn_issn']:'';?>"></td>
+								    		</tr>
+								    		<tr>
+								    			<td>Pengarang</td>
+								    			<td id="fromPengarang"><?php if(isset($pengarang)&&$pengarang){foreach ($pengarang as $keyPengarang => $valuePengarang) { 
+								    					$keyPengarang++;
+								    				?>
+								    				<div id="pengarangRow<?=$keyPengarang?>">
+									    				<select name="pengarang_id[]" class="form-control" id="optPengarang<?=$keyPengarang?>">
+									    					<option value="<?=$valuePengarang['pengarang_id']?>"><?=$valuePengarang['nama_pengarang']?></option>
+									    					
+									    				</select>
+									    				<div id="actPengarang<?=$keyPengarang?>">
+									    					<?php if (count($pengarang)!=$keyPengarang) { ?>
+										    				<a href="javascript:void(0)" onclick="pengarang_hapus(<?=$keyPengarang?>);"> [Hapus pengarang] </a>
+									    					<?php }else{ ?>
+										    				<a href="javascript:void(0)" onclick="pengarang_tambah(<?=$keyPengarang?>);"> [Tambah pengarang] </a>
+										    				<a href="javascript:void(0)" onclick="pengarang_baru(<?=$keyPengarang?>);"> [Pengarang Baru] </a>
+										    				<?php } ?>
+									    				</div>
+								    				</div>
+								    				<?php } }else{ ?>
+													<div id="pengarangRow1">
+									    				<select name="pengarang_id[]" class="form-control" id="optPengarang1">
+									    					<option value=""></option>
+									    				</select>
+									    				<div id="actPengarang1">
+										    				<a href="javascript:void(0)" onclick="pengarang_tambah(1);"> [Tambah pengarang] </a>
+										    				<a href="javascript:void(0)" onclick="pengarang_baru(1);"> [Pengarang Baru] </a>
+									    				</div>
+								    				</div>
+								    				<?php } ?>
+								    			</td>
 								    		</tr>
 								    		<tr>
 								    			<td>Penerbit</td>
@@ -98,20 +159,23 @@
 								    			</td>
 								    		</tr>
 								    		<tr>
-								    			<td>Asal</td>
-								    			<td><input type="text" name="asal" class="form-control" value="<?=isset($buku)?$buku['asal']:'';?>"></td>
-								    		</tr>
-								    		<tr>
 								    			<td>Tempat Terbit</td>
-								    			<td><input type="text" name="tempat_terbit_id" class="form-control" value="<?=isset($buku)?$buku['tempat_terbit_id']:'';?>"></td>
+								    			<td>
+								    				<select name="tempat_terbit_id" class="form-control">
+								    					<option value=""></option>
+								    					<?php foreach ($tempat_terbit as $key => $value) {
+											                $selected = "";
+											                if (isset($buku)&&$buku['tempat_terbit_id']==$value['tempat_terbit_id']) {
+											                  $selected='selected';
+											                }
+											                echo "<option ".$selected." value='".$value['tempat_terbit_id']."'>".$value['nama_tempat']."</option>";
+											              } ?>
+								    				</select>
+								    			</td>
 								    		</tr>
 								    		<tr>
 								    			<td>Catatan</td>
 								    			<td><input type="text" name="notes" class="form-control" value="<?=isset($buku)?$buku['notes']:'';?>"></td>
-								    		</tr>
-								    		<tr>
-								    			<td>Gambar</td>
-								    			<td><input type="file" name="gambar" class="form-control"></td>
 								    		</tr>
 								    		<tr>
 								    			<td>Labels</td>
@@ -162,10 +226,6 @@
 								    				</select>
 								    			</td>
 								    		</tr>
-								    		<tr>
-								    			<td>Klasifikasi</td>
-								    			<td><input type="text" name="klasifikasi" class="form-control" value="<?=isset($buku)?$buku['klasifikasi']:'';?>"></td>
-								    		</tr>
 								    	</table>
 								    	<input type="submit" value="SIMPAN" class="btn btn-primary" >
 								    </form>
@@ -179,3 +239,184 @@
                 </div>
 		</div>
 	</div>
+
+<?php if ($this->session->flashdata('status')) { ?>
+<div class="modal" id="respModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><?= $this->session->flashdata('pesan'); ?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Apakah anda ingin menambah item buku tersebut?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="<?=site_url('buku/item/form?biblio_id='.$idBaru);?>" class="btn btn-primary">Tambah Item</a>
+        <a href="<?=site_url('buku/item')?>" class="btn btn-secondary" data-dismiss="modal">Tutup</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#respModal').modal('show');
+	$('#respModal').on('hidden.bs.modal', function (e) {
+	  window.location = "<?=site_url('buku')?>";
+	})
+})
+</script>
+<?php } ?>
+<div id="modal_form" class="modal" data-width="600">
+	<div id="tampil_form"></div>
+</div>
+<script type="text/javascript" src="<?=base_url('assets/vendor/upload.js')?>"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		opsiPengarang(1);
+	})
+	function pengarang_tambah(ke) {
+		last=ke-1;next=ke+1;
+		var form = "<div id=\"pengarangRow"+next+"\">"+
+					"<select name=\"pengarang_id[]\" class=\"form-control\" id=\"optPengarang"+next+"\">"+
+						"<option value=\"\"></option>"+
+					"</select>"+
+					"<div id=\"actPengarang"+next+"\">"+
+						"<a href=\"javascript:void(0)\" onclick=\"pengarang_tambah("+next+");\"> [Tambah pengarang] </a>"+
+						"<a href=\"javascript:void(0)\" onclick=\"pengarang_baru("+next+");\"> [Pengarang Baru] </a>"+
+					"</div></div>";
+		$("#fromPengarang").append(form);
+		opsiPengarang(next);
+		var act = "<a href=\"javascript:void(0)\" onclick=\"pengarang_hapus("+ke+");\"> [Hapus pengarang] </a>";
+		$("#actPengarang"+ke).html(act);
+	}
+	function pengarang_hapus(ke) {
+		$('#pengarangRow'+ke).remove();
+	}
+	function pengarang_baru(){
+		$('#tampil_form').load("<?=site_url()?>pengaturan/pengarang/modal_form_pengarang/",
+			function(){
+				$('#modal_form').modal('show');
+		});
+	}
+	function opsiPengarang(ke) {
+		$.get('<?=site_url('buku/ajax/pengarang')?>',
+			function(data){
+				$('#optPengarang'+ke).html(data);
+			})
+	}
+</script>
+
+
+<style type="text/css">
+a{
+	color: #0056b3;
+}			
+.btn-file {
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+}
+.btn-file > input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  font-size: 23px;
+  height: 100%;
+  width: 100%;
+  direction: ltr;
+  cursor: pointer;
+}
+.fileinput {
+  margin-bottom: 9px;
+  display: inline-block;
+}
+.fileinput .form-control {
+  padding-top: 7px;
+  padding-bottom: 5px;
+  display: inline-block;
+  margin-bottom: 0px;
+  vertical-align: middle;
+  cursor: text;
+}
+.fileinput .thumbnail {
+  overflow: hidden;
+  display: inline-block;
+  margin-bottom: 5px;
+  vertical-align: middle;
+  text-align: center;
+}
+.fileinput .thumbnail > img {
+  max-height: 100%;
+}
+.fileinput .btn {
+  vertical-align: middle;
+}
+.fileinput-exists .fileinput-new,
+.fileinput-new .fileinput-exists {
+  display: none;
+}
+.fileinput-inline .fileinput-controls {
+  display: inline;
+}
+.fileinput-filename {
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+}
+.form-control .fileinput-filename {
+  vertical-align: bottom;
+}
+.fileinput.input-group {
+  display: table;
+}
+.fileinput.input-group > * {
+  position: relative;
+  z-index: 2;
+}
+.fileinput.input-group > .btn-file {
+  z-index: 1;
+}
+.fileinput-new.input-group .btn-file,
+.fileinput-new .input-group .btn-file {
+  border-radius: 0 4px 4px 0;
+}
+.fileinput-new.input-group .btn-file.btn-xs,
+.fileinput-new .input-group .btn-file.btn-xs,
+.fileinput-new.input-group .btn-file.btn-sm,
+.fileinput-new .input-group .btn-file.btn-sm {
+  border-radius: 0 3px 3px 0;
+}
+.fileinput-new.input-group .btn-file.btn-lg,
+.fileinput-new .input-group .btn-file.btn-lg {
+  border-radius: 0 6px 6px 0;
+}
+.form-group.has-warning .fileinput .fileinput-preview {
+  color: #8a6d3b;
+}
+.form-group.has-warning .fileinput .thumbnail {
+  border-color: #faebcc;
+}
+.form-group.has-error .fileinput .fileinput-preview {
+  color: #a94442;
+}
+.form-group.has-error .fileinput .thumbnail {
+  border-color: #ebccd1;
+}
+.form-group.has-success .fileinput .fileinput-preview {
+  color: #3c763d;
+}
+.form-group.has-success .fileinput .thumbnail {
+  border-color: #d6e9c6;
+}
+.input-group-addon:not(:first-child) {
+  border-left: 0;
+}
+
+
+	</style>

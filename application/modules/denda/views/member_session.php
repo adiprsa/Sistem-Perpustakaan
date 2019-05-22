@@ -15,7 +15,7 @@
         $("#sejarah").html(resp);
       },
       error: function() {
-        alert('Gagal');
+        showMessage('error', '500', 'Terjadi Kegagalan Proses');
       }
     });
   }
@@ -44,12 +44,12 @@
           },
           success: function(resp) {
             var obj = JSON.parse(resp);
-            alert(obj.error_code + ' - ' + obj.messages);
+            showMessage(obj.type, obj.error_code, obj.messages);
             $('#btnKembali').prop('disabled', false);
-            window.location.reload();
+            setTimeout(function(){ window.location.reload(); }, 1500);
           },
           error: function() {
-            alert('Gagal simpan data');
+            showMessage('error', '500', 'Terjadi Kegagalan Proses');
           }
         });
       }
@@ -97,7 +97,7 @@
                 <div class="tab-regular">
                   <ul class="nav nav-tabs " id="myTab" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active" id="pinjam-tab" data-toggle="tab" href="#pinjam" onclick="javascript:kembali();" role="tab" aria-controls="pinjam" aria-selected="true" cur>Pembayaran Denda</a>
+                      <a class="nav-link active" id="pinjam-tab" data-toggle="tab" href="#pinjam" role="tab" aria-controls="pinjam" aria-selected="true" cur>Pembayaran Denda</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" id="sejarah-tab" data-toggle="tab" href="#sejarah" onclick="javascript:sejarah();" role="tab" aria-controls="sejarah" aria-selected="false">History Pembayaran</a>

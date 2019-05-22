@@ -54,19 +54,19 @@
                 <div id="submenu-2" class="collapse submenu" style="">
                     <ul class="nav flex-column">
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Bibliografi</a>
+                          <a class="nav-link" href="<?=base_url('buku');?>">Bibliografi</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Eksemplar</a>
+                          <a class="nav-link" href="<?=base_url('buku/item');?>">Eksemplar</a>
                       </li>
-                      <li class="nav-item">
+					  <li class="nav-item">
                           <a class="nav-link" href="<?=base_url('pengaturan/kolasi');?>">Tipe Kolasi</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="<?=base_url('pengaturan/tipe_media');?>">Tipe Media</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Serial</a>
+                          <a class="nav-link" href="<?=base_url('buku/kategori');?>">Kategori</a>
                       </li>
                   </ul>
               </div>
@@ -92,10 +92,10 @@
                 <div id="submenu-4" class="collapse submenu" style="">
                     <ul class="nav flex-column">
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Waktu Stok Opname</a>
+                          <a class="nav-link" href="<?=base_url('stok_opname');?>">Waktu Stok Opname</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Stok Take</a>
+                          <a class="nav-link" href="<?=base_url('stok_opname_item');?>">Stok Take</a>
                       </li>
                   </ul>
               </div>
@@ -130,10 +130,10 @@
                           <a class="nav-link" href="<?=base_url('user');?>">Pengguna</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Member</a>
+                          <a class="nav-link" href="<?=base_url('member');?>">Member</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Tipe Member</a>
+                          <a class="nav-link" href="<?=base_url('member/tipe_member');?>">Tipe Member</a>
                       </li>
 					  <!--
                       <li class="nav-item">

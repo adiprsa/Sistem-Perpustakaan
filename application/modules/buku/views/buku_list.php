@@ -39,17 +39,12 @@
                                     <table id="data" class="table table-striped table-bordered second" style="width:100%">
                                         <thead>
                                             <tr>
-<<<<<<< HEAD:application/modules/buku/views/buku_list.php
                                                 <th>No</th>
                                                 <th>Judul</th>
                                                 <th>ISBN ISSN </th>
 												<th>Penerbit</th>
 												<th>Tahun Terbit</th>
-=======
-                                                <th>Nama Pengarang</th>
-                                                <th>Tahun Pengarang</th>
-                                                <th>Tipe Pengarang</th>
->>>>>>> refs/remotes/origin/master:application/modules/pengaturan/views/main.php
+												<th>Nomor Panggil</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -72,33 +67,21 @@
 <link rel="stylesheet" href="<?= base_url('assets/datatable') ?>/dataTables.bootstrap.min.css">
 <script>
 $(document).ready(function() {
-table = $('#data').DataTable({
+table = $('#data').datatable({
 		"processing": true, //Feature control the processing indicator.
 		"serverSide": true, //Feature control DataTables' server-side processing mode.
 		"order": [], //Initial no order.
 		// Load data for the table's content from an Ajax source
-<<<<<<< HEAD:application/modules/buku/views/buku_list.php
 		"ajax": {
 			"url": "<?=site_url('buku/ajax/buku_datatable')?>",
-=======
-			"ajax": {
-			"url": "<?=site_url('Pengaturan/pengarang_list')?>",
->>>>>>> refs/remotes/origin/master:application/modules/pengaturan/views/main.php
 			"type": "POST",
 		},
 		//Set column definition initialisation properties.
 		"columnDefs": [
-<<<<<<< HEAD:application/modules/buku/views/buku_list.php
 			{
 				"targets": [ 0 ], //first column / numbering column
 				"orderable": false, //set not orderable
 			},
-=======
-		{
-			"targets": [ 0 ], //first column / numbering column
-			"orderable": false, //set not orderable
-		},
->>>>>>> refs/remotes/origin/master:application/modules/pengaturan/views/main.php
 		],
 	});
 });

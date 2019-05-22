@@ -78,10 +78,9 @@
                                             <th>Penerbit</th>
                                             <th>Tahun Terbit</th>
                                             <th>Lokasi Terbit</th>
-                                            <th>Kategori Buku</th>
                                             <th>Tanggal Masuk</th>
                                             <th>Status Buku</th>
-                                            <th>Lokasi Buku</th>
+                                            <th>Rak Buku</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -97,10 +96,9 @@
                                                <td><?php echo $data->nama_penerbit; ?></td>
                                                <td><?php echo $data->tahun_terbit; ?></td>
                                                <td><?php echo $data->nama_tempat; ?></td>
-                                               <td><?php echo $data->klasifikasi; ?></td>
                                                <td><?php echo $data->tgl_terima; ?></td>
                                                <td><?php echo $data->nama_status; ?></td>
-                                               <td><?php echo $data->nama_lokasi; ?></td>
+                                               <td><?php echo $data->nama_rak; ?></td>
                                             </tr>
                                         <?php endforeach; ?>
 

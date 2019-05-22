@@ -22,11 +22,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | If you need to allow multiple domains, remember that this file is still
 | a PHP script and you can easily do that on your own.
 |
-*/
+*//*
 $server_name=filter_input(INPUT_SERVER, 'SERVER_NAME');
 $port=filter_input(INPUT_SERVER, 'SERVER_PORT');
 $config['base_url'] = 'http://'.$server_name.":".$port;
-$config['base_url'] = 'http://localhost/sistem-perpustakaan';
+*/
+$config['base_url'] = "http://".$_SERVER['HTTP_HOST'];
+$config['base_url'] .= preg_replace('@/+$@','',dirname($_SERVER['SCRIPT_NAME'])).'/';
+//$config['base_url'] = 'http://localhost/sistem-perpustakaan';
 
 /*
 |--------------------------------------------------------------------------

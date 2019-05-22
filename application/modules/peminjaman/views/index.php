@@ -4,8 +4,6 @@
 <link rel="stylesheet" href="<?= base_url('assets/datatable') ?>/dataTables.bootstrap.min.css"> -->
 
 <script>
-
-
 $(document).ready(function (e) {
   $('#member_code').keypress(function(e){
         if(e.which == 13){
@@ -26,7 +24,7 @@ $(document).ready(function (e) {
         },
         success: function(resp){
           if(resp=='404') {
-            alert('Member tidak tersedia');
+            showMessage('warning', '404', 'Member ID tidak ditemukan');
             $("#detailMember").html('');
             $("#member_code").val('');
             $("#member_code").focus();
@@ -38,7 +36,7 @@ $(document).ready(function (e) {
 
         },
         error: function() {
-          alert('Gagal simpan data');
+          showMessage('error', '500', 'Terjadi Kegagalan Proses');
         }
       });
     }

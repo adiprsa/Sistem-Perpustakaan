@@ -19,12 +19,12 @@ $(document).ready(function (e) {
         },
         success: function(resp){
           var obj = JSON.parse(resp);
-          alert(obj.error_code+ ' - '+obj.messages);
+          showMessage(obj.type, obj.error_code, obj.messages);
           clear_input();
           $('#btnKembali').prop('disabled', false);
         },
         error: function() {
-          alert('Gagal simpan data');
+          showMessage('error', '500', 'Terjadi Kegagalan Proses');
         }
       });
     }

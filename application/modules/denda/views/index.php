@@ -26,7 +26,7 @@ $(document).ready(function (e) {
         },
         success: function(resp){
           if(resp=='404') {
-            alert('Member tidak tersedia');
+            showMessage('warning', '404', 'Member ID tidak ditemukan');
             $("#detailMember").html('');
             $("#member_code").val('');
             $("#member_code").focus();
@@ -38,7 +38,7 @@ $(document).ready(function (e) {
 
         },
         error: function() {
-          alert('Gagal simpan data');
+          showMessage('error', '500', 'Terjadi Kegagalan Proses');
         }
       });
     }
@@ -54,7 +54,7 @@ $(document).ready(function (e) {
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body loading" id="detailMember">
               <h4>Ketik atau Scan ID Member</h4>
                 <div class="input-group mb-3">
                   <input type="text" class="form-control col-md-2" id="member_code" autofocus>
@@ -62,7 +62,7 @@ $(document).ready(function (e) {
                     <button type="button" class="btn btn-primary" id="find_member">Cari Data</button>
                   </div>
                 </div>
-              <div id="detailMember" class="loading"></div>
+                <div id="detailMember" class="loading"></div>
 
             </div>
           </div>

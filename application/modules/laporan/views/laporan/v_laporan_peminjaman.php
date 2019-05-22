@@ -83,7 +83,6 @@
                                             <th>Penerbit</th>
                                             <th>Tahun Terbit</th>
                                             <th>Lokasi Terbit</th>
-                                            <th>Kategori Buku</th>
                                             <th>Status Buku</th>
                                             <th>Peminjam</th>
                                             <th>Tanggal Peminjaman</th>
@@ -104,7 +103,6 @@
                                                <td><?php echo $data->nama_penerbit; ?></td>
                                                <td><?php echo $data->tahun_terbit; ?></td>
                                                <td><?php echo $data->nama_tempat; ?></td>
-                                               <td><?php echo $data->klasifikasi; ?></td>
                                                <td><?php echo $data->nama_status; ?></td>
                                                <td><?php echo $data->nama_member; ?></td>
                                                <td><?php echo $data->tgl_pinjam; ?></td>

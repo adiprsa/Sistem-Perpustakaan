@@ -60,8 +60,8 @@ class Pengembalian extends MY_Controller {
     $member_code = $this->member_code;
     $result = $this->pengembalian->get_item_pinjam($item_code,$this->member_id);
     if($result) {
-      // $tgl_kembali = date('Y-m-d');
-      $tgl_kembali = '2019-05-30';
+      $tgl_kembali = date('Y-m-d');
+      // $tgl_kembali = '2019-06-07';
       $tgl_harus_kembali = $result->tgl_harus_kembali;
       $denda_perhari = $this->rule->denda_perhari;
       // Jika tgl kembali > tangal kembali kena denda
@@ -70,12 +70,14 @@ class Pengembalian extends MY_Controller {
       } 
       $return = $this->pengembalian->return_book($result->peminjaman_id,$tgl_kembali);
       if($return){
-        $resp['error_code'] = '201';
+          $resp['type'] = 'success';
+          $resp['error_code'] = '201';
           $resp['messages'] = 'Buku Berhasil Dikembalikan!';
           echo json_encode($resp);
           exit;
       }
     } else {
+      $resp['type'] = 'error';
       $resp['error_code'] = '404';
         $resp['messages'] = 'Kode Buku tidak tersedia';
         echo json_encode($resp);

@@ -17,37 +17,31 @@ class Item_m extends CI_Model {
 	public function tambah()
 	{
 		$data = array('biblio_id'			=> $this->input->post('biblio_id'),
-						'call_number'		=> $this->input->post('call_number'),
-						'tipe_kolasi'		=> $this->input->post('tipe_kolasi'),
 						'kode_item'			=> $this->input->post('kode_item'),
-						'kode_inventaris'	=> $this->input->post('kode_inventaris'),
-						'tgl_terima'		=> $this->input->post('tgl_terima'),
+						'tgl_terima'		=> date('Y-m-d',strtotime($this->input->post('tgl_terima'))),
 						'supplier_id'		=> $this->input->post('supplier_id'),
 						'no_order'			=> $this->input->post('no_order'),
 						'lokasi_id'			=> $this->input->post('lokasi_id'),
 						'nama_rak'			=> $this->input->post('nama_rak'),
-						'tgl_order'			=> $this->input->post('tgl_order'),
+						'tgl_order'			=> date('Y-m-d',strtotime($this->input->post('tgl_order'))),
 						'item_status_id'	=> $this->input->post('item_status_id'),
 						'asal'				=> $this->input->post('asal'),
 						'invoice'			=> $this->input->post('invoice'),
 						'harga'				=> $this->input->post('harga'),
 						'input_date'		=> date('Y-m-d H:i:s'));
-		$query = $this->db->insert('itemgrafi', $data);
+		$query = $this->db->insert('item', $data);
 		return $query;
 	}
 	public function edit($id=null)
 	{
 		$data = array('biblio_id'			=> $this->input->post('biblio_id'),
-						'call_number'		=> $this->input->post('call_number'),
-						'tipe_kolasi'		=> $this->input->post('tipe_kolasi'),
 						'kode_item'			=> $this->input->post('kode_item'),
-						'kode_inventaris'	=> $this->input->post('kode_inventaris'),
-						'tgl_terima'		=> $this->input->post('tgl_terima'),
+						'tgl_terima'		=> date('Y-m-d',strtotime($this->input->post('tgl_terima'))),
 						'supplier_id'		=> $this->input->post('supplier_id'),
 						'no_order'			=> $this->input->post('no_order'),
 						'lokasi_id'			=> $this->input->post('lokasi_id'),
 						'nama_rak'			=> $this->input->post('nama_rak'),
-						'tgl_order'			=> $this->input->post('tgl_order'),
+						'tgl_order'			=> date('Y-m-d',strtotime($this->input->post('tgl_order'))),
 						'item_status_id'	=> $this->input->post('item_status_id'),
 						'asal'				=> $this->input->post('asal'),
 						'invoice'			=> $this->input->post('invoice'),
