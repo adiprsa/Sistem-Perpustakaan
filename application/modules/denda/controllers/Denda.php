@@ -28,8 +28,8 @@ class Denda extends MY_Controller {
   }
 
   public function find_member() {
-    $data['items'] = $this->denda->get_denda_by_member($this->member_code);
     $member_code = isset($this->member_code) ? $this->member_code : $this->input->post('member_code');
+    $data['items'] = $this->denda->get_denda_by_member($member_code);
     $result = $this->denda->get_member_by_code($member_code);
     if(!$result) {
       $member_sess = array(

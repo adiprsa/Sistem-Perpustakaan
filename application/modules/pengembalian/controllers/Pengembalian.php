@@ -60,8 +60,8 @@ class Pengembalian extends MY_Controller {
     $member_code = $this->member_code;
     $result = $this->pengembalian->get_item_pinjam($item_code,$this->member_id);
     if($result) {
-      // $tgl_kembali = date('Y-m-d');
-      $tgl_kembali = '2019-05-30';
+      $tgl_kembali = date('Y-m-d');
+      // $tgl_kembali = '2019-06-07';
       $tgl_harus_kembali = $result->tgl_harus_kembali;
       $denda_perhari = $this->rule->denda_perhari;
       // Jika tgl kembali > tangal kembali kena denda

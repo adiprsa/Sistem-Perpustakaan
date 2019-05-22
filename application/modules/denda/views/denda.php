@@ -44,7 +44,7 @@
           },
           success: function(resp) {
             var obj = JSON.parse(resp);
-            alert(obj.error_code + ' - ' + obj.messages);
+            showMessage(obj.type, obj.error_code, obj.messages);
             $('#btnKembali').prop('disabled', false);
             setTimeout(function(){ window.location.reload(); }, 1500);
           },
