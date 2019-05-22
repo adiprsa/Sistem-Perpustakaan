@@ -20,7 +20,11 @@ class User extends MY_Controller {
 	}
 
 	function modal_form($hash='0'){
-		$q = $this->Db_model->get('user','*',array('sha1(user_id)' => $hash));
+		$q = $this->Db_model->get('user','*',array('sha1(user.user_id)' => $hash),'','','','',
+					array(
+							array('on' => 'user.karyawan_id=karyawan.karyawan_id', 'table' => 'karyawan')
+						));
+		$data['userlevel'] = $this->Db_model->get('grup_pengguna');
 		$data['user'] = $q;
 		$data['ref'] = $hash;
 		$this->load->view('user/modal_user',$data);
@@ -107,6 +111,7 @@ class User extends MY_Controller {
 
 	}
 	function simpan_user(){
+//		print_r($this->input->post());exit;
 		$json['status'] = 'gagal';
 		$json['alert'] 	= 'gagal';
 		$json['link'] 	= site_url('user');
@@ -149,6 +154,8 @@ class User extends MY_Controller {
 			echo json_encode($json);
 			exit;
 		}
+		
+		$data['grup_id']	= $this->input->post('userlevel');
 
 		if(!$this->input->post('name')){
 			$json['alert'] 	= 'Nama asli harus diisi';
@@ -156,7 +163,23 @@ class User extends MY_Controller {
 			exit;
 		}
 		$data['nama_asli'] = $this->input->post('name');
-
+		$datax['nama'] = $this->input->post('name');
+		
+		if(!$this->input->post('no_identitas')){
+			$json['alert'] 	= 'No Identitas harus diisi';
+			echo json_encode($json);
+			exit;
+		}
+		$datax['no_identitas'] = $this->input->post('no_identitas');
+		$datax['jenis_kelamin'] = $this->input->post('jenis_kelamin');
+		$datax['alamat'] = $this->input->post('alamat');
+		if(!$this->input->post('jabatan')){
+			$json['alert'] 	= 'Jabatan harus diisi';
+			echo json_encode($json);
+			exit;
+		}
+		$datax['jabatan'] = $this->input->post('jabatan');
+		
 		if(!$this->input->post('email')){
 			$json['alert'] 	= 'Email harus diisi';
 			echo json_encode($json);
@@ -171,6 +194,9 @@ class User extends MY_Controller {
 		$data['email'] = $this->input->post('email');
 		if($ref=='0'){
 			if($this->Db_model->add('user',$data)){
+				$this->Db_model->add('karyawan',$datax);
+				$max_id = $this->Db_model->get('karyawan','MAX(karyawan_id) as id_max')->row()->id_max;
+				$this->Db_model->update('user',array('karyawan_id' => $max_id), array('email' => $this->input->post('email')));
 				$json['status'] = 'berhasil';
 				$json['alert']  = "Data berhasil disimpan";
 				echo json_encode($json);
@@ -178,6 +204,7 @@ class User extends MY_Controller {
 			}
 		}else{
 			if($this->Db_model->update('user',$data,array('md5(user_id)' => $ref))){
+				$this->Db_model->update('karyawan',$datax,array('karyawan_id' => $q->karyawan_id));
 				$json['status'] = 'berhasil';
 				$json['alert']  = "Data berhasil disimpan";
 				echo json_encode($json);
@@ -228,7 +255,41 @@ class User extends MY_Controller {
 				);
 		echo json_encode($output);
 	}
+	
+	
+	function log_usernya(){
+		$data['title'] = 'Log Pengguna';
+		$this->load->view('templates/header', $data);
+		$this->load->view('user/log_usernya',$data);
+		$this->load->view('templates/footer');
+	}
+	
+	function log_list(){
+		$this->load->model('Log_model');
+		$list = $this->Log_model->get_datatables();
+		$data = array();
+		$no = 1;
+		if($_POST['start']){
+			$no = $_POST['start'] + 1;
+		}
+		foreach ($list as $rows) {
+			$row = array();
 
+			$row[] = isset($rows->username) ? $rows->username : '-';
+			$row[] = isset($rows->aktifitas) ? $rows->aktifitas : '-';
+			$row[] = isset($rows->waktu) ? $rows->waktu : '-';
+			$data[] = $row;
+			$no++;
+		}
+		$output = array(
+						"draw" => $_POST['draw'],
+						"recordsTotal" => $this->Log_model->count_all(),
+						"recordsFiltered" => $this->Log_model->count_filtered(),
+						"data" => $data,
+				);
+		echo json_encode($output);
+	}
+	
 }
 
 ?>

@@ -16,19 +16,21 @@
                 <div id="submenu-1" class="collapse submenu" style="">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?=base_url('Pengaturan/pengarang');?>">Pengarang</a>
+                            <a class="nav-link" href="<?=base_url('pengaturan/pengarang');?>">Pengarang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?=base_url('Pengaturan/penerbit');?>">Penerbit</a>
+                            <a class="nav-link" href="<?=base_url('pengaturan/penerbit');?>">Penerbit</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?=base_url('#');?>">Supplier</a>
+                            <a class="nav-link" href="<?=base_url('pengaturan/supplier');?>">Supplier</a>
                         </li>
+						<!--
                         <li class="nav-item">
                             <a class="nav-link" href="<?=base_url('#');?>">Lokasi Buku</a>
                         </li>
+						-->
                         <li class="nav-item">
-                            <a class="nav-link" href="<?=base_url('#');?>">Tempat</a>
+                            <a class="nav-link" href="<?=base_url('pengaturan/lokasi');?>">Lokasi</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?=base_url('#');?>">Member</a>
@@ -37,11 +39,13 @@
                             <a class="nav-link" href="<?=base_url('#');?>">Tipe Member</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?=base_url('#');?>">Frekuensi Terbit</a>
+                            <a class="nav-link" href="<?=base_url('pengaturan/frekuensi');?>">Frekuensi Terbit</a>
                         </li>
+						<!--
                         <li class="nav-item">
                             <a class="nav-link" href="<?=base_url('#');?>">Karyawan</a>
                         </li>
+						-->
                     </ul>
                 </div>
             </li>
@@ -56,10 +60,10 @@
                           <a class="nav-link" href="<?=base_url('#');?>">Eksemplar</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('Pengaturan/kolasi');?>">Tipe Kolasi</a>
+                          <a class="nav-link" href="<?=base_url('pengaturan/kolasi');?>">Tipe Kolasi</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Tipe Media</a>
+                          <a class="nav-link" href="<?=base_url('pengaturan/tipe_media');?>">Tipe Media</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="<?=base_url('#');?>">Serial</a>
@@ -123,7 +127,7 @@
                 <div id="submenu-6" class="collapse submenu" style="">
                     <ul class="nav flex-column">
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Pengguna</a>
+                          <a class="nav-link" href="<?=base_url('user');?>">Pengguna</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="<?=base_url('#');?>">Member</a>
@@ -131,6 +135,7 @@
                       <li class="nav-item">
                           <a class="nav-link" href="<?=base_url('#');?>">Tipe Member</a>
                       </li>
+					  <!--
                       <li class="nav-item">
                           <a class="nav-link" href="<?=base_url('#');?>">Module</a>
                       </li>
@@ -140,8 +145,9 @@
                       <li class="nav-item">
                           <a class="nav-link" href="<?=base_url('#');?>">Grup Pengguna</a>
                       </li>
+					  -->
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Log Pengguna</a>
+                          <a class="nav-link" href="<?=base_url('user/log_usernya');?>">Log Pengguna</a>
                       </li>
                     </ul>
                 </div>
@@ -151,19 +157,19 @@
                 <div id="submenu-7" class="collapse submenu" style="">
                     <ul class="nav flex-column">
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Fakultas</a>
+                          <a class="nav-link" href="<?=base_url('pengaturan/fakultas');?>">Fakultas</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Prodi</a>
+                          <a class="nav-link" href="<?=base_url('pengaturan/prodi');?>">Prodi</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Bahasa</a>
+                          <a class="nav-link" href="<?=base_url('pengaturan/bahasa');?>">Bahasa</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="<?=base_url('#');?>">Aturan Pinjam</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="<?=base_url('#');?>">Hari Libur</a>
+                          <a class="nav-link" href="<?=base_url('pengaturan/libur');?>">Hari Libur</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="<?=base_url('#');?>">Berita</a>

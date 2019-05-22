@@ -27,20 +27,16 @@ $row = $user->row();
 			<tr>
 				<td>Userlevel</td>
 				<td>
-					<?php
-					if(isset($row->nama_level)){
-						?>
-					<input type='text' readonly name='userlevel' value='<?=$row->nama_level?>' class='form-control'>
-					<input type='hidden' name='userlevel' value='<?=$row->userlevel?>'>
-						<?php
-					}else{
-						?>
 						<select name='userlevel' class='form-control'>
-							<option value='1'> Superadmin
-						</select>
+					<?php
+						foreach($userlevel->result() as $zz => $mm){
+						?>
+							<option value='<?=$mm->grup_id?>' <?=(isset($row->grup_id) AND $row->grup_id==$mm->grup_id)? 'selected' : ''?>> <?=$mm->nama_grup?>
 						<?php
-					}
+						}
+					
 					?>
+						</select>
 				</td>
 			</tr>
 			<tr>
@@ -62,23 +58,39 @@ $row = $user->row();
 				</td>
 			</tr>
 			<tr>
+				<td>No Identitas</td>
+				<td>
+					<input placeholder='No Identitas' type='text' name='no_identitas' value='<?=isset($row->no_identitas) ? $row->no_identitas : ''?>' class='form-control'>
+				</td>
+			</tr>
+			<tr>
+				<td>Jenis Kelamin</td>
+				<td>
+					<select class='form-control' name='jenis_kelamin'>
+						<option value='L' <?=(isset($row->jenis_kelamin) AND $row->jenis_kelamin=='L')? 'selected' : ''?> > Laki-Laki </option>
+						<option value='P' <?=(isset($row->jenis_kelamin) AND $row->jenis_kelamin=='P')? 'selected' : ''?>> Perempuan </option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Alamat</td>
+				<td>
+					<input placeholder='Alamat' type='text' name='alamat' value='<?=isset($row->alamat) ? $row->alamat : ''?>' class='form-control'>
+				</td>
+			</tr>
+			<tr>
+				<td>Jabatan</td>
+				<td>
+					<input placeholder='Jabatan' type='text' name='jabatan' value='<?=isset($row->jabatan) ? $row->jabatan : ''?>' class='form-control'>
+				</td>
+			</tr>
+			
+			<tr>
 				<td>Email</td>
 				<td>
 					<input placeholder='Email' type='email' name='email' value='<?=isset($row->email) ? $row->email : ''?>' class='form-control'>
 				</td>
 			</tr>
-			<tr>
-				<td>Status</td>
-				<td>
-					<select name='status' class='form-control'>
-						<option value='0' <?=(isset($row->status) AND $row->status==0) ? "selected" : ''?> >Tidak Aktif
-						<option value='1' <?=(isset($row->status) AND $row->status==1) ? "selected" : ''?> >Aktif
-						<option value='2' <?=(isset($row->status) AND $row->status==2) ? "selected" : ''?> >Bekukan
-					</select>
-
-				</td>
-			</tr>
-
 		  </table>
         </div>
         <div class="modal-footer">
