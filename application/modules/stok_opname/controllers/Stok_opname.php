@@ -74,10 +74,10 @@ class Stok_opname extends MY_Controller {
     }
 
     public function delete() {
-        $id = $this->input->post('id');
+        $id = $this->uri->segment(3);
         $save = $this->opname->delete($id);
         if($save) {
-            redirect('opname');
+            redirect('stok_opname');
         }
     }
     
