@@ -80,7 +80,7 @@
                           <td>
                             <a href="<?=base_url('stok_opname/edit/'.$item->stok_opname_id);?>" class="btn btn-warning">
                               Edit</a> &nbsp; 
-                              <a href="<?=base_url('stok_opname/edit/'.$item->stok_opname_id);?>" class="btn btn-danger">
+                              <a href="<?=base_url('stok_opname/delete/'.$item->stok_opname_id);?>" class="btn btn-danger">
                               Hapus</a> 
                           </td>
                         </tr>
