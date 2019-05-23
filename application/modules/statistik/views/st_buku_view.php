@@ -88,34 +88,34 @@
                                     var list_month = [];
                                     var list_jenis = [];
                                     var data_sets = []
-                                    var data_pinjam = {}
+                                    var data_buku = {}
                                     var color_list = ['#1133CC', '#33CC11', '#CC1133', '#FF4466', '#66FF44', '#4466FF'];
 
                                     for (var i in data) {
                                         list_month.push(data[i].month);
-                                        list_jenis.push(data[i].klasifikasi);
+                                        list_jenis.push(data[i].kategori);
                                     }
                                     var month_list = list_month.filter(unique);
-                                    var jenis_list = list_jenis.filter(unique);
+                                    var buku_list = list_jenis.filter(unique);
 
-                                    for (var i in jenis_list) {
-                                        data_pinjam[i] = [];
+                                    for (var i in buku_list) {
+                                        data_buku[i] = [];
                                         for (var j in month_list) {
-                                            var data_pj = "0";
+                                            var data_bk = "0";
                                             for (var k in data) {
-                                                if (data[k].month == month_list[j] && data[k].klasifikasi == jenis_list[i]) {
-                                                    data_pj = data[k].tot_buku;
+                                                if (data[k].month == month_list[j] && data[k].kategori == buku_list[i]) {
+                                                    data_bk = data[k].tot_buku;
                                                 }
                                             }
-                                            data_pinjam[i].push(data_pj);
+                                            data_buku[i].push(data_bk);
                                         }
                                         data_sets.push({
-                                            label: jenis_list[i],
+                                            label: buku_list[i],
                                             backgroundColor: color_list[i],
                                             borderColor: '#000000',
                                             hoverBackgroundColor: color_list[(color_list.length - 1) - i],
                                             hoverBorderColor: '#ffffff',
-                                            data: data_pinjam[i]
+                                            data: data_buku[i]
                                         });
                                     }
 

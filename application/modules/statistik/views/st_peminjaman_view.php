@@ -93,7 +93,7 @@
 
                                     for (var i in data) {
                                         list_month.push(data[i].month);
-                                        list_jenis.push(data[i].klasifikasi);
+                                        list_jenis.push(data[i].kategori);
                                     }
                                     var month_list = list_month.filter(unique);
                                     var jenis_list = list_jenis.filter(unique);
@@ -103,7 +103,7 @@
                                         for (var j in month_list) {
                                             var data_pj = "0";
                                             for (var k in data) {
-                                                if (data[k].month == month_list[j] && data[k].klasifikasi == jenis_list[i]) {
+                                                if (data[k].month == month_list[j] && data[k].kategori == jenis_list[i]) {
                                                     data_pj = data[k].tot_pinjam;
                                                 }
                                             }

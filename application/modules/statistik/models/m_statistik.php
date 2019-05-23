@@ -41,9 +41,10 @@ class M_statistik extends CI_Model
 
 
     public function statistik_buku($month, $year) {
-        $this->db->select("DATE_FORMAT(item.tgl_terima, '%M') as month, bibliografi.klasifikasi, COUNT(item.item_id) as tot_buku");
+        $this->db->select("DATE_FORMAT(item.tgl_terima, '%M') as month, kategori.nama_kategori as kategori, COUNT(item.item_id) as tot_buku");
         $this->db->from('item');
         $this->db->join('bibliografi', 'item.biblio_id = bibliografi.biblio_id');
+        $this->db->join('kategori', 'bibliografi.kategori_id = kategori.kategori_id');
         if ($month != "") {
             $this->db->where("DATE_FORMAT(item.tgl_terima, '%M') =", $month);
         }
@@ -53,17 +54,18 @@ class M_statistik extends CI_Model
         else {
             $this->db->where("DATE_FORMAT(item.tgl_terima, '%Y') = DATE_FORMAT(NOW(), '%Y')");
         }
-        $this->db->group_by("DATE_FORMAT(item.tgl_terima, '%M'), bibliografi.klasifikasi");
-        $this->db->order_by('item.tgl_terima, bibliografi.klasifikasi');
+        $this->db->group_by("DATE_FORMAT(item.tgl_terima, '%M'), kategori.nama_kategori");
+        $this->db->order_by('item.tgl_terima, kategori.nama_kategori');
         $query = $this->db->get()->result();
         return $query;
     }
 
     public function statistik_peminjaman($month, $year) {
-        $this->db->select("DATE_FORMAT(peminjaman.tgl_pinjam, '%M') as month, bibliografi.klasifikasi, COUNT(peminjaman.peminjaman_id) as tot_pinjam");
+        $this->db->select("DATE_FORMAT(peminjaman.tgl_pinjam, '%M') as month, kategori.nama_kategori as kategori, COUNT(peminjaman.peminjaman_id) as tot_pinjam");
         $this->db->from('peminjaman');
         $this->db->join('item', 'peminjaman.no_item = item.item_id');
         $this->db->join('bibliografi', 'item.biblio_id = bibliografi.biblio_id');
+        $this->db->join('kategori', 'bibliografi.kategori_id = kategori.kategori_id');
         if ($month != "") {
             $this->db->where("DATE_FORMAT(peminjaman.tgl_pinjam, '%M') =", $month);
         }
@@ -73,8 +75,8 @@ class M_statistik extends CI_Model
         else {
             $this->db->where("DATE_FORMAT(peminjaman.tgl_pinjam, '%Y') = DATE_FORMAT(NOW(), '%Y')");
         }
-        $this->db->group_by("DATE_FORMAT(peminjaman.tgl_pinjam, '%M'), bibliografi.klasifikasi");
-        $this->db->order_by('peminjaman.tgl_pinjam, bibliografi.klasifikasi');
+        $this->db->group_by("DATE_FORMAT(peminjaman.tgl_pinjam, '%M'), kategori.nama_kategori");
+        $this->db->order_by('peminjaman.tgl_pinjam, kategori.nama_kategori');
         $query = $this->db->get()->result();
         return $query;
     }
