@@ -354,7 +354,7 @@ class Member extends MY_Controller {
 			echo json_encode($json);
 			exit;
 		}
-		$this->load->model(array('Import_model'));
+		$this->load->model('member/Member_model','Import_model');
 		$this->load->library(array('PHPExcel','convertion'));
 		$filename	=	"import_member_".date('Ymdhis').".xls";
 		$config['file_name']		= $filename;
@@ -373,7 +373,7 @@ class Member extends MY_Controller {
 			$data = array('upload_data' => $this->upload->data());
             $upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
             //$filename = $upload_data['file_name'];
-            $kampret = $this->Import_model->import_pengarang($filename);
+            $kampret = $this->Import_model->import_member($filename);
 		//	echo $this->db->last_query();
           //  print_r($kampret);exit;
 			$json['status'] = $kampret['status'];
