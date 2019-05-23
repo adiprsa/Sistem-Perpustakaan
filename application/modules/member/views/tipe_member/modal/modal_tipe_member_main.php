@@ -32,28 +32,6 @@
 							</td>
 						</tr>
 						<tr>
-							<td>Boleh Reservasi</td>
-							<td>
-								<select class="form-control" name="boleh_reservasi">
-									<option value="1" <?= isset($row->boleh_reservasi) ? 
-									($row->boleh_reservasi == '1' ? 'selected' : '' ) : ''?>>YA</option>
-									<option value="0" <?= isset($row->boleh_reservasi) ? 
-									($row->boleh_reservasi == '0' ? 'selected' : '' ) : ''?>>TIDAK</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>Bisa Tiap Hari</td>
-							<td>
-								<select class="form-control" name="bisa_tiap_hari">
-									<option value="1" <?= isset($row->bisa_tiap_hari) ? 
-									($row->bisa_tiap_hari == '1' ? 'selected' : '' ) : ''?>>YA</option>
-									<option value="0" <?= isset($row->bisa_tiap_hari) ? 
-									($row->bisa_tiap_hari == '0' ? 'selected' : '' ) : ''?>>TIDAK</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
 							<td>Masa Tenggang(hari)</td>
 							<td>
 								<input type='number' name='masa_tenggang' class='form-control'  min='0' 

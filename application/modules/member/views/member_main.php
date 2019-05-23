@@ -38,15 +38,16 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <button type='button' class='btn btn-success' id='tambah'>Tambah</button>
+                                <button type='button' class='btn btn-info' id='tambah'>Tambah</button>
+								<button type='button' class='btn btn-success' id='import'>Import Data Member</button>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="member" class="table table-striped table-bordered second" style="width:100%">
                                         <thead>
                                             <tr>
-												<th>No</th>
                                                 <th>Nomor Induk Member</th>
+												<th>Tipe Member</th>
 												<th>Nama Member</th>
 												<th>Jurusan</th>
                                                 <th>Aksi</th>
