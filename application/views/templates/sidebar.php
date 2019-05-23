@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav flex-column">
             <li class="nav-item ">
-                <a class="nav-link" href="#"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
+                <a class="nav-link" href="<?=site_url()?>"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
             </li>
             <li class="nav-divider">
                 Menu
