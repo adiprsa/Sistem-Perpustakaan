@@ -62,8 +62,7 @@
                 </div>
 		</div>
 	</div>
-<div id="modal_form" class="modal" data-width="900">
-</div>
+<div id="popup"></div>
 <script src="<?= base_url('assets/datatable') ?>/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="<?= base_url('assets/datatable') ?>/dataTables.bootstrap.min.css">
 <script>
@@ -86,4 +85,24 @@ table = $('#data').DataTable({
 		],
 	});
 });
+</script>
+
+<script type="text/javascript">
+	function hapus(idItem,nmItem) {
+		$.get('<?=site_url('buku/ajax/popup/hapus')?>',
+			{id:idItem,nama:nmItem,tabel:'item'},
+			function(data) {
+				$('#popup').html(data)
+				$('.modal').modal('show');
+			})
+	}
+	function yakinHapus(id) {
+		$.get('<?=site_url('buku/ajax/hapus/item')?>',
+			{id:id},
+			function(data) {
+				if (data.status){
+					location.reload();
+				}
+			})
+	}
 </script>

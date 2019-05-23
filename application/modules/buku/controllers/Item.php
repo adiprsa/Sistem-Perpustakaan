@@ -28,6 +28,12 @@ class Item extends MY_Controller {
 	}
 	public function cari()
 	{
+		if ($this->input->post('judul')) {
+			$judul = $this->input->post('judul');
+			$buku = explode('_', $judul);
+			redirect('buku/item/form/tambah?biblio_id='.$buku[0],'refresh');
+		}
+
 		$data['title'] = 'item';
 		$data['action'] = 'cari';
 		//Header

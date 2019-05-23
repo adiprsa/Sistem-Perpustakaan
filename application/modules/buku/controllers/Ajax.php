@@ -9,7 +9,7 @@ class Ajax extends MY_Controller {
 		/* AJAX check  */
 		if ( $this->input->is_ajax_request()==FALSE) {
 			/* special ajax here */
-			redirect('buku');
+			//redirect('buku');
 		}
 	}
 	public function index()
@@ -32,17 +32,19 @@ class Ajax extends MY_Controller {
         $page   = $this->input->get('page');
 
         $this->load->model('biblio_m');
-        $result = $this->biblio_m->cari($q);
+        $total_count = $this->biblio_m->total_count();
+        $result = $this->biblio_m->cari($q,$page);
         //print_r($result);
         foreach ($result as $key => $value) {
-            $resp[] = array('judul'       => $value->judul,
+            $resp[] = array('id'        => $value->biblio_id,
+                            'judul' => $value->judul,
                             'penerbit'  => $value->nama_penerbit,
                             //'gambar'    => $value->gambar,
                         );
         }
-        $resp = array('total_count'     => count($resp),
-                        'incomplete_results'    => false,
-                        'items'         => $resp );
+        $resp = array('total_count'         => $total_count,
+                        'incomplete_results'=> false,
+                        'items'             => $resp );
         header('Content-Type: application/json');
         print_r(json_encode($resp));
     }
@@ -62,7 +64,7 @@ class Ajax extends MY_Controller {
             $row[] = $buku->nama_penerbit;
             $row[] = $buku->tahun_terbit;
             $row[] = $buku->call_number;
-            $row[] = "<a href='".site_url('buku/form/edit?id_biblio='.$buku->biblio_id)."' class='btn btn-warning'> Edit <a><a href='".site_url('buku/detail?id_biblio='.$buku->biblio_id)."' class='btn btn-success'> Detail <a><a href='".site_url('buku/delete?id_biblio='.$buku->biblio_id)."' class='btn btn-danger'> Hapus <a>";
+            $row[] = "<a href='".site_url('buku/form/edit?id_biblio='.$buku->biblio_id)."' class='btn btn-warning'> Edit <a><a href='".site_url('buku/detail?id_biblio='.$buku->biblio_id)."' class='btn btn-success'> Detail <a><a href='javascript:void(0)' onclick=\"hapus('".$buku->biblio_id."','".$buku->judul."')\" class='btn btn-danger'> Hapus <a>";
  
             $data[] = $row;
         } 
@@ -93,7 +95,7 @@ class Ajax extends MY_Controller {
             $row[] = $buku->nama_lokasi;
             $row[] = $buku->nama_rak;
             $row[] = $buku->asal;
-            $row[] = "<a href='".site_url('buku/item/form/edit?id_item='.$buku->item_id)."' class='btn btn-warning'> Edit <a><a href='".site_url('buku/detail?id_item='.$buku->item_id)."' class='btn btn-success'> Detail <a><a href='".site_url('buku/delete?id_item='.$buku->item_id)."' class='btn btn-danger'> Hapus <a>";
+            $row[] = "<a href='".site_url('buku/item/form/edit?biblio_id='.$buku->biblio_id.'&id_item='.$buku->item_id)."' class='btn btn-warning'> Edit <a><a href='".site_url('buku/detail?id_item='.$buku->item_id)."' class='btn btn-success'> Detail <a><a href='javascript:void(0)' onclick=\"hapus('".$buku->item_id."','".$buku->judul."')\" class='btn btn-danger'> Hapus <a>";
  
             $data[] = $row;
         } 
