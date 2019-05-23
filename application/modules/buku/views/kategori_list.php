@@ -50,8 +50,8 @@
                                         		echo "<tr><td>".$no."</td><td>".$value['nama_kategori']."</td>
                                         				<td>".$value['kode_kategori']."</td>
                                         				<td>
-                                        					<a href='javascript:void(0)' class='btn btn-warning' onclick='edit(\"".$value['kategori_id']."\")'> Edit <a>
-                                        					<a href='javascript:void(0)' class='btn btn-danger' onclick='hapus(\"".$value['kategori_id']."\",\"".$value['nama_kategori']."\")'> Hapus <a>
+                                        					<a href='javascript:void(0)' class='btn btn-warning' onclick='edit(\"".$value['kategori_id']."\")'> Edit </a>
+                                        					<a href='javascript:void(0)' class='btn btn-danger' onclick='hapus(\"".$value['kategori_id']."\",\"".$value['nama_kategori']."\")'> Hapus </a>
                                         				</td></tr>";
                                         		$no++;
                                         	} }else{

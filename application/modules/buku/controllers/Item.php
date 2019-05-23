@@ -6,8 +6,11 @@ class Item extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		if(!$this->session->userdata('username')){
+			redirect('login/logout');
+		}
 		$this->load->model(array('item_m','biblio_m'));
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 	}
 	public function index()
 	{
