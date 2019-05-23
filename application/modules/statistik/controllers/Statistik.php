@@ -4,7 +4,7 @@ class statistik extends MY_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('m_statistik');
+		$this->load->model('statistik/m_statistik');
 	}
 
 	// public function tampil_statistik_pengunjung() {
