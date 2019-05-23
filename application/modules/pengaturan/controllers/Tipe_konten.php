@@ -7,6 +7,9 @@ class Tipe_konten extends MY_Controller {
 		if(!$this->session->userdata('username')){
 			redirect('login/logout');
 		}
+		if($this->session->userdata('tipe_user')!='1'){
+			redirect('');
+		}
     }
 	
 	function index(){

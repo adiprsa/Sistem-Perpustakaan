@@ -7,11 +7,13 @@ class Pengarang extends MY_Controller {
 		if(!$this->session->userdata('username')){
 			redirect('login/logout');
 		}
+		if($this->session->userdata('tipe_user')!='1'){
+			redirect('');
+		}
     }
 	
 	function index(){
 		$data['title'] = 'Pengaturan Pengarang';
-		//$data['hari_libur']	= $this->Db_model->get('hari_libur','*',array('YEAR(tgl_libur)' => $tahun));
 		$this->load->view('templates/header', $data);
 		$this->load->view('pengaturan/main_pengarang',$data);
 		$this->load->view('templates/footer');
