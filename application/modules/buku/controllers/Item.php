@@ -6,8 +6,11 @@ class Item extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		if(!$this->session->userdata('username')){
+			redirect('login/logout');
+		}
 		$this->load->model(array('item_m','biblio_m'));
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 	}
 	public function index()
 	{
@@ -25,6 +28,12 @@ class Item extends MY_Controller {
 	}
 	public function cari()
 	{
+		if ($this->input->post('judul')) {
+			$judul = $this->input->post('judul');
+			$buku = explode('_', $judul);
+			redirect('buku/item/form/tambah?biblio_id='.$buku[0],'refresh');
+		}
+
 		$data['title'] = 'item';
 		$data['action'] = 'cari';
 		//Header

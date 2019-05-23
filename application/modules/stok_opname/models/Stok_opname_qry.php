@@ -30,10 +30,9 @@ class Stok_opname_qry extends CI_Model{
 
         $data = array(
             'nama_stok_opname'=>$nama_stok_opname,
-            'tgl_mulai'=>$tgl_mulai,
-            'tgl_selesai'=>$tgl_selesai,
+            'tgl_mulai'=>date("Y-m-d", strtotime($tgl_mulai)),
+            'tgl_selesai'=>date("Y-m-d", strtotime($tgl_selesai)),
             'nama_pembuat'=>$pembuat,
-            'tgl_selesai'=>$tgl_selesai,
             'is_active'=>1,
             'pemproses'=>$this->session->userdata('nama_asli')
         );
@@ -76,14 +75,9 @@ class Stok_opname_qry extends CI_Model{
 
     }
 
-
-
     public function delete($id) {
-        $sql1 = "DELETE FROM USERS
-                WHERE USER_ID = '$id'";
-        $this->db->query($sql1);
-        $sql = "DELETE FROM EMRS_USERS
-                WHERE USER_ID = '$id'";
+        $sql = "DELETE FROM stok_opname
+                WHERE stok_opname_id = '$id'";
         $query = $this->db->query($sql);
         if ($query) {
             return true;

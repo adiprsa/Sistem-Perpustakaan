@@ -17,11 +17,7 @@ class Stok_opname_item extends MY_Controller {
     $data['status'] = $this->opname->get_item_status();
     $data['items'] = $this->opname->get_item($this->stok_opname->stok_opname_id);
     $this->load->view('templates/header', $data);
-    if(!empty($this->member_code)) {
-      $this->load->view('member_session.php',$data);
-    } else {
-      $this->load->view('index',$data);
-    }
+    $this->load->view('index',$data);
     $this->load->view('templates/footer');
   }
 

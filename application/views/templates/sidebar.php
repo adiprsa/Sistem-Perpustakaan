@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav flex-column">
             <li class="nav-item ">
-                <a class="nav-link" href="#"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
+                <a class="nav-link" href="<?=site_url()?>"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
             </li>
             <li class="nav-divider">
                 Menu
@@ -118,6 +118,28 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url('laporan/c_laporan_denda/tampil_laporan_denda') ?>">Laporan Denda</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8"><i class="fa fa-fw fa-book"></i>Statistik</a>
+                <div id="submenu-8" class="collapse submenu" style="">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('statistik/tampil_statistik_member') ?>">Statistik Daftar Anggota Perpustakaan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('statistik/tampil_statistik_buku') ?>">Statistik Koleksi Buku</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('statistik/tampil_statistik_peminjaman') ?>">Statistik Peminjaman Buku</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('statistik/tampil_statistik_pembayaran_denda') ?>">Statistik Pembayaran Denda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo base_url('statistik/tampil_statistik_stok_opname') ?>">Statistik Stock Opname</a>
                         </li>
                     </ul>
                 </div>

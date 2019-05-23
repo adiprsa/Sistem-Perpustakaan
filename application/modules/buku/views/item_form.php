@@ -130,7 +130,7 @@
 							    		</tr>								    		
 							    		<tr>
 							    			<td>Tanggal Order</td>
-							    			<td><input type="text" name="tanggal_order" class="form-control" value="<?=isset($item)?$item['tanggal_order']:'';?>"></td>
+							    			<td><input type="text" name="tgl_order" class="form-control" value="<?=isset($item)?$item['tgl_order']:'';?>"></td>
 							    		</tr>
 							    		<tr>
 							    			<td>Asal</td>

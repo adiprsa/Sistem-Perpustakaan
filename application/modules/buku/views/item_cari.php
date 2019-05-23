@@ -34,11 +34,11 @@
 						</div>
 						<div class="card-body">
                             <div class="table-responsive">
-                                <form method="post">
+                  <form method="post">
 							    	<table class="table">
 							    		<tr>
 							    			<td width="30%">Judul Buku</td>
-							    			<td><select class="form-control judul"></select></td>
+							    			<td><select class="form-control judul" name="judul"></select></td>
 							    		</tr>							    		
 							    	</table>
 							    	<input type="submit" value="Lihat" class="btn btn-primary" >
@@ -52,7 +52,6 @@
 	</div>
 
 <link rel="stylesheet" type="text/css" href="<?=base_url('assets/plugins/select2/css/select2.min.css')?>">
-<link rel="stylesheet" type="text/css" href="<?=base_url('assets/plugins/select2/css/select2.cari.css')?>">
 <script type="text/javascript" src="<?=base_url('assets/plugins/select2/js/select2.min.js')?>"></script>
 <script type="text/javascript">
 
@@ -83,7 +82,7 @@ $(".judul").select2({
     },
     cache: true
   },
-  placeholder: 'Search for a repository',
+  placeholder: 'Cari buku',
   escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
   minimumInputLength: 1,
   templateResult: formatRepo,
@@ -92,7 +91,7 @@ $(".judul").select2({
 
 function formatRepo (repo) {
   if (repo.loading) {
-    return repo.text;
+    return 'loading';
   }
 
   var markup = "<div class='select2-result-repository clearfix'>" +
@@ -107,6 +106,61 @@ function formatRepo (repo) {
 }
 
 function formatRepoSelection (repo) {
-  return repo.full_name || repo.text;
+  return repo.id+"_"+repo.judul;
 }
 </script>
+<style type="text/css">
+  
+.select2-result-repository {
+ padding-top:4px;
+ padding-bottom:3px
+}
+.select2-result-repository__avatar {
+ float:left;
+ width:60px;
+ margin-right:10px
+}
+.select2-result-repository__avatar img {
+ width:100%;
+ height:auto;
+ border-radius:2px
+}
+.select2-result-repository__meta {
+ margin-left:70px
+}
+.select2-result-repository__title {
+ color:black;
+ font-weight:700;
+ word-wrap:break-word;
+ line-height:1.1;
+ margin-bottom:4px
+}
+.select2-result-repository__forks,
+.select2-result-repository__stargazers {
+ margin-right:1em
+}
+.select2-result-repository__forks,
+.select2-result-repository__stargazers,
+.select2-result-repository__watchers {
+ display:inline-block;
+ color:#aaa;
+ font-size:11px
+}
+.select2-result-repository__description {
+ font-size:13px;
+ color:#777;
+ margin-top:4px
+}
+.select2-results__option--highlighted .select2-result-repository__title {
+ color:white
+}
+.select2-results__option--highlighted .select2-result-repository__forks,
+.select2-results__option--highlighted .select2-result-repository__stargazers,
+.select2-results__option--highlighted .select2-result-repository__description,
+.select2-results__option--highlighted .select2-result-repository__watchers {
+ color:#c6dcef
+}
+.s2-docs-sidebar.affix {
+ position:static
+}
+</style>
