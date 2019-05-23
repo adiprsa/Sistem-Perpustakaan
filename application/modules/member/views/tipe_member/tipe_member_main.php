@@ -38,7 +38,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <button type='button' class='btn btn-success' id='tambah'>Tambah</button>
+                                <button type='button' class='btn btn-info' id='tambah'>Tambah</button>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -66,9 +66,9 @@
 													<td><?php echo $row->lama_pinjam;?> hari</td>
 													<td><?php echo $this->convertion->rupiah($row->denda_perhari);?></td>
 													<td>
-														<button type="button" class="btn btn-info ganti"  
+														<button type="button" class="btn btn-warning ganti"  
 														id="<?php echo sha1($row->tipe_member_id);?>">Ubah</button>
-														<button type="button" class="btn btn-warning hapus" 
+														<button type="button" class="btn btn-danger hapus" 
 														id="<?php echo sha1($row->tipe_member_id);?>">Hapus</button>
 													</td>
 												</tr>

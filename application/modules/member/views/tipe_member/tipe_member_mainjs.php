@@ -9,7 +9,7 @@
         });
 
         //Form add tipe member
-        $("#tambah").click(function(){
+        $("#tambah").click(function() {
             $('#tampil_form').load("<?=site_url()?>member/tipe_member/modal_form",function() {
                 $('#modal_form').modal('show');
             });

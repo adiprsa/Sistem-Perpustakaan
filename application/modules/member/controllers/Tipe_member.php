@@ -59,8 +59,6 @@ class Tipe_member extends MY_Controller {
 		 
 		$data['limit_pinjam'] = $limit_pinjam;
 		$data['lama_pinjam'] = $lama_pinjam;
-		$data['boleh_reservasi'] = $this->input->post('boleh_reservasi');
-		$data['bisa_tiap_hari'] = $this->input->post('bisa_tiap_hari');
 		$data['masa_tenggang'] = $masa_tenggang;
 		$data['denda_perhari'] = $denda_perhari;
 		$data['last_update'] = date("Y-m-d H:i:s");
