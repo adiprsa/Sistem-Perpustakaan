@@ -61,13 +61,12 @@
                 </div>
 		</div>
 	</div>
-<div id="modal_form" class="modal" data-width="900">
-</div>
+<div id="popup"></div>
 <script src="<?= base_url('assets/datatable') ?>/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="<?= base_url('assets/datatable') ?>/dataTables.bootstrap.min.css">
 <script>
 $(document).ready(function() {
-table = $('#data').datatable({
+table = $('#data').DataTable({
 		"processing": true, //Feature control the processing indicator.
 		"serverSide": true, //Feature control DataTables' server-side processing mode.
 		"order": [], //Initial no order.
@@ -85,4 +84,24 @@ table = $('#data').datatable({
 		],
 	});
 });
+</script>
+
+<script type="text/javascript">
+	function hapus(idBuku,nmBuku) {
+		$.get('<?=site_url('buku/ajax/popup/hapus')?>',
+			{id:idBuku,nama:nmBuku,tabel:'biblio'},
+			function(data) {
+				$('#popup').html(data)
+				$('.modal').modal('show');
+			})
+	}
+	function yakinHapus(id) {
+		$.get('<?=site_url('buku/ajax/hapus/biblio')?>',
+			{id:id},
+			function(data) {
+				if (data.status){
+					location.reload();
+				}
+			})
+	}
 </script>

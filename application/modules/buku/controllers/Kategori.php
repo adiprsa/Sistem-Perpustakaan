@@ -6,6 +6,9 @@ class Kategori extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		if(!$this->session->userdata('username')){
+			redirect('login/logout');
+		}
 		$this->load->model('kategori_m');
 	}
 	public function index()

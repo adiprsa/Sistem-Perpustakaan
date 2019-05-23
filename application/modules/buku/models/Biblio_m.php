@@ -115,8 +115,13 @@ class Biblio_m extends CI_Model {
 	public function hapus($id=null)
 	{
 		$this->db->where('biblio_id', $id);
-		$query = $this->db->delete('bibliografi', $data);
+		$query = $this->db->delete('bibliografi');
 		return $query;
+	}
+	public function total_count()
+	{
+		$query = $this->db->get('bibliografi');
+		return $query->num_rows();
 	}
 }
 

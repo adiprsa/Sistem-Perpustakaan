@@ -1,15 +1,19 @@
+<!-- bootstap datepicker js -->
+<script src="<?php echo base_url('assets/vendor/datepicker/moment.js') ?>"></script>
+<script src="<?php echo base_url('assets/vendor/datepicker/tempusdominus-bootstrap-4.js') ?>"></script>
+<script src="<?php echo base_url('assets/vendor/datepicker/datepicker.js') ?>"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     // $('#responsive-datatable').DataTable({
     //   "pageLength": 25
     // });
-    $('#tgl_mulai').datetimepicker({
-      format: 'YYYY-MM-DD'
-    });
-    $('#tgl_selesai').datetimepicker({
-      format: 'YYYY-MM-DD'
+    $('#dt_tgl_mulai').datetimepicker({
+      format: 'L'
     });
 
+    $('#dt_tgl_selesai').datetimepicker({
+      format: 'L'
+    });
 
     $("#btnSave").on('click', (function(e) {
       e.preventDefault();
@@ -90,35 +94,42 @@
               <input id="id" type="hidden" name="id" data-parsley-type="id" value="<?php echo $item->stok_opname_id;?>">
               <div class="form-group row">
                 <label for="nama" class="col-3 col-lg-2 col-form-label text-right">Nama Waktu</label>
-                <div class="col-9 col-lg-10">
+                <div class="col-3 col-lg-4">
                   <input id="nama_stok_opname" type="text" name="nama_stok_opname" data-parsley-type="nama" placeholder="Nama Stok Opname" class="form-control" value="<?php echo $item->nama_stok_opname;?>">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="tgl_mulai" class="col-3 col-lg-2 col-form-label text-right">Tanggal Mulai</label>
-                <div class="col-6 col-lg-10">
-                  <input id="tgl_mulai" type="text" name="tgl_mulai" data-parsley-type="tgl_mulai" placeholder="YYYY-MM-DD" class="form-control"  value="<?php echo $item->tgl_mulai;?>">
+                <div class="col-3 col-lg-4">
+                  <div class="input-group date" id="dt_tgl_mulai" data-target-input="nearest">
+                    <input type="text" id="tgl_mulai" class="form-control datetimepicker-input" data-target="#dt_tgl_mulai"  placeholder="MM/DD/YYYY" value="<?php echo date("m/d/Y", strtotime($item->tgl_mulai));?>" />
+                    <div class="input-group-append" data-target="#dt_tgl_mulai" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group row">
                 <label for="tgl_mulai" class="col-3 col-lg-2 col-form-label text-right">Tanggal Selesai</label>
-                <div class="col-6 col-lg-10">
-                  <input id="tgl_selesai" type="text" name="tgl_selesai" data-parsley-type="tgl_selesai" placeholder="YYYY-MM-DD" class="form-control"  value="<?php echo $item->tgl_selesai;?>">
+                <div class="col-3 col-lg-4">
+                  <div class="input-group date" id="dt_tgl_selesai" data-target-input="nearest">
+                    <input type="text" id="tgl_selesai" class="form-control datetimepicker-input" data-target="#dt_tgl_selesai" placeholder="MM/DD/YYYY"  value="<?php echo date("m/d/Y", strtotime($item->tgl_selesai));?>" />
+                    <div class="input-group-append" data-target="#dt_tgl_selesai" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group row">
                 <label for="tgl_mulai" class="col-3 col-lg-2 col-form-label text-right">Penanggung Jawab</label>
-                <div class="col-6 col-lg-10">
+                <div class="col-3 col-lg-4">
                   <input id="pembuat" type="text" name="pembuat" data-parsley-type="pembuat" placeholder="Penanggung Jawab" class="form-control"  value="<?php echo $item->nama_pembuat;?>">
                 </div>
               </div>
-              <div class="row pt-2 pt-sm-5 mt-1">
-                <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
-
-                </div>
-                <div class="col-sm-6 pl-0">
-                  <p class="text-right">
-                    <button type="button" class="btn btn-space btn-primary" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
+              <div class="form-group row">
+                <label for="tgl_mulai" class="col-3 col-lg-2 col-form-label text-right"></label>
+                <div class="col-3 col-lg-4">
+                  <button type="button" class="btn btn-space btn-primary" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
                     <a href="/stok_opname" class="btn btn-space btn-secondary"><i class="fa fa-arrow-left"></i> Batal</a>
                   </p>
                 </div>
