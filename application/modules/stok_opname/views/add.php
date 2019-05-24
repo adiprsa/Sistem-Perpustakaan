@@ -41,7 +41,7 @@
             var obj = JSON.parse(resp);
             showMessage(obj.type, obj.error_code, obj.messages);
             setTimeout(function() {
-              window.location.assign('<?=base_url('stok_opname');?>')';
+              window.location.assign('<?=base_url('stok_opname');?>');
             }, 1500);
           },
           error: function() {
