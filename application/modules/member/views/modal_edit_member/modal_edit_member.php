@@ -97,7 +97,7 @@
 							<td>Tanggal Register</td>
 							<td>
 								<div class="form-group">
-									<input type='text' name='tanggal_register' placeholder='DD/MM/YYYY' class='form-control'>
+									<input type='text' value="<?php echo $tanggal_register;?>" name='tanggal_register' placeholder='DD/MM/YYYY' class='form-control'>
 								</div>
 							</td>
 						</tr>

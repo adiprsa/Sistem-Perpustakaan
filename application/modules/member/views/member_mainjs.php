@@ -52,7 +52,7 @@
         var cnf = confirm("Apakah anda yakin akan menghapus member ini?");
         if (cnf == true) {
             $.post('<?=site_url()?>member/hapus/' + $(this).attr('id'), function() {
-                alert('Tipe member berhasil dihapus');
+                alert('Member berhasil dihapus');
                 location.reload();
             });
         }

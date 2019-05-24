@@ -176,7 +176,7 @@ class Member extends MY_Controller {
 		}
 
 		$data['last_update'] = date("Y-m-d H:i:s");
-		$data['input_date'] = date("Y-m-d H:i:s");echo json_encode($data);exit();
+		$data['input_date'] = date("Y-m-d H:i:s");
 		$this->Db_model->add('member',$data);
 		$result['alert']  = "Data berhasil disimpan";
 		$result['status'] = 'berhasil';
@@ -299,7 +299,7 @@ class Member extends MY_Controller {
 	}
 
 	function hapus($sha1){
-		$this->Db_model->delete('member',array('sha1(member_id)' => $sha1));
+		$this->Db_model->delete('member',array('member_id' => $sha1));
 	}
 
 	public function get_data_member() {
