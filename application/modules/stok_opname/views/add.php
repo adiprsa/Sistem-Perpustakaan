@@ -132,7 +132,7 @@
                 <label for="tgl_mulai" class="col-3 col-lg-2 col-form-label text-right"></label>
                 <div class="col-3 col-lg-4">
                   <button type="button" class="btn btn-space btn-primary" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
-                    <a href="/stok_opname" class="btn btn-space btn-secondary"><i class="fa fa-arrow-left"></i> Batal</a>
+                    <a href="<?=base_url('stok_opname');?>" class="btn btn-space btn-secondary"><i class="fa fa-arrow-left"></i> Batal</a>
                   </p>
                 </div>
               </div>
