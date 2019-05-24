@@ -14,6 +14,16 @@ class Item_m extends CI_Model {
 			return $item;
 		}
 	}
+	public function item_biblio($id=null)
+	{
+		$this->db->where('biblio_id', $id);
+		$this->db->join('supplier', 'supplier.supplier_id = item.supplier_id', 'left');
+		$this->db->join('lokasi', 'lokasi.lokasi_id = item.lokasi_id', 'left');
+		$query = $this->db->get('item',1);
+		if ($query->num_rows()>0) {
+			return $query->result_array();
+		}
+	}
 	public function tambah()
 	{
 		$data = array('biblio_id'			=> $this->input->post('biblio_id'),

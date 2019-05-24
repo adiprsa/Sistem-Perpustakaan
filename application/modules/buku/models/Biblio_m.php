@@ -7,6 +7,7 @@ class Biblio_m extends CI_Model {
 	{
 		$this->db->where('biblio_id', $id);
 		$this->db->join('penerbit', 'penerbit.penerbit_id = bibliografi.penerbit_id', 'left');
+		$this->db->join('kategori', 'kategori.kategori_id = bibliografi.kategori_id', 'left');
 		$query = $this->db->get('bibliografi',1);
 		if ($query->num_rows()>0) {
 			foreach ($query->result_array() as $value) {

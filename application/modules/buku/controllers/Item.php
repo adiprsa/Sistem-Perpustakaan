@@ -84,7 +84,10 @@ class Item extends MY_Controller {
 			$data['item'] = $this->input->post();
 		}
 
-		//Referensi tabal
+		//Referensi tabel
+		$data['supplier'] = $this->ref_m->ambil('supplier');
+		$data['lokasi'] = $this->ref_m->ambil('lokasi');
+		$data['asal'] = $this->ref_m->ambil('asal');
 
 		//Header
 		$this->load->view('templates/header', $data);

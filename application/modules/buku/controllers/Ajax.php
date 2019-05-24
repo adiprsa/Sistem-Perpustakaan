@@ -8,8 +8,8 @@ class Ajax extends MY_Controller {
 		parent::__construct();
 		/* AJAX check  */
 		if ( $this->input->is_ajax_request()==FALSE) {
-			/* special ajax here */
-			//redirect('buku');
+			/* Jika bukan ajax */
+			redirect('buku');
 		}
 	}
 	public function index()
@@ -64,7 +64,7 @@ class Ajax extends MY_Controller {
             $row[] = $buku->nama_penerbit;
             $row[] = $buku->tahun_terbit;
             $row[] = $buku->call_number;
-            $row[] = "<a href='".site_url('buku/form/edit?id_biblio='.$buku->biblio_id)."' class='btn btn-warning'> Edit <a><a href='".site_url('buku/detail?id_biblio='.$buku->biblio_id)."' class='btn btn-success'> Detail <a><a href='javascript:void(0)' onclick=\"hapus('".$buku->biblio_id."','".$buku->judul."')\" class='btn btn-danger'> Hapus <a>";
+            $row[] = "<a href='".site_url('buku/form/edit?id_biblio='.$buku->biblio_id)."' class='btn btn-warning'> Edit </a><a href='".site_url('buku/detail?id_biblio='.$buku->biblio_id)."' class='btn btn-success'> Detail </a><a href='javascript:void(0)' onclick=\"hapus('".$buku->biblio_id."','".$buku->judul."')\" class='btn btn-danger'> Hapus </a>";
  
             $data[] = $row;
         } 
@@ -95,7 +95,7 @@ class Ajax extends MY_Controller {
             $row[] = $buku->nama_lokasi;
             $row[] = $buku->nama_rak;
             $row[] = $buku->asal;
-            $row[] = "<a href='".site_url('buku/item/form/edit?biblio_id='.$buku->biblio_id.'&id_item='.$buku->item_id)."' class='btn btn-warning'> Edit <a><a href='".site_url('buku/detail?id_item='.$buku->item_id)."' class='btn btn-success'> Detail <a><a href='javascript:void(0)' onclick=\"hapus('".$buku->item_id."','".$buku->judul."')\" class='btn btn-danger'> Hapus <a>";
+            $row[] = "<a href='".site_url('buku/item/form/edit?biblio_id='.$buku->biblio_id.'&id_item='.$buku->item_id)."' class='btn btn-warning'> Edit </a><a href='".site_url('buku/detail?id_item='.$buku->item_id)."' class='btn btn-success'> Detail </a><a href='javascript:void(0)' onclick=\"hapus('".$buku->item_id."','".$buku->judul."')\" class='btn btn-danger'> Hapus </a>";
  
             $data[] = $row;
         } 
@@ -131,6 +131,11 @@ class Ajax extends MY_Controller {
 
             $this->load->view('modal_form'.$data['tabel'],$data);
         }
+    }
+    public function popupImport()
+    {
+        $data['jenis']    = $this->uri->segment(4);
+        $this->load->view('modal_import'.$data['jenis'],$data);
     }
     public function hapus()
     {

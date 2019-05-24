@@ -87,6 +87,43 @@ class Buku extends MY_Controller {
 		// Footer
 		$this->load->view('templates/footer');
 	}
+	public function detail()
+	{
+		$this->load->model('item_m');
+
+		$data['title'] = 'Buku';
+		$data['action'] = 'detail';
+
+		$id = $this->input->get('id_biblio');
+		$data['buku'] = $this->biblio_m->biblio_id($id);
+		$data['pengarang'] = $this->biblio_m->biblio_pengarang($id);
+		$data['item'] = $this->item_m->item_biblio($id);
+		if (!$data['buku']) {
+			redirect('buku','refresh');
+		}
+		//Header
+		$this->load->view('templates/header', $data);
+		// Body
+		$this->load->view('buku_detail',$data);
+		// Footer
+		$this->load->view('templates/footer');
+	}	
+    public function cetak()
+    {
+        $this->load->library('cetak');
+        $jenis = $this->input->get('jenis');
+
+        if ($jenis=='kode_item'){
+            $kodeItem = $this->input->get('kode_item');
+            $this->cetak->kodeItem($kodeItem);
+        }else if ($jenis=='callnumber'){
+            $callnumber = $this->input->get('callnumber');
+            $this->cetak->callnumber($callnumber);
+        }
+        $data['output'] = $jenis.'_'.$this->session->userdata('username').'.pdf';
+        $this->load->view('pdf',$data);
+
+    }
 	private function upload($judul=null)
 	{
 		$config['upload_path'] 	= './uploads/buku/';

@@ -33,6 +33,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <a href="<?=site_url('buku/form/tambah')?>" class='btn btn-success'>Tambah</a>
+                                <!-- <a href="javascript:void(0)" onclick="modalImport()" class="btn btn-primary">Import Data Biblio</a> -->
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -87,6 +88,13 @@ table = $('#data').DataTable({
 </script>
 
 <script type="text/javascript">
+	function modalImport() {
+		$.get('<?=site_url('buku/ajax/popupImport/Biblio')?>',
+			function(data) {
+			$('#popup').html(data)
+			$('.modal').modal('show');
+		})
+	}
 	function hapus(idBuku,nmBuku) {
 		$.get('<?=site_url('buku/ajax/popup/hapus')?>',
 			{id:idBuku,nama:nmBuku,tabel:'biblio'},

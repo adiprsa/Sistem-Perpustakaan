@@ -88,19 +88,19 @@
 							    		</tr>
 							    		<tr>
 							    			<td>Tanggal Terima</td>
-							    			<td><input type="text" name="tgl_terima" class="form-control" value="<?=isset($item)?$item['tgl_terima']:'';?>"></td>
+							    			<td><input type="text" name="tgl_terima" class="form-control" value="<?=isset($item)?date('d-m-Y',strtotime($item['tgl_terima'])):'';?>"></td>
 							    		</tr>
 							    		<tr>
 							    			<td>Suplier</td>
 							    			<td>
 							    				<select name="siplier_id" class="form-control">
 							    					<option value=""></option>
-							    					<?php foreach ($suplier as $key => $value) {
+							    					<?php foreach ($supplier as $key => $value) {
 										                $selected = "";
-										                if (isset($item)&&$item['suplier_id']==$value['suplier_id']) {
+										                if (isset($item)&&$item['supplier_id']==$value['supplier_id']) {
 										                  $selected='selected';
 										                }
-										                echo "<option ".$selected." value='".$value['suplier_id']."'>".$value['nama_suplier']."</option>";
+										                echo "<option ".$selected." value='".$value['supplier_id']."'>".$value['nama_supplier']."</option>";
 										              } ?>
 							    				</select>
 							    			</td>
@@ -130,11 +130,22 @@
 							    		</tr>								    		
 							    		<tr>
 							    			<td>Tanggal Order</td>
-							    			<td><input type="text" name="tgl_order" class="form-control" value="<?=isset($item)?$item['tgl_order']:'';?>"></td>
+							    			<td><input type="text" name="tgl_order" class="form-control" value="<?=isset($item)?date('d-m-Y',strtotime($item['tgl_order'])):'';?>"></td>
 							    		</tr>
 							    		<tr>
 							    			<td>Asal</td>
-							    			<td><input type="text" name="asal" class="form-control" value="<?=isset($item)?$item['asal']:'';?>"></td>
+							    			<td>
+							    				<select name="asal" class="form-control">
+							    					<option value=""></option>
+							    					<?php foreach ($asal as $key => $value) {
+										                $selected = "";
+										                if (isset($item)&&$item['asal']==$value['asal']) {
+										                  $selected='selected';
+										                }
+										                echo "<option ".$selected." value='".$value['asal']."'>".$value['asal']."</option>";
+										              } ?>
+							    				</select>
+							    			</td>
 							    		</tr>
 							    		<tr>
 							    			<td>Invoice</td>

@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Datatable_item extends CI_Model {
  
     var $table = 'item';
-    var $column_order = array(null,'judul','call_number','kode_item','lokasi','nama_rak','asal');
-    var $column_search =  array('judul','call_number','kode_item','lokasi','nama_rak','asal');
+    var $column_order = array(null,'judul','call_number','kode_item','nama_lokasi','nama_rak','asal');
+    var $column_search =  array('judul','call_number','kode_item','nama_lokasi','nama_rak','asal');
     var $order = array('item.item_id' => 'desc');
  
     public function __construct()
