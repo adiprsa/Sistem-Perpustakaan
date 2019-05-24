@@ -55,15 +55,9 @@ class Dashboard extends MY_Controller {
 		$data['grafik_harus_balik'] = $grafik_harus_balik;
 		$data['grafik_pinjam'] = $grafik_pinjam;
 		$data['tanggal_chart'] = $tanggal_chart;
-		
-		// Store title
 		$data['title'] = 'Halaman Dashboard';
-
-		//Header
 		$this->load->view('templates/header', $data);
-		// Body
 		$this->load->view('dashboard/main');
-		// Footer
 		$this->load->view('templates/footer');
 	}
 }

@@ -12,16 +12,17 @@
 						<tr>
 							<td>Nomor Induk Member</td>
 							<td>
-								<input type='text' name='nomor_induk_member' class='form-control'>
+								<input type='text' name='nomor_induk_member' class='form-control' value='<?php echo $member->member_code?>' readonly>
 							</td>
 						</tr>
 						<tr>
 							<td>Tipe Member</td>
 							<td>
 								<select class="form-control" name="tipe_member">
-									<option>-- pilih --</option>
+									<option value="0">-- pilih --</option>
 									<?php foreach ($tipe_member->result() as $row) {?>
-									<option value="<?php echo $row->tipe_member_id;?>"><?php echo $row->nama_tipe_member;?></option>
+									<option value="<?php echo $row->tipe_member_id;?>" 
+                                    <?= $row->tipe_member_id == $member->tipe_member_id ? 'selected' : '' ?>><?php echo $row->nama_tipe_member;?></option>
 									<?php }?>
 								</select>
 							</td>
@@ -29,7 +30,7 @@
 						<tr>
 							<td>Nama Member</td>
 							<td>
-								<input type='text' name='nama_member' class='form-control'>
+								<input type='text' name='nama_member' class='form-control' value='<?php echo $member->nama_member?>'>
 							</td>
 						</tr>
 						<tr>
@@ -37,8 +38,8 @@
 							<td>
 								<select class="form-control" name="jenis_kelamin">
 									<option value="0">-- pilih --</option>
-									<option value="L">LAKI-LAKI</option>
-									<option value="P">PEREMPUAN</option>
+									<option value="L" <?= $member->jenis_kelamin == 'L' ? 'selected' : '' ?>>LAKI-LAKI</option>
+									<option value="P" <?= $member->jenis_kelamin == 'P' ? 'selected' : '' ?>>PEREMPUAN</option>
 								</select>
 							</td>
 						</tr>
@@ -47,7 +48,8 @@
 							<td>
 								<div class="form-group">
 									<div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-										<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" name="tanggal_lahir" value="">
+										<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" name="tanggal_lahir"
+                                        value="<?= $tanggal_lahir?>">
 										<div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
 											<div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
 										</div>
@@ -58,13 +60,13 @@
 						<tr>
 							<td>Alamat</td>
 							<td>
-								<input type='text' name='alamat' class='form-control'>
+								<input type='text' name='alamat' class='form-control' value='<?php echo $member->alamat?>'>
 							</td>
 						</tr>
 						<tr>
 							<td>E-mail</td>
 							<td>
-								<input type='email' name='email' class='form-control'>
+								<input type='email' name='email' class='form-control' value='<?php echo $member->email?>'>
 							</td>
 						</tr>
 						<tr>
@@ -73,7 +75,8 @@
 								<select class="form-control" name="fakultas" id="fakultas">
 									<option>-- pilih --</option>
 									<?php foreach ($fakultas->result() as $row) {?>
-									<option value="<?php echo $row->kd_fakultas;?>"><?php echo $row->fakultas;?></option>
+									<option value="<?php echo $row->kd_fakultas;?>" 
+									<?= $id_fakultas == $row->kd_fakultas ? 'selected' : ''?>><?php echo $row->fakultas;?></option>
 									<?php }?>
 								</select>
 							</td>
@@ -83,6 +86,10 @@
 							<td>
 								<select class="form-control" name="prodi" id="prodi">
 									<option value="0">-- pilih --</option>
+									<?php foreach ($prodi->result() as $row) {?>
+									<option value="<?php echo $row->kd_prodi;?>" 
+									<?= $row->kd_prodi == $member->prodi_id ? 'selected' : ''?>><?php echo $row->prodi;?></option>
+									<?php }?>
 								</select>
 							</td>
 						</tr>
@@ -90,13 +97,22 @@
 							<td>Tanggal Register</td>
 							<td>
 								<div class="form-group">
-									<input type='text' name='tanggal_register' placeholder='DD/MM/YYYY' class='form-control'>
+									<input type='text' value="<?php echo $tanggal_register;?>" name='tanggal_register' placeholder='DD/MM/YYYY' class='form-control'>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>Tanggal Expired</td>
+							<td>
+								<div class="form-group">
+									<input type='text' name='tanggal_expired' placeholder='DD/MM/YYYY' class='form-control'>
 								</div>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<div class="modal-footer">
+                    <input type='hidden' name='ref' id='ref' value='<?= $member->member_id?>'>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-info" id='simpan'>Simpan</button>
 				</div>

@@ -32,7 +32,7 @@ class M_laporan extends CI_Model
         $this->db->join('item', 'item.biblio_id = bibliografi.biblio_id');
         $this->db->join('item_status', 'item.item_status_id = item_status.item_status_id');
         $this->db->join('tempat_terbit', 'bibliografi.tempat_terbit_id = tempat_terbit.tempat_terbit_id');
-        $this->db->join('peminjaman', 'peminjaman.no_item = item.item_id');
+        $this->db->join('peminjaman', 'peminjaman.item_id = item.item_id');
         $this->db->join('member', 'member.member_id = peminjaman.member_id');
         if ($filter!="" && $tgl1!=""&&$tgl1!="") {
             $this->db->where($filter.'>=',$tgl1);
@@ -49,7 +49,7 @@ class M_laporan extends CI_Model
         $this->db->join('pengarang', 'pengarang.pengarang_id = biblio_pengarang.pengarang_id');
         $this->db->join('item', 'item.biblio_id = bibliografi.biblio_id');
         $this->db->join('tempat_terbit', 'bibliografi.tempat_terbit_id = tempat_terbit.tempat_terbit_id');
-        $this->db->join('peminjaman', 'peminjaman.no_item = item.item_id');
+        $this->db->join('peminjaman', 'peminjaman.item_id = item.item_id');
         $this->db->join('member', 'member.member_id = peminjaman.member_id');
         $this->db->join('pembayaran_denda', 'peminjaman.peminjaman_id = pembayaran_denda.peminjaman_id');
         if ($filter!="" && $tgl1!=""&&$tgl1!="") {

@@ -2,11 +2,12 @@
 <script src="<?php echo base_url('assets/vendor/datepicker/moment.js') ?>"></script>
 <script src="<?php echo base_url('assets/vendor/datepicker/tempusdominus-bootstrap-4.js') ?>"></script>
 <script src="<?php echo base_url('assets/vendor/datepicker/datepicker.js') ?>"></script>
+
 <script>
 	$(document).ready( function () {
         $.ajaxSetup({
             type:"POST",
-            url: "<?php echo site_url('member/ajaxprodi'); ?>",
+            url: "<?php echo site_url('member/ajaxprodi_edit'); ?>",
             cache: false
         });
 
@@ -26,7 +27,7 @@
 			event.preventDefault();
 			$("#modal_loader").show();
 			$.post(
-				"<?php echo site_url('member/simpan_member');?>", 
+				"<?php echo site_url('member/update_member');?>", 
 				$(this).serialize(), 
 				function(response) {
 					var response = jQuery.parseJSON(response);
