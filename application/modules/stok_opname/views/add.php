@@ -102,14 +102,24 @@
               </div>
               <div class="form-group row">
                 <label for="tgl_mulai" class="col-3 col-lg-2 col-form-label text-right">Tanggal Mulai</label>
-                <div class="col-6 col-lg-10">
-                  <input id="tgl_mulai" type="text" name="tgl_mulai" data-parsley-type="tgl_mulai" placeholder="YYYY-MM-DD" class="form-control"  value="<?php echo $item->tgl_mulai;?>">
+                <div class="col-3 col-lg-4">
+                  <div class="input-group date" id="dt_tgl_mulai" data-target-input="nearest">
+                    <input type="text" id="tgl_mulai" class="form-control datetimepicker-input" data-target="#dt_tgl_mulai"  placeholder="MM/DD/YYYY" />
+                    <div class="input-group-append" data-target="#dt_tgl_mulai" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group row">
                 <label for="tgl_mulai" class="col-3 col-lg-2 col-form-label text-right">Tanggal Selesai</label>
-                <div class="col-6 col-lg-10">
-                  <input id="tgl_selesai" type="text" name="tgl_selesai" data-parsley-type="tgl_selesai" placeholder="YYYY-MM-DD" class="form-control"  value="<?php echo $item->tgl_selesai;?>">
+                <div class="col-3 col-lg-4">
+                  <div class="input-group date" id="dt_tgl_selesai" data-target-input="nearest">
+                    <input type="text" id="tgl_selesai" class="form-control datetimepicker-input" data-target="#dt_tgl_selesai" placeholder="MM/DD/YYYY" />
+                    <div class="input-group-append" data-target="#dt_tgl_selesai" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="form-group row">
