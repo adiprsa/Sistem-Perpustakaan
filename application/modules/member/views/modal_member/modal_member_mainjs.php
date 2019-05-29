@@ -4,6 +4,12 @@
 <script src="<?php echo base_url('assets/vendor/datepicker/datepicker.js') ?>"></script>
 <script>
 	$(document).ready( function () {
+		$("#dp_tgl_lahir").datetimepicker({
+            format: 'L'
+		});
+		$("#dp_tgl_register").datetimepicker({
+            format: 'L'
+        });
         $.ajaxSetup({
             type:"POST",
             url: "<?php echo site_url('member/ajaxprodi'); ?>",

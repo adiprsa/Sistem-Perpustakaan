@@ -217,20 +217,6 @@ class Member extends MY_Controller {
 		$result['status'] = 'gagal';
 		$data = array();
 
-		if($nomor_induk_member) {
-			$cek_nomor_induk_member = $this->Db_model->get(
-				'member','member_code',array('member_code' => $nomor_induk_member));
-			if($cek_nomor_induk_member->num_rows()>0){
-				$result['alert'] 	= 'Nomor induk member sudah dipakai';
-				echo json_encode($result); exit();
-			} else {
-				$data['member_code'] = $nomor_induk_member;
-			}
-		} else {
-			$result['alert'] = 'Nomor induk member harus diisi';
-			echo json_encode($result); exit();
-		}
-
 		if($tipe_member != 0) {
 			$data['tipe_member_id'] = $tipe_member;
 		} else {

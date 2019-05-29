@@ -46,9 +46,9 @@
 							<td>Tanggal Lahir</td>
 							<td>
 								<div class="form-group">
-									<div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-										<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4" name="tanggal_lahir" value="">
-										<div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+									<div class="input-group date" id="dp_tgl_lahir" data-target-input="nearest">
+										<input type="text" class="form-control datetimepicker-input" data-target="#dp_tgl_lahir" name="tanggal_lahir">
+										<div class="input-group-append" data-target="#dp_tgl_lahir" data-toggle="datetimepicker">
 											<div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
 										</div>
 									</div>
@@ -90,7 +90,12 @@
 							<td>Tanggal Register</td>
 							<td>
 								<div class="form-group">
-									<input type='text' name='tanggal_register' placeholder='DD/MM/YYYY' class='form-control'>
+									<div class="input-group date" id="dp_tgl_register" data-target-input="nearest">
+										<input type="text" class="form-control datetimepicker-input" data-target="#dp_tgl_register" name="tanggal_register">
+										<div class="input-group-append" data-target="#dp_tgl_register" data-toggle="datetimepicker">
+											<div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+										</div>
+									</div>
 								</div>
 							</td>
 						</tr>

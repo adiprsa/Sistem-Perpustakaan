@@ -5,6 +5,19 @@
 
 <script>
 	$(document).ready( function () {
+		$('#edp_tgl_lahir').datetimepicker({
+			format: 'DD/MM/YYYY'
+		});
+		var tgl_register = $("#tgl_register").val();
+		$('#dp_tgl_register').datetimepicker({
+			format: 'DD/MM/YYYY',
+			date : moment(tgl_register, "DD/MM/YYYY")
+		});
+		var tgl_expired = $("#tgl_expired").val();
+		$('#dp_tgl_expired').datetimepicker({
+			format: 'DD/MM/YYYY',
+			date : moment(tgl_expired, "DD/MM/YYYY")
+		});
         $.ajaxSetup({
             type:"POST",
             url: "<?php echo site_url('member/ajaxprodi_edit'); ?>",
