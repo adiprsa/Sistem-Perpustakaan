@@ -4,7 +4,6 @@ class Member extends MY_Controller {
 	
 	public function __construct() {
 			parent::__construct();
-			$this->load->model('member/member_model');
 			if(!$this->session->userdata('username')){
 				redirect('login/logout');
 			}
@@ -325,52 +324,168 @@ class Member extends MY_Controller {
 	}
 
 	function import_member() {
+		date_default_timezone_set("Asia/Bangkok"); //set timezone
+
 		$json['status'] = 'gagal';
-		$json['alert'] 	= 'Gagal';
-		$this->session->set_userdata('data_xx',null);
-		$file = $_FILES['import'];
-		$filex = $_FILES['import']['name'];
-		$path = "uploads/xls/";
-		if(!is_dir($path)){
-			mkdir($path,0777,TRUE);
-			fopen($path."/index.php", "w");
+		$json['status'] = 'Gagal';
+		$config['upload_path']          = './uploads/xls/';
+		$config['allowed_types']        = 'xls|xlsx';
+		$config['max_size']             = 10000;
+		$filename						= 'import_member_'.date('j-m-y_G:i:s').'.xls';
+		$config['file_name']			= $filename;
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('import'))
+		{
+			$error = array('error' => $this->upload->display_errors());
+			$json['alert'] = $error;
 		}
-		if(!$filex){
-			$json['alert']	= "File XLS harus dipilih";
-			echo json_encode($json);
-			exit;
-		}
-		$this->load->model('member/Member_model','Import_model');
-		$this->load->library(array('PHPExcel','convertion'));
-		$filename	=	"import_member_".date('Ymdhis').".xls";
-		$config['file_name']		= $filename;
-		$config['upload_path']      = "uploads/xls/";
-        $config['allowed_types']    = array('xls','xlsx');
-		$config['max_size']         = 3000;
-		$this->load->library('upload', $config);		
-		$this->upload->initialize($config);
-		if ( ! $this->upload->do_upload('import')){
-			$msg = $this->upload->display_errors();	
-			$json['alert'] = $msg;
-			echo json_encode($json);
-			exit;			
-		}
-		else{
+		else
+		{
 			$data = array('upload_data' => $this->upload->data());
-            $upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
-            //$filename = $upload_data['file_name'];
-            $kampret = $this->Import_model->import_member($filename);
-		//	echo $this->db->last_query();
-          //  print_r($kampret);exit;
-			$json['status'] = $kampret['status'];
-            $json['alert'] = $kampret['pesan'];
-            $json['link'] = site_url('member');
-			unlink('uploads/xls/'.$filename);
-			//$json['alert'] = $msg;
-			echo json_encode($json);
-			exit;
-			exit;
+			$import = $this->import_ke_db($filename);
+			$json['status'] = $import['status'];
+			$json['alert'] = $import['pesan'];		
 		}
+		echo json_encode($json); exit();
+	}
+
+	function import_ke_db($filename) {
+		$this->load->model('member/Member_model','Member_model');
+		$file = 'uploads/xls/' . $filename;
+		require 'vendor/autoload.php';
+		
+		$status = 'gagal';
+		$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($file);
+		$worksheet = $spreadsheet->getActiveSheet()->toArray(null,true,true,true);
+		$highestRow = $spreadsheet->getActiveSheet()->getHighestRow();
+		if(
+			$worksheet[1]["A"] != "No" ||
+			$worksheet[1]["B"] != "Nomor induk member" ||
+			$worksheet[1]["C"] != "Tipe member" ||
+			$worksheet[1]["D"] != "Nama member" ||
+			$worksheet[1]["E"] != "Jenis kelamin" ||
+			$worksheet[1]["F"] != "Tanggal lahir" ||
+			$worksheet[1]["G"] != "Alamat" ||
+			$worksheet[1]["H"] != "E-mail" ||
+			$worksheet[1]["I"] != "Jurusan" ||
+			$worksheet[1]["J"] != "Tanggal register"
+		) {
+			$msg = "Format salah";
+		} else {
+			for($loop=2;$loop<=$highestRow;$loop++) {
+				
+				//Cek nomor member
+				$inputMemberCode = $worksheet[$loop]["B"]; 
+				if(trim($inputMemberCode) == '') { //menghilangkan spasi pada input
+					$msg = 'Nomor induk member harus diisi';
+				} else {
+					$query_cek_nomor_member = $this->Member_model->cek_nomor_member($inputMemberCode);
+					if($query_cek_nomor_member) {
+						$msg = 'Nomor induk member sudah ada'; break;
+					} else {
+						$data["member_code"] = $inputMemberCode;
+					}
+				}
+
+				//Cek tipe member
+				$inputTipeMember = $worksheet[$loop]["C"];
+				if(trim($inputTipeMember) == '') { //menghilangkan spasi pada input
+					$msg = 'Tipe member harus diisi';break;
+				} else {
+					$query_cek_tipe_member = $this->Member_model->cek_tipe_member($inputTipeMember);
+					if($query_cek_tipe_member) {
+						$data["tipe_member_id"] = $this->Member_model->kode_tipe_member($inputTipeMember);
+					} else {
+						$msg = 'Tipe member '.$inputTipeMember.' belum ada'; break;
+					}
+				}
+
+				$inputNamaMember = $worksheet[$loop]["D"];
+				if(trim($inputNamaMember) == '') { //cek input alamat kosong
+					$msg = 'Nama member harus diisi';
+				} else {
+					$data["nama_member"] = $inputNamaMember;
+				} 
+				
+				//Cek input jenis kelamin
+				$inputJenisKelamin = $worksheet[$loop]["E"];
+				if($inputJenisKelamin == 'L' || $inputJenisKelamin == 'P') { //menghilangkan spasi pada input
+					$data["jenis_kelamin"] = $inputJenisKelamin;
+				} else {
+					$msg = 'Jenis kelamin harus diisi dengan L/P'; break;
+				}
+
+				//Cek tanggal lahir
+				$inputTanggalLahir = $worksheet[$loop]["F"];
+				if(trim($inputTanggalLahir) == '') { //menghilangkan spasi pada input
+					$msg = 'Tanggal lahir tidak boleh kosong'; break;
+				} else {
+					if(strlen($inputTanggalLahir) == 8 || strlen($inputTanggalLahir) == 9 || strlen($inputTanggalLahir) == 10) {
+						list($day, $month, $year) = explode("/",$inputTanggalLahir);
+						if(checkdate($month,$day,$year)) {
+							$data["tgl_lahir"] = $year . '-' . $month . '-' . $day;
+						} else {
+							$msg = 'Format tanggal salah'; break;
+						}
+					} else { $msg = 'Panjang tanggal lahir tidak sesuai';}
+				}
+
+				$inputAlamat = $worksheet[$loop]["G"];
+				if(trim($inputAlamat) == '') { //cek input alamat kosong
+					$msg = 'Alamat harus diisi';
+				} else {
+					$data["alamat"] = $inputAlamat;
+				} 
+
+				$inputEmail = $worksheet[$loop]["H"];
+				if(trim($inputAlamat) == '') { //cek input email kosong
+					$msg = 'Email harus diisi';
+				} else {
+					$data["email"] = $inputEmail;
+				} 
+
+				$inputJurusan = $worksheet[$loop]["I"];
+				if(trim($inputJurusan) == '') { //menghilangkan spasi pada input
+					$msg = 'Jurusan harus diisi';break;
+				} else {
+					$query_cek_tipe_prodi = $this->Member_model->cek_prodi($inputJurusan);
+					if($query_cek_tipe_member) {
+						$data["prodi_id"] = $this->Member_model->kode_prodi($inputJurusan);
+					} else {
+						$msg = 'Prodi '.$inputJurusan.' belum ada'; break;
+					}
+				}
+				
+				//Cek tanggal register
+				$inputTanggalRegister = $worksheet[$loop]["J"];
+				if(trim($inputTanggalRegister) == '') { //menghilangkan spasi pada input
+					$msg = 'Tanggal register tidak boleh kosong'; break;
+				} else {
+					if(strlen($inputTanggalRegister) == 8 || strlen($inputTanggalRegister) == 9 || strlen($inputTanggalRegister) == 10) {
+						list($day, $month, $year) = explode("/",$inputTanggalRegister);
+						if(checkdate($month,$day,$year)) {
+							$data["tgl_register"] = $year . '-' . $month . '-' . $day;
+						} else {
+							$msg = 'Format tanggal salah'; break;
+						}
+					} else { $msg = 'Panjang tanggal register tidak sesuai';}
+				}
+
+				//Insert member
+				$data['last_update'] = date("Y-m-d H:i:s");
+				$data['input_date'] = date("Y-m-d H:i:s");
+				$this->Db_model->add('member',$data);
+				$msg = 'Data berhasil diimport';
+				$status = 'berhasil';
+			}
+		}
+		$array = array('status' => $status, 'pesan' => $msg);
+		if($status == 'gagal') {
+			unlink($file); //hapus jika gagal
+		} 
+		return $array;
 	}
 }
 

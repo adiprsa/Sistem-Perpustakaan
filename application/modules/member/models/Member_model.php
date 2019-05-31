@@ -78,59 +78,52 @@ class Member_model extends CI_Model {
 		return $this->db->count_all_results();
 	}
 
-	function import_member($filename){
-		ini_set('memory_limit', '-1');
-        $inputFileName = 'uploads/xls/'.$filename;
-//		echo $inputFileName;
-        try {
-        $objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
-        } catch(Exception $e) {
-        die('Error loading file :' . $e->getMessage());
-        }
-
-        $worksheet = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
-        $numRows = count($worksheet);
-		$status = "gagal";
-		$line_kosong 		= array();
-		$line_bermasalah 	= array();
-		$data_isi = array();
-		//$msg = "Data Berhasil dihapus";
-		if(
-			$worksheet[1]["B"] != "Nomor induk member" OR 
-			$worksheet[1]["C"] != "Tipe member" OR 
-			$worksheet[1]["D"] != "Nama member" OR 
-			$worksheet[1]["E"] != "Jenis kelamin" OR
-			$worksheet[1]["F"] != "Tanggal lahir" OR
-			$worksheet[1]["G"] != "Alamat" OR
-			$worksheet[1]["H"] != "E-mail" OR
-			$worksheet[1]["I"] != "Fakultas" OR
-			$worksheet[1]["J"] != "Jurusan" OR
-			$worksheet[1]["K"] != "Tanggal register")
-			{
-			$msg = "format salah";
-		}else{
-			for ($i=2; $i < ($numRows+1) ; $i++) { 
-				if($worksheet[$i]["A"] == "No" or $worksheet[$i]["A"] == ""){
-				}else{					
-					$data['member_code']  = $worksheet[$i]["B"];
-					$data['tipe_member_id']  = $worksheet[$i]["C"];
-					$data['nama_member']  = $worksheet[$i]["D"];
-					$data['jenis_kelamin']  = $worksheet[$i]["E"];
-					$data['tgl_lahir']  = $worksheet[$i]["F"];
-					$data['alamat']  = $worksheet[$i]["G"];
-					$data['email']  = $worksheet[$i]["H"];
-					$data['fakultas']  = $worksheet[$i]["I"];
-					$data['prodi']  = $worksheet[$i]["J"];
-					$data['tgl_register']  = $worksheet[$i]["K"];
-					$this->Db_model->add('member',$data);
-				}	
-			}
+	public function cek_nomor_member($nomor) {
+		$this->db->select('member_code');
+		$this->db->where('member_code',$nomor);
+		$query=$this->db->get('member');
+		if ($query->num_rows() > 0){
+			return true;
 		}
-		$msg = "Data berhasil disimpan";
-		
-		$status = "berhasil";
-		$array = array('status' => $status, 'pesan' => $msg);
-		return $array;
+		else{
+			return false;
+		}
+	}
+
+	public function cek_tipe_member($member) {
+		$this->db->select('nama_tipe_member');
+		$this->db->where('nama_tipe_member',$member);
+		$query=$this->db->get('tipe_member');
+		if ($query->num_rows() > 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public function kode_tipe_member($member) {
+		$this->db->select('tipe_member_id');
+		$this->db->where('nama_tipe_member',$member);
+		return $this->db->get('tipe_member')->row()->tipe_member_id;
+	}
+
+	public function cek_prodi($prodi) {
+		$this->db->select('prodi');
+		$this->db->where('prodi',$prodi);
+		$query=$this->db->get('prodi');
+		if ($query->num_rows() > 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public function kode_prodi($prodi) {
+		$this->db->select('kd_prodi');
+		$this->db->where('prodi',$prodi);
+		return $this->db->get('prodi')->row()->kd_prodi;
 	}
 
 }

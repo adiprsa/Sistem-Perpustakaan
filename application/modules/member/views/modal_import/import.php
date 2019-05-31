@@ -64,18 +64,13 @@
 			processData:false,
 			success: function(respon){
 				if (respon.status == 'berhasil') {
-                            alert(respon.alert);
-							window.location.href = respon.link;
-                        } else {
-                            alert(respon.alert);
-							$("#modal_loader").hide();
-                        }
-				},
-		  	error: function() 
-	    	{
-				alert('Gagal simpan data');
-				$("#modal_loader").hide();
-	    	}	        
+					alert(respon.alert);
+					location.reload();
+				} else {
+					alert(respon.alert);
+					$("#modal_loader").hide();
+				}
+			}	        
 	   });
 	}));
 	});
